@@ -29,6 +29,10 @@ class Footer extends React.Component {
               </a>
             </div>
           </div>
+          <div className={s.copyright}>
+            Copyright © ECHO Team 2014-2018 ECHO Contributors<br />
+            www.echo.com
+          </div>
         </div>
       </div>
     );

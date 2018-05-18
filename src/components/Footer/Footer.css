@@ -26,12 +26,31 @@
 }
 
 .logo {
-  flex: auto;
+  flex: none;
 }
 
 .sns {
   display: flex;
   flex: auto;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.sns a {
+  flex: auto
+}
+
+.sns img {
+  opacity: 0.5;
+}
+
+.sns img:hover {
+  opacity: 1;
+}
+
+.copyright {
+  margin-top: 10px;
+  text-align: center;
 }
 
 .text {
