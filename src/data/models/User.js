@@ -14,9 +14,16 @@ const User = Model.define(
   'User',
   {
     id: {
-      type: DataType.UUID,
-      defaultValue: DataType.UUIDV1,
+      type: DataType.INTEGER,
+      autoIncrement: true,
       primaryKey: true,
+    },
+
+    username: {
+      type: DataType.STRING,
+    },
+    password: {
+      type: DataType.STRING,
     },
 
     email: {
@@ -33,5 +40,6 @@ const User = Model.define(
     indexes: [{ fields: ['email'] }],
   },
 );
+
 
 export default User;
