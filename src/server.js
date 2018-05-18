@@ -31,6 +31,9 @@ import schema from './data/schema';
 // import assets from './asset-manifest.json'; // eslint-disable-line import/no-unresolved
 import chunks from './chunk-manifest.json'; // eslint-disable-line import/no-unresolved
 import config from './config';
+import User from './data/models/User';
+
+const LocalStrategy = require('passport-local').Strategy;
 
 process.on('unhandledRejection', (reason, p) => {
   console.error('Unhandled Rejection at:', p, 'reason:', reason);
@@ -83,27 +86,54 @@ app.use((err, req, res, next) => {
 });
 
 app.use(passport.initialize());
-
-app.get(
-  '/login/facebook',
-  passport.authenticate('facebook', {
-    scope: ['email', 'user_location'],
-    session: false,
-  }),
+app.use(passport.session());
+passport.use(
+  new LocalStrategy(
+    {
+      usernameField: 'usernameOrEmail',
+      passwordField: 'password',
+      passReqToCallback: true,
+      session: false,
+    },
+    (req, username, password, done) => {
+      console.info(username);
+      User.findOne({ where: { username, password } }).then(user => {
+        if (!user) {
+          return done(null, false);
+        }
+        if (user.password !== password) {
+          return done(null, false);
+        }
+        return done(null, user);
+      });
+    },
+  ),
 );
-app.get(
-  '/login/facebook/return',
-  passport.authenticate('facebook', {
-    failureRedirect: '/login',
-    session: false,
-  }),
+passport.serializeUser((user, cb) => {
+  cb(null, user.id);
+});
+
+passport.deserializeUser((id, cb) => {
+  User.findById(id).then(user => {
+    cb(null, user);
+  });
+});
+
+app.post(
+  '/login',
+  passport.authenticate('local', { failureRedirect: '/login' }),
   (req, res) => {
-    const expiresIn = 60 * 60 * 24 * 180; // 180 days
-    const token = jwt.sign(req.user, config.auth.jwt.secret, { expiresIn });
-    res.cookie('id_token', token, { maxAge: 1000 * expiresIn, httpOnly: true });
-    res.redirect('/');
+    console.info('=======');
+    console.info(req.user);
+    res.json(req.user);
   },
 );
+app.post('/register', (req, res) => {
+  const { username, password } = req.body;
+  User.findOne({ username, password }).then(() => {
+    res.json({ message: 'user already exists!' });
+  });
+});
 
 //
 // Register API middleware
@@ -214,7 +244,17 @@ app.use((err, req, res, next) => {
 //
 // Launch the server
 // -----------------------------------------------------------------------------
-const promise = models.sync().catch(err => console.error(err.stack));
+const promise = models
+  .sync({ force: true })
+  .then(() => {
+    User.create({
+      username: 'straysh',
+      password: '123456',
+      email: 'jobhancao@gmail.com',
+      emailConfirmed: true,
+    });
+  })
+  .catch(err => console.error(err.stack));
 if (!module.hot) {
   promise.then(() => {
     app.listen(config.port, () => {

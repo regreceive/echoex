@@ -10,10 +10,17 @@
 import Sequelize, { Op } from 'sequelize';
 import config from '../config';
 
-const sequelize = new Sequelize(config.databaseUrl, {
+const sequelize = new Sequelize(config.databaseUrl, 'root', '123456', {
   operatorsAliases: Op,
+  dialect: 'mysql',
   define: {
     freezeTableName: true,
+  },
+  pool: {
+    max: 5,
+    min: 0,
+    acquire: 30000,
+    idle: 10000,
   },
 });
 

@@ -12,7 +12,8 @@ import Model from '../sequelize';
 
 const UserProfile = Model.define('UserProfile', {
   userId: {
-    type: DataType.UUID,
+    type: DataType.INTEGER,
+    autoIncrement: true,
     primaryKey: true,
   },
 

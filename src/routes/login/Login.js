@@ -32,6 +32,7 @@ class Login extends React.Component {
                   type="text"
                   name="usernameOrEmail"
                   autoFocus // eslint-disable-line jsx-a11y/no-autofocus
+                  defaultValue="straysh"
                 />
               </label>
             </div>
@@ -43,6 +44,7 @@ class Login extends React.Component {
                   id="password"
                   type="password"
                   name="password"
+                  defaultValue="123456"
                 />
               </label>
             </div>
