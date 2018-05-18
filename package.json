@@ -36,6 +36,7 @@
     "prop-types": "^15.6.1",
     "query-string": "^6.0.0",
     "react": "^16.3.1",
+    "react-bootstrap": "^0.32.1",
     "react-dom": "^16.3.1",
     "sequelize": "^4.37.6",
     "serialize-javascript": "^1.4.0",
@@ -83,6 +84,7 @@
     "lint-staged": "^7.0.4",
     "markdown-it": "^8.4.1",
     "mkdirp": "^0.5.1",
+    "node-sass": "^4.9.0",
     "null-loader": "^0.1.1",
     "opn-cli": "^3.1.0",
     "pixrem": "^4.0.1",
@@ -109,6 +111,7 @@
     "react-error-overlay": "^4.0.0",
     "react-test-renderer": "^16.3.1",
     "rimraf": "^2.6.2",
+    "sass-loader": "^7.0.1",
     "stylelint": "^9.2.0",
     "stylelint-config-standard": "^18.2.0",
     "stylelint-order": "^0.8.1",
@@ -162,6 +165,7 @@
     "deploy": "babel-node tools/run deploy",
     "render": "babel-node tools/run render",
     "serve": "babel-node tools/run runServer",
-    "start": "babel-node tools/run start"
+    "start": "babel-node tools/run start",
+    "sass": "node-sass \"src/components/assets/bootstrap/_bootstrap.scss\" \"public/bootstrap.css\""
   }
 }
