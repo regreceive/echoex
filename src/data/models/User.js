@@ -7,6 +7,7 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
+import crypto from 'crypto';
 import DataType from 'sequelize';
 import Model from '../sequelize';
 
@@ -41,6 +42,17 @@ User.createNewUser = async (email, password) => {
   );
   const user = await User.findOne({ where: { email } });
   return user;
+};
+
+User.encryptPassword = function(pwd, s) {
+  return new Promise((resolve, reject) => {
+    let salt = s || 'power-chain-kyc';
+    salt = salt.toString('base64');
+    crypto.pbkdf2(pwd, salt, 2048, 64, 'sha512', (err, hash) => {
+      if (err) return reject(err);
+      return resolve(hash.toString('hex').slice(0, 64));
+    });
+  });
 };
 
 export default User;

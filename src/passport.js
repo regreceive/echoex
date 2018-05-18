@@ -27,14 +27,18 @@ passport.use(
       session: false,
     },
     (req, email, password, done) => {
-      User.findOne({ where: { email, password } }).then(user => {
-        if (!user) {
-          return done(null, false);
-        }
-        if (user.password !== password) {
-          return done(null, false);
-        }
-        return done(null, user);
+      User.encryptPassword(password, null).then(encryptedPassword => {
+        User.findOne({ where: { email, password: encryptedPassword } }).then(
+          user => {
+            if (!user) {
+              return done(null, false);
+            }
+            if (user.password !== password) {
+              return done(null, false);
+            }
+            return done(null, user);
+          },
+        );
       });
     },
   ),

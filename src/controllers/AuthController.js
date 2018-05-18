@@ -26,6 +26,7 @@ const tryErrors = function tryErrors(req, res, fn) {
       if (err instanceof WE) {
         res.json(err.ToJSON());
       } else {
+        console.error(err);
         res.json({
           info: 'unknown',
           status: -1,
@@ -34,6 +35,7 @@ const tryErrors = function tryErrors(req, res, fn) {
       }
     });
   } catch (err) {
+    console.error(err);
     res.json({
       info: 'unknown',
       status: -1,
@@ -52,7 +54,7 @@ AuthController.Login = (req, res, next) => {
       if (err) {
         return next(err);
       }
-      res.json({ info: 'success', status: 10000, data: req.user.id });
+      return res.json({ info: 'success', status: 10000, data: req.user.id });
     });
   });
 };
@@ -92,7 +94,8 @@ AuthController.Register = (req, res) => {
 
     // construct user
     // write user into databse
-    const newuser = await User.createNewUser(email, password);
+    const encryptedPassword = await User.encryptPassword(password, null);
+    const newuser = await User.createNewUser(email, encryptedPassword);
     return res.json({
       info: 'success',
       status: 10000,

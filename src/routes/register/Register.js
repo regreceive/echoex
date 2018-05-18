@@ -32,7 +32,7 @@ class Register extends React.Component {
                   type="text"
                   name="email"
                   autoFocus // eslint-disable-line jsx-a11y/no-autofocus
-                  defaultValue="straysh2@qq.com"
+                  defaultValue="straysh@qq.com"
                 />
               </label>
             </div>
