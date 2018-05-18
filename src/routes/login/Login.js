@@ -24,15 +24,15 @@ class Login extends React.Component {
           <h1>{this.props.title}</h1>
           <form method="post">
             <div className={s.formGroup}>
-              <label className={s.label} htmlFor="usernameOrEmail">
+              <label className={s.label} htmlFor="username">
                 Username or email address:
                 <input
                   className={s.input}
-                  id="usernameOrEmail"
+                  id="email"
                   type="text"
-                  name="usernameOrEmail"
+                  name="email"
                   autoFocus // eslint-disable-line jsx-a11y/no-autofocus
-                  defaultValue="straysh"
+                  defaultValue="straysh2@qq.com"
                 />
               </label>
             </div>

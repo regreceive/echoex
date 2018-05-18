@@ -24,26 +24,53 @@ class Register extends React.Component {
           <h1>{this.props.title}</h1>
           <form method="post">
             <div className={s.formGroup}>
-              <label className={s.label} htmlFor="usernameOrEmail">
-                Username or email address:
+              <label className={s.label} htmlFor="email">
+                邮箱:
                 <input
                   className={s.input}
-                  id="usernameOrEmail"
+                  id="email"
                   type="text"
-                  name="usernameOrEmail"
+                  name="email"
                   autoFocus // eslint-disable-line jsx-a11y/no-autofocus
-                  defaultValue="straysh"
+                  defaultValue="straysh2@qq.com"
                 />
               </label>
             </div>
+            {/* 验证码 */}
+            <div className={s.formGroup}>
+              <label className={s.label} htmlFor="captcha">
+                验证码:
+                <input
+                  className={s.input}
+                  id="captcha"
+                  type="text"
+                  name="captcha"
+                  defaultValue="D3f5"
+                />
+              </label>
+            </div>
+            {/* 密码 */}
             <div className={s.formGroup}>
               <label className={s.label} htmlFor="password">
-                Password:
+                密码:
                 <input
                   className={s.input}
                   id="password"
                   type="password"
                   name="password"
+                  defaultValue="123456"
+                />
+              </label>
+            </div>
+            {/* 密码2 */}
+            <div className={s.formGroup}>
+              <label className={s.label} htmlFor="password_confirm">
+                确认密码:
+                <input
+                  className={s.input}
+                  id="password_confirm"
+                  type="password"
+                  name="password_confirm"
                   defaultValue="123456"
                 />
               </label>

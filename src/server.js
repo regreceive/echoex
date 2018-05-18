@@ -11,10 +11,11 @@ import path from 'path';
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
+import session from 'express-session';
 import expressJwt, { UnauthorizedError as Jwt401Error } from 'express-jwt';
 import { graphql } from 'graphql';
 import expressGraphQL from 'express-graphql';
-import jwt from 'jsonwebtoken';
+// import jwt from 'jsonwebtoken';
 import nodeFetch from 'node-fetch';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
@@ -31,9 +32,7 @@ import schema from './data/schema';
 // import assets from './asset-manifest.json'; // eslint-disable-line import/no-unresolved
 import chunks from './chunk-manifest.json'; // eslint-disable-line import/no-unresolved
 import config from './config';
-import User from './data/models/User';
-
-const LocalStrategy = require('passport-local').Strategy;
+import { AuthController, HomeController } from './controllers';
 
 process.on('unhandledRejection', (reason, p) => {
   console.error('Unhandled Rejection at:', p, 'reason:', reason);
@@ -63,6 +62,16 @@ app.use(express.static(path.resolve(__dirname, 'public')));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(
+  session({
+    secret: 'powerchain-kyc',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false },
+  }),
+);
+app.use(passport.initialize());
+app.use(passport.session());
 
 //
 // Authentication
@@ -85,55 +94,21 @@ app.use((err, req, res, next) => {
   next(err);
 });
 
-app.use(passport.initialize());
-app.use(passport.session());
-passport.use(
-  new LocalStrategy(
-    {
-      usernameField: 'usernameOrEmail',
-      passwordField: 'password',
-      passReqToCallback: true,
-      session: false,
-    },
-    (req, username, password, done) => {
-      console.info(username);
-      User.findOne({ where: { username, password } }).then(user => {
-        if (!user) {
-          return done(null, false);
-        }
-        if (user.password !== password) {
-          return done(null, false);
-        }
-        return done(null, user);
-      });
-    },
-  ),
-);
-passport.serializeUser((user, cb) => {
-  cb(null, user.id);
+// 路由
+app.post('/login', (req, res, next) => {
+  passport.authenticate('local', (err, user) => {
+    req.user = user;
+    AuthController.LoginWithError(req, res, next);
+  })(req, res, next);
 });
-
-passport.deserializeUser((id, cb) => {
-  User.findById(id).then(user => {
-    cb(null, user);
-  });
-});
-
-app.post(
-  '/login',
-  passport.authenticate('local', { failureRedirect: '/login' }),
-  (req, res) => {
-    console.info('=======');
-    console.info(req.user);
-    res.json(req.user);
-  },
-);
-app.post('/register', (req, res) => {
-  const { username, password } = req.body;
-  User.findOne({ username, password }).then(() => {
-    res.json({ message: 'user already exists!' });
-  });
-});
+// app.post(
+//   '/login',
+//   passport.authenticate('local', { successRedirect: '/profile' }),
+// );
+app.post('/register', AuthController.Register);
+app.post('/resetpwd', AuthController.Resetpwd);
+app.post('/join', HomeController.JoinEcho);
+app.get('/profile', HomeController.ApplyProfile);
 
 //
 // Register API middleware
@@ -244,17 +219,7 @@ app.use((err, req, res, next) => {
 //
 // Launch the server
 // -----------------------------------------------------------------------------
-const promise = models
-  .sync({ force: true })
-  .then(() => {
-    User.create({
-      username: 'straysh',
-      password: '123456',
-      email: 'jobhancao@gmail.com',
-      emailConfirmed: true,
-    });
-  })
-  .catch(err => console.error(err.stack));
+const promise = models.sync().catch(err => console.error(err.stack));
 if (!module.hot) {
   promise.then(() => {
     app.listen(config.port, () => {

@@ -19,9 +19,6 @@ const User = Model.define(
       primaryKey: true,
     },
 
-    username: {
-      type: DataType.STRING,
-    },
     password: {
       type: DataType.STRING,
     },
@@ -29,11 +26,7 @@ const User = Model.define(
     email: {
       type: DataType.STRING(255),
       validate: { isEmail: true },
-    },
-
-    emailConfirmed: {
-      type: DataType.BOOLEAN,
-      defaultValue: false,
+      unique: true,
     },
   },
   {
@@ -41,5 +34,13 @@ const User = Model.define(
   },
 );
 
+User.createNewUser = async (email, password) => {
+  await Model.query(
+    'INSERT IGNORE INTO `User` (`email`,`password`,`createdAt`,`updatedAt`) values(:email,:password,:date,:date)',
+    { replacements: { email, password, date: new Date() } },
+  );
+  const user = await User.findOne({ where: { email } });
+  return user;
+};
 
 export default User;
