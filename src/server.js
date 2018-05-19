@@ -103,7 +103,7 @@ app.post('/login', (req, res, next) => {
 });
 app.post('/captcha/send', AuthController.SendCaptcha);
 app.post('/register', AuthController.Register);
-app.post('/password/resetLink', AuthController.ResetLink);
+app.post('/password/reset-link', AuthController.ResetLink);
 app.post('/password/recover', AuthController.Recoverpwd);
 app.post('/join', HomeController.JoinEcho);
 app.get('/profile', HomeController.ApplyProfile);

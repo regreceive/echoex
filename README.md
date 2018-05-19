@@ -13,7 +13,7 @@
 3.  \*\*POST /captcha/send: 获取验证码
   * email
 
-3.  \*\*POST /resetpwd: 重置密码
+3.  \*\*POST /password/reset-link: 重置密码邮件
   * email
 
 4.  POST /join: 加入 Echo 链
