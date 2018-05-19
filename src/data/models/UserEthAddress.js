@@ -28,4 +28,11 @@ const UserEthAddress = Model.define('UserEthAddress', {
   },
 });
 
+UserEthAddress.createNewRecord = async (userId, address) => {
+  return Model.query(
+    'INSERT IGNORE INTO `UserEthAddress` (`userId`,`address`,`createdAt`,`updatedAt`) values(:uid,:address,:date,:date)',
+    { replacements: { userId, address, date: new Date() } },
+  );
+};
+
 export default UserEthAddress;

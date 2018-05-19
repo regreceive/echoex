@@ -24,6 +24,12 @@
 
 3.  \*\*POST /password/reset-link: 重置密码邮件
   * email
+  
+4. \*\* POST /password/recover: 修改密码
+  * email
+  * captcha
+  * password
+  * password_confirm
 
 4.  POST /join: 加入 Echo 链
   * organization 机构名称

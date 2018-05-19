@@ -108,6 +108,7 @@ app.post('/password/reset-link', AuthController.ResetLink);
 app.post('/password/recover', AuthController.Recoverpwd);
 app.post('/join', HomeController.JoinEcho);
 app.get('/profile', HomeController.ApplyProfile);
+app.post('/profile/address', HomeController.SubmitEthAddress);
 
 //
 // Register API middleware

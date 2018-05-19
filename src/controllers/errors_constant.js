@@ -1,5 +1,6 @@
 export const EMAIL_EMPTY = 30001;
 export const EMAIL_INVALID_FORMAT = 30002;
+export const ETH_ADDR_INVALID = 30003;
 
 export const CAPTCHA_EMPTY = 30101;
 export const CAPTCHA_INVALID = 30102;
@@ -15,3 +16,8 @@ export const USER_NOT_EXISTS = 30302;
 
 export const MAIL_SEND_FAILED = 30401;
 export const MAIL_SENT_FREQUENT = 30402;
+export const PWD_RESET_LINK_EXPIRED = 30403;
+export const PWD_RESET_LINK_INVALID = 30404;
+
+export const MUST_LOGIN = 40001;
+export const MUST_BE_GUEST = 40001;

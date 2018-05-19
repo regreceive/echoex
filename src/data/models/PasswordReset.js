@@ -55,4 +55,21 @@ PasswordReset.Count = async email => {
   return c[0] ? c[0].count : 0;
 };
 
+PasswordReset.findRecord = async code => {
+  const c = await Model.query(
+    'select * from `PasswordReset` where code=:code AND createdAt > :c AND createdAt < :e',
+    {
+      replacements: {
+        code,
+        c: new Date(new Date() - 24 * 3600 * 1000),
+        e: new Date(),
+      },
+      type: DataType.QueryTypes.SELECT,
+    },
+  );
+
+  return c[0] ? c[0] : null;
+};
+
+
 export default PasswordReset;

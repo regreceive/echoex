@@ -12,9 +12,10 @@ function validEmail(email) {
     return Errors.EMAIL_INVALID_FORMAT;
   return null;
 }
-function validCaptcha(req, captcha) {
-  if (!captcha || /^\s*&/.test(captcha)) return Errors.CAPTCHA_EMPTY;
-  if (captcha !== req.session.captcha) return Errors.CAPTCHA_INVALID;
+function validCaptcha(captcha, originInSession) {
+  if (!captcha || /^\s*&/.test(captcha))
+    return Errors.CAPTCHA_EMPTY;
+  if (!originInSession || captcha !== originInSession) return Errors.CAPTCHA_INVALID;
   return null;
 }
 function validPassword(p1, p2) {
@@ -71,7 +72,7 @@ AuthController.Register = (req, res) => {
     err = validEmail(email);
     if (err) throw new WE(err);
     // validate catpcha rules
-    validCaptcha(req, captcha);
+    validCaptcha(captcha, req.session.captcha ? req.session.captcha.reg : null);
     if (err) throw new WE(err);
     // validate password rules
     err = validPassword(password, password2);
@@ -86,6 +87,7 @@ AuthController.Register = (req, res) => {
     // write user into databse
     const encryptedPassword = await User.encryptPassword(password, null);
     const newuser = await User.createNewUser(email, encryptedPassword);
+    delete req.session.captcha.reg;
     return res.json({
       info: 'success',
       status: 10000,
@@ -96,16 +98,20 @@ AuthController.Register = (req, res) => {
 
 AuthController.SendCaptcha = (req, res) => {
   tryErrors(req, res, async () => {
-    const { email } = req.body;
+    const { email, scenario } = req.body;
     const err = validEmail(email);
     if (err) throw new WE(err);
+    if (scenario !== 'reg' && scenario !== 'reset') {
+      throw new WE(Errors.CAPTCHA_INVALID);
+    }
 
     const captcha = crypto
       .randomBytes(4)
       .toString('hex')
       .slice(0, 6)
       .toUpperCase();
-    req.session.captcha = captcha;
+    req.session.captcha = req.session.captcha || {};
+    req.session.captcha[scenario] = captcha;
     res.json({
       info: 'success',
       status: 10000,
@@ -182,7 +188,55 @@ Echochain团队
 };
 
 AuthController.Recoverpwd = (req, res) => {
-  res.json({ message: 'OK' });
+  tryErrors(req, res, async () => {
+    const { code } = req.query;
+    if (!code || code.length !== 64) {
+      throw new WE(Errors.CAPTCHA_INVALID);
+    }
+
+    const record = await PasswordReset.findRecord(code);
+    if (!record) {
+      throw new WE(Errors.PWD_RESET_LINK_EXPIRED);
+    }
+
+    const { email, captcha, password, password_confirm: password2 } = req.body;
+    let err;
+    // validate username rules
+    err = validEmail(email);
+    if (err) throw new WE(err);
+    // validate catpcha rules
+    err = validCaptcha(
+      captcha,
+      req.session.captcha ? req.session.captcha.reset : null,
+    );
+    if (err) throw new WE(err);
+    // validate password rules
+    err = validPassword(password, password2);
+    if (err) throw new WE(err);
+    // make sure use not exits in database
+    const user = await User.findOne({ where: { email } });
+    if (!user) {
+      throw new WE(Errors.USER_NOT_EXISTS);
+    }
+
+    console.info(user.email, record.email);
+    if (user.email !== record.email) {
+      throw new WE(Errors.PWD_RESET_LINK_INVALID);
+    }
+
+    const encryptedPassword = await User.encryptPassword(password, null);
+    // @should use transaction, but here's 2 simple SQL query, we just call them sequencially.
+    // 修改密码
+    User.changePwd(email, encryptedPassword);
+    // 删除 reset links
+    PasswordReset.destroy({ where: { email } });
+    delete req.session.captcha.reset;
+    res.json({
+      info: 'success',
+      status: 10000,
+      data: null,
+    });
+  });
 };
 
 export default AuthController;
