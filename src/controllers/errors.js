@@ -12,4 +12,7 @@ errors[Constant.PASSWORD_TOO_SHORT_OR_LONG] = 'password too short or long';
 errors[Constant.USER_EXISTS] = 'user already exists';
 errors[Constant.USER_NOT_EXISTS] = 'user not exists';
 
+errors[Constant.MAIL_SEND_FAILED] = 'mail send failed';
+errors[Constant.MAIL_SENT_FREQUENT] = 'mail sent frequent';
+
 export default errors;
