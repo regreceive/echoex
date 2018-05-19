@@ -96,11 +96,15 @@ AuthController.Register = (req, res) => {
 
 AuthController.SendCaptcha = (req, res) => {
   tryErrors(req, res, async () => {
-    const { email } = req.query;
+    const { email } = req.body;
     const err = validEmail(email);
     if (err) throw new WE(err);
 
-    const captcha = crypto.randomBytes(4).toString('hex').slice(0,6).toUpperCase();
+    const captcha = crypto
+      .randomBytes(4)
+      .toString('hex')
+      .slice(0, 6)
+      .toUpperCase();
     req.session.captcha = captcha;
     res.json({
       info: 'success',

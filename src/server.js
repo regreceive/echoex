@@ -102,7 +102,7 @@ app.post('/login', (req, res, next) => {
     AuthController.Login(req, res, next);
   })(req, res, next);
 });
-app.get('/captcha/send', AuthController.SendCaptcha);
+app.post('/captcha/send', AuthController.SendCaptcha);
 app.post('/register', AuthController.Register);
 app.post('/password/reset-link', AuthController.ResetLink);
 app.post('/password/recover', AuthController.Recoverpwd);
