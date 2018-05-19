@@ -1,3 +1,12 @@
+## API Response:
+```json
+{
+  info: '', // 返回结果的简要描述.如'success'表示正常.
+  status: 10000, // 错误代码,详细的错误代码列表见 src/controllers/errors_constant.js  当status!=10000时,表示有错误发生,参考info字段获取错误信息
+  data: ... // 接口正常时返回的数据
+}
+```
+
 ## Our API Goal:
 
 1.  \*\*POST /login: 登录
