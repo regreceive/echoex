@@ -1,39 +1,45 @@
-/**
- * React Starter Kit (https://www.reactstarterkit.com/)
- *
- * Copyright © 2014-present Kriasoft, LLC. All rights reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
- */
+// @flow
 
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './Footer.css';
-import Link from '../Link';
-import logoUrl from '../assets/logo.png';
-import gg from '../assets/sns/gg.png'
+import Grid from 'react-bootstrap/lib/Grid';
+import Row from 'react-bootstrap/lib/Row';
+import Col from 'react-bootstrap/lib/Col';
+import cs from 'classnames';
+import Wechat from './Wechat';
+import logoUrl from '../../assets/logo.png';
+import sns from '../../assets/sns';
+
+import s from './Footer.scss';
+
+const renderSns = () =>
+  sns.map((row, key) => (
+    <a href={row.url} key={key}>
+      <img src={row.icon} width="45" height="45" />
+    </a>
+  ));
 
 class Footer extends React.Component {
+  componentDidMount() {}
+
   render() {
     return (
-      <div className={s.root}>
-        <div className={s.container}>
-          <div className={s.firstRow}>
-            <div className={s.logo}>
+      <div className={cs('container-fluid', s.root)}>
+        <Grid>
+          <Row className={s.firstRow}>
+            <Col className={s.logoContainer}>
               <img src={logoUrl} width="184" height="60" alt="echo" />
-            </div>
-            <div className={s.sns}>
-              <a href="https://discord.gg/FKvngzE">
-                <img src={gg} width="45" height="45" />
-              </a>
-            </div>
-          </div>
-          <div className={s.copyright}>
-            Copyright © ECHO Team 2014-2018 ECHO Contributors<br />
+            </Col>
+            <Col className={s.sns}>
+              {renderSns()}
+              <Wechat />
+            </Col>
+          </Row>
+          <Row className={s.copyright}>
+            Copyright © ECHO Team 2014-2018 ECHO Contributors <br />
             www.echo.com
-          </div>
-        </div>
+          </Row>
+        </Grid>
       </div>
     );
   }
