@@ -101,10 +101,6 @@ app.post('/login', (req, res, next) => {
     AuthController.LoginWithError(req, res, next);
   })(req, res, next);
 });
-// app.post(
-//   '/login',
-//   passport.authenticate('local', { successRedirect: '/profile' }),
-// );
 app.post('/register', AuthController.Register);
 app.post('/resetpwd', AuthController.Resetpwd);
 app.post('/join', HomeController.JoinEcho);
