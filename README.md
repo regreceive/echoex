@@ -9,23 +9,23 @@
 
 ## Our API Goal:
 
-1.  \*\*POST /login: 登录
+1.  \*\*POST /login: 登录 [√]
   * email
   * password //长度[6,20]含区间
 
-2.  \*\*POST /register: 注册
+2.  \*\*POST /register: 注册 [√]
   * email
   * captcha
   * password
   * password_confirm
 
-3.  \*\*POST /captcha/send: 获取验证码
+3.  \*\*POST /captcha/send: 获取验证码 [√]
   * email
 
-3.  \*\*POST /password/reset-link: 重置密码邮件
+3.  \*\*POST /password/reset-link: 重置密码邮件 [√]
   * email
   
-4. \*\* POST /password/recover: 修改密码
+4. \*\* POST /password/recover: 修改密码 [√]
   * email
   * captcha
   * password
@@ -52,7 +52,7 @@
   * passport_image_01 护照正面
   * passport_image_02 护照背面
 
-6.  \*POST /profile/address: 登记以太地址
+6.  \*POST /profile/address: 登记以太地址 [√]
   * address 以太地址
 
 注: \*星号标识的接口需要登录才能访问.  
