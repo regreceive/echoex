@@ -5,9 +5,12 @@ HomeController.JoinEcho = (req, res) => {
 };
 
 HomeController.ApplyProfile = (req, res) => {
-  console.info(req.cookies);
-  console.info(req.session);
-  res.json(req.user);
+  const result = {
+    user: req.user,
+    cookie: req.cookies,
+    session: req.session,
+  };
+  res.json(result);
 };
 
 export default HomeController;

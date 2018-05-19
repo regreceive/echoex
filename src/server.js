@@ -65,9 +65,10 @@ app.use(bodyParser.json());
 app.use(
   session({
     secret: 'powerchain-kyc',
+    name: 'kycd',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: true },
+    cookie: { secure: false },
   }),
 );
 app.use(passport.initialize());
@@ -101,7 +102,7 @@ app.post('/login', (req, res, next) => {
     AuthController.Login(req, res, next);
   })(req, res, next);
 });
-app.post('/captcha/send', AuthController.SendCaptcha);
+app.get('/captcha/send', AuthController.SendCaptcha);
 app.post('/register', AuthController.Register);
 app.post('/password/reset-link', AuthController.ResetLink);
 app.post('/password/recover', AuthController.Recoverpwd);

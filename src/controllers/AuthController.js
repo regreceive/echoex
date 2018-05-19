@@ -12,9 +12,9 @@ function validEmail(email) {
     return Errors.EMAIL_INVALID_FORMAT;
   return null;
 }
-function validCaptcha(captcha) {
-  if (/^\s*&/.test(captcha)) return Errors.CAPTCHA_EMPTY;
-  if (captcha !== '000000') return Errors.CAPTCHA_INVALID;
+function validCaptcha(req, captcha) {
+  if (!captcha || /^\s*&/.test(captcha)) return Errors.CAPTCHA_EMPTY;
+  if (captcha !== req.session.captcha) return Errors.CAPTCHA_INVALID;
   return null;
 }
 function validPassword(p1, p2) {
@@ -71,7 +71,7 @@ AuthController.Register = (req, res) => {
     err = validEmail(email);
     if (err) throw new WE(err);
     // validate catpcha rules
-    validCaptcha(captcha);
+    validCaptcha(req, captcha);
     if (err) throw new WE(err);
     // validate password rules
     err = validPassword(password, password2);
@@ -96,11 +96,12 @@ AuthController.Register = (req, res) => {
 
 AuthController.SendCaptcha = (req, res) => {
   tryErrors(req, res, async () => {
-    const { email } = req.body;
+    const { email } = req.query;
     const err = validEmail(email);
     if (err) throw new WE(err);
 
-    const captcha = 756841;
+    const captcha = crypto.randomBytes(4).toString('hex').slice(0,6).toUpperCase();
+    req.session.captcha = captcha;
     res.json({
       info: 'success',
       status: 10000,
