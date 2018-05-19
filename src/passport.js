@@ -28,17 +28,24 @@ passport.use(
     },
     (req, email, password, done) => {
       User.encryptPassword(password, null).then(encryptedPassword => {
-        User.findOne({ where: { email, password: encryptedPassword } }).then(
-          user => {
-            if (!user) {
-              return done(null, false);
-            }
-            if (user.password !== password) {
-              return done(null, false);
-            }
-            return done(null, user);
-          },
-        );
+        console.info({ email, password: encryptedPassword });
+        const fn = async () => {
+          const user = await User.findOne({
+            where: { email, password: encryptedPassword },
+          });
+          if (!user) {
+            return done(null, false);
+          }
+          if (user.password !== encryptedPassword) {
+            return done(null, false);
+          }
+          return done(null, user);
+        };
+
+        fn().catch(err => {
+          console.error(err);
+          done(null, false);
+        });
       });
     },
   ),

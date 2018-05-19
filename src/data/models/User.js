@@ -10,6 +10,8 @@
 import crypto from 'crypto';
 import DataType from 'sequelize';
 import Model from '../sequelize';
+import * as Errors from '../../controllers/errors_constant';
+import WE from '../../controllers/exception';
 
 const User = Model.define(
   'User',
@@ -42,6 +44,16 @@ User.createNewUser = async (email, password) => {
   );
   const user = await User.findOne({ where: { email } });
   return user;
+};
+
+User.changePwd = async (email, password) => {
+  const user = await User.findOne({ where: { email } });
+  if (!user) {
+    throw new WE(Errors.USER_NOT_EXISTS);
+  }
+
+  user.updateAttributes({ password });
+  return true;
 };
 
 User.encryptPassword = function(pwd, s) {

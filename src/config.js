@@ -35,6 +35,11 @@ module.exports = {
   // Database
   // databaseUrl: process.env.DATABASE_URL || 'sqlite:database.sqlite',
   databaseUrl: process.env.DATABASE_URL || 'kyc',
+  database: {
+    db: 'kyc',
+    user: 'root',
+    pass: '123456',
+  },
 
   // Web analytics
   analytics: {
@@ -67,6 +72,27 @@ module.exports = {
       secret:
         process.env.TWITTER_CONSUMER_SECRET ||
         'KTZ6cxoKnEakQCeSpZlaUCJWGAlTEBJj0y2EMkUBujA7zWSvaQ',
+    },
+  },
+
+  mailer: {
+    qq: {
+      host: 'smtp.exmail.qq.com',
+      port: 465,
+      secure: true,
+      user: 'echo@echo.center', // echo@echo.center
+      pass: 'Ec4116', // Ec4116
+      from: 'echo <echo@echo.center>',
+      maxPwdReset: 5,
+    },
+    net163: {
+      host: 'smtp.163.com',
+      port: 465,
+      secure: true,
+      user: 'straysh@163.com', // echo@echo.center
+      pass: '884168a@', // Ec4116
+      from: 'straysh <straysh@163.com>',
+      maxPwdReset: 5,
     },
   },
 };

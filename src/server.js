@@ -65,6 +65,7 @@ app.use(bodyParser.json());
 app.use(
   session({
     secret: 'powerchain-kyc',
+    name: 'kycd',
     resave: false,
     saveUninitialized: true,
     cookie: { secure: false },
@@ -98,13 +99,16 @@ app.use((err, req, res, next) => {
 app.post('/login', (req, res, next) => {
   passport.authenticate('local', (err, user) => {
     req.user = user;
-    AuthController.LoginWithError(req, res, next);
+    AuthController.Login(req, res, next);
   })(req, res, next);
 });
+app.post('/captcha/send', AuthController.SendCaptcha);
 app.post('/register', AuthController.Register);
-app.post('/resetpwd', AuthController.Resetpwd);
+app.post('/password/reset-link', AuthController.ResetLink);
+app.post('/password/recover', AuthController.Recoverpwd);
 app.post('/join', HomeController.JoinEcho);
 app.get('/profile', HomeController.ApplyProfile);
+app.post('/profile/address', HomeController.SubmitEthAddress);
 
 //
 // Register API middleware

@@ -10,12 +10,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './Login.css';
+import s from '../login/Login.css';
 
-class Login extends React.Component {
+class Register extends React.Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
   };
+
+  _captcha = function (){
+    fetch('http://localhost:3000/captcha/send', {
+      credentials: "same-origin",
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: 'caotinghan@echo.center',
+        scenario: 'reset',
+      })
+    })
+  }
 
   render() {
     return (
@@ -24,8 +39,8 @@ class Login extends React.Component {
           <h1>{this.props.title}</h1>
           <form method="post">
             <div className={s.formGroup}>
-              <label className={s.label} htmlFor="username">
-                Username or email address:
+              <label className={s.label} htmlFor="email">
+                邮箱:
                 <input
                   className={s.input}
                   id="email"
@@ -36,14 +51,42 @@ class Login extends React.Component {
                 />
               </label>
             </div>
+            {/* 验证码 */}
+            <div className={s.formGroup}>
+              <label className={s.label} htmlFor="captcha">
+                验证码:
+                <input
+                  className={s.input}
+                  id="captcha"
+                  type="text"
+                  name="captcha"
+                  defaultValue="D3f5"
+                  onClick={this._captcha}
+                />
+              </label>
+            </div>
+            {/* 密码 */}
             <div className={s.formGroup}>
               <label className={s.label} htmlFor="password">
-                Password:
+                密码:
                 <input
                   className={s.input}
                   id="password"
                   type="password"
                   name="password"
+                  defaultValue="123456"
+                />
+              </label>
+            </div>
+            {/* 密码2 */}
+            <div className={s.formGroup}>
+              <label className={s.label} htmlFor="password_confirm">
+                确认密码:
+                <input
+                  className={s.input}
+                  id="password_confirm"
+                  type="password"
+                  name="password_confirm"
                   defaultValue="123456"
                 />
               </label>
@@ -60,4 +103,4 @@ class Login extends React.Component {
   }
 }
 
-export default withStyles(s)(Login);
+export default withStyles(s)(Register);
