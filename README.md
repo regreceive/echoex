@@ -9,51 +9,96 @@
 
 ## Our API Goal:
 
-1.  \*\*POST /login: 登录 [√]
-  * email
-  * password //长度[6,20]含区间
+### 登录
+```
+Request URL: /login
+Request Method: POST
 
-2.  \*\*POST /register: 注册 [√]
-  * email
-  * captcha
-  * password
-  * password_confirm
+Form Data: 
+  email
+  password //长度[6,20]含区间
+```
 
-3.  \*\*POST /captcha/send: 获取验证码 [√]
-  * email
+### 注册
+```
+Request URL: /register
+Request Method: POST
 
-3.  \*\*POST /password/reset-link: 重置密码邮件 [√]
-  * email
+Form Data:
+  email
+  captcha
+  password
+  password_confirm
+```
+
+###  获取验证码
+```
+Request URL: /captcha/send
+Request Method: POST
+
+Form Data:
+  email
+```
+
+### 重置密码邮件
+```
+Request URL: /password/reset-link
+Request Method: POST
+
+Form Data:
+  email
+```
   
-4. \*\* POST /password/recover: 修改密码 [√]
-  * email
-  * captcha
-  * password
-  * password_confirm
+### 修改密码
+```
+Request URL: /password/recover
+Request Method: POST
 
-4.  POST /join: 加入 Echo 链
-  * organization 机构名称
-  * industry 行业
-  * mobile 移动电话
-  * phone 座机
-  * email 邮箱
-  * description 机构简介及合作计划
+Form Data:
+  email
+  captcha
+  password
+  password_confirm
+```
 
-5.  \*POST /profile: 提交个人资料
-  * name 姓名
-  * firstname 名
-  * lastname 姓
-  * gender 性别[0 女 1 男]
-  * birthday 出生日期
-  * country 国家
-  * city 城市
-  * location 街道信息
-  * passport_id 护照 id
-  * passport_image_01 护照正面
-  * passport_image_02 护照背面
+### 加入 Echo 链
+```
+Request URL: /join
+Request Method: POST
 
-6.  \*POST /profile/address: 登记以太地址 [√]
+Form Data:
+   organization 机构名称
+   industry 行业
+   mobile 移动电话
+   phone 座机
+   email 邮箱
+   description 机构简介及合作计划
+```
+
+### 提交个人资料
+```
+Request URL: /profile
+Request Method: POST
+
+Form Data:
+  name 姓名
+  firstname 名
+  lastname 姓
+  gender 性别[0 女 1 男]
+  birthday 出生日期
+  country 国家
+  city 城市
+  location 街道信息
+  passport_id 护照 id
+  passport_image_01 护照正面
+  passport_image_02 护照背面
+```
+
+### 登记以太地址
+```
+Request URL: /profile/address
+Request Method: POST
+
+Form Data:
   * address 以太地址
-
-注: \*星号标识的接口需要登录才能访问.  
-\*\*双星号标识的接口只能在未登录状态下访问
+```
