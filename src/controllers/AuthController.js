@@ -192,8 +192,9 @@ Echochain团队
 AuthController.Recoverpwd = (req, res) => {
   tryErrors(req, res, async () => {
     const { code } = req.query;
+    console.info(req.body);
     if (!code || code.length !== 64) {
-      throw new WE(Errors.CAPTCHA_INVALID);
+      throw new WE(Errors.PWD_RESET_LINK_INVALID);
     }
 
     const record = await PasswordReset.findRecord(code);

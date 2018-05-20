@@ -10,9 +10,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './Login.css';
+import s from '../login/Login.css';
 
-class Login extends React.Component {
+class Register extends React.Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
   };
@@ -21,18 +21,20 @@ class Login extends React.Component {
     super(props);
     this.state = {
       email: 'caotinghan@echo.center',
-      password: '123456',
     };
 
     this.subLogin = this.subLogin.bind(this);
     this.handleEmail = this.handleEmail.bind(this);
-    this.handlePassword = this.handlePassword.bind(this);
+  }
+
+  handleEmail(event) {
+    this.setState({ email: event.target.value });
   }
 
   subLogin = function(e) {
     e.preventDefault();
 
-    fetch('http://localhost:3000/api/login', {
+    fetch('http://localhost:3000/api/password/reset-link', {
       credentials: 'same-origin',
       method: 'POST',
       headers: {
@@ -43,32 +45,28 @@ class Login extends React.Component {
     })
       .then(res => res.json())
       .then(result => {
-        console.log(result);
         if (result.status !== 10000) {
-          return window.alert(result.info);
+          window.alert(result.info);
         }
-        window.location.href = '/password/reset-link';
+        console.log(result);
       });
 
     return false;
   };
-
-  handleEmail(event) {
-    this.setState({ email: event.target.value });
-  }
-  handlePassword(event) {
-    this.setState({ password: event.target.value });
-  }
 
   render() {
     return (
       <div className={s.root}>
         <div className={s.container}>
           <h1>{this.props.title}</h1>
-          <form method="post" action="/api/login" onSubmit={this.subLogin}>
+          <form
+            method="post"
+            action="/api/password/recover"
+            onSubmit={this.subLogin}
+          >
             <div className={s.formGroup}>
-              <label className={s.label} htmlFor="username">
-                Username or email address:
+              <label className={s.label} htmlFor="email">
+                邮箱:
                 <input
                   className={s.input}
                   id="email"
@@ -81,26 +79,9 @@ class Login extends React.Component {
               </label>
             </div>
             <div className={s.formGroup}>
-              <label className={s.label} htmlFor="password">
-                Password:
-                <input
-                  className={s.input}
-                  id="password"
-                  type="password"
-                  name="password"
-                  value={this.state.password}
-                  onChange={this.handlePassword}
-                />
-              </label>
-            </div>
-            <div className={s.formGroup}>
               <button className={s.button} type="submit">
                 Log in
               </button>
-            </div>
-
-            <div>
-              <a href="/password/reset-link">忘记密码?</a>
             </div>
           </form>
         </div>
@@ -109,4 +90,4 @@ class Login extends React.Component {
   }
 }
 
-export default withStyles(s)(Login);
+export default withStyles(s)(Register);
