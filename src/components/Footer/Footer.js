@@ -24,7 +24,7 @@ class Footer extends React.Component {
 
   render() {
     return (
-      <div className={cs('container-fluid', s.root)}>
+      <footer className={cs('container-fluid', s.root)}>
         <Grid>
           <Row className={s.firstRow}>
             <Col className={s.logoContainer}>
@@ -40,7 +40,7 @@ class Footer extends React.Component {
             www.echo.com
           </Row>
         </Grid>
-      </div>
+      </footer>
     );
   }
 }

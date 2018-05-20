@@ -25,10 +25,12 @@ html {
   font-size: 1em; /* ~16px; */
   font-family: var(--font-family-base);
   line-height: 1.375; /* ~22px */
+  min-height: 100%;
 }
 
 body {
   margin: 0;
+  min-height: 100%;
 }
 
 a {
