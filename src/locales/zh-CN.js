@@ -15,5 +15,8 @@
 
 export default {
   LOGIN: '登录',
+  LOGIN_TITLE: '登录',
   REGISTER: '注册',
+  EMAIL_DESCRIPTION: '邮箱',
+  PASSWORD_DESCRIPTION: '密码',
 };

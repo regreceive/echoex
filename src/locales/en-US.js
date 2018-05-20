@@ -15,5 +15,8 @@
 
 export default {
   LOGIN: 'Login',
+  LOGIN_TITLE: 'Login In',
   REGISTER: 'Register',
+  EMAIL_DESCRIPTION: 'Email address',
+  PASSWORD_DESCRIPTION: 'Password',
 };

@@ -10,6 +10,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import intl from 'react-intl-universal';
 import s from './Login.css';
 
 class Login extends React.Component {
@@ -68,7 +69,7 @@ class Login extends React.Component {
           <form method="post" action="/api/login" onSubmit={this.subLogin}>
             <div className={s.formGroup}>
               <label className={s.label} htmlFor="username">
-                Username or email address:
+                {intl.get('EMAIL_DESCRIPTION')}
                 <input
                   className={s.input}
                   id="email"
@@ -82,7 +83,7 @@ class Login extends React.Component {
             </div>
             <div className={s.formGroup}>
               <label className={s.label} htmlFor="password">
-                Password:
+                {intl.get('PASSWORD_DESCRIPTION')}
                 <input
                   className={s.input}
                   id="password"

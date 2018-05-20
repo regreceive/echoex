@@ -14,6 +14,8 @@ import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import session from 'express-session';
 import { graphql } from 'graphql';
+import querystring from 'querystring';
+import url from 'url';
 import expressGraphQL from 'express-graphql';
 // import jwt from 'jsonwebtoken';
 import nodeFetch from 'node-fetch';
@@ -33,6 +35,7 @@ import schema from './data/schema';
 import chunks from './chunk-manifest.json'; // eslint-disable-line import/no-unresolved
 import config from './config';
 import { AuthController, HomeController } from './controllers';
+import { loadLocales } from './locales';
 
 const upload = multer({
   storage: multer.memoryStorage(),
@@ -145,6 +148,10 @@ app.get('*', async (req, res, next) => {
       pathname: req.path,
       query: req.query,
     };
+
+    const { query } = url.parse(req.url);
+    const { lang } = querystring.parse(query);
+    await loadLocales(lang || '', req.headers['accept-language'] || '');
 
     const route = await router.resolve(context);
 

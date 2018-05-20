@@ -1,23 +1,17 @@
-/**
- * React Starter Kit (https://www.reactstarterkit.com/)
- *
- * Copyright © 2014-present Kriasoft, LLC. All rights reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
- */
-
+// @flow
 import 'whatwg-fetch';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import deepForceUpdate from 'react-deep-force-update';
 import queryString from 'query-string';
 import { createPath } from 'history/PathUtils';
+import intl from 'react-intl-universal';
 import App from './components/App';
 import createFetch from './createFetch';
 import history from './history';
 import { updateMeta } from './DOMUtils';
 import router from './router';
+import { loadLocales } from './locales';
 
 // Global (context) variables that can be easily accessed from any React component
 // https://facebook.github.io/react/docs/context.html
@@ -59,10 +53,20 @@ async function onLocationChange(location, action) {
 
   const isInitialRender = !action;
   try {
+    const lang: string =
+      context.query && context.query.lang ? context.query.lang : '';
+
     context = Object.assign({}, context, {
       pathname: location.pathname,
       query: queryString.parse(location.search),
     });
+
+    if (
+      (context.query.lang && context.query.lang !== lang) ||
+      !intl.getInitOptions().currentLocale
+    ) {
+      await loadLocales();
+    }
 
     // Traverses the list of routes in the order they are defined until
     // it finds the first route that matches provided URL path string
