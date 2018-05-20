@@ -14,6 +14,7 @@
       email
       password //长度[6,20]含区间
     ```
+    
 1. ### 注册
     ```
     **Api: POST /api/register  
@@ -23,18 +24,21 @@
       password
       password_confirm
     ```
+    
 3. ###  获取验证码
     ```
     Api: POST /api/captcha/send
     Params:
       email
     ```
+    
 4. ### 重置密码邮件
     ```
     ** Api: POST /api/password/reset-link
     Params:
       email
     ```
+    
 5. ### 修改密码
     ```
     ** Api: POST /api/password/recover
@@ -44,6 +48,7 @@
       password
       password_confirm
     ```
+    
 6. ### 加入 Echo 链
     ```
     Api: POST /api/join
