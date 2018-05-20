@@ -27,6 +27,7 @@ class Login extends React.Component {
       <div className={s.root}>
         <div className={s.container}>
           <h1>{this.props.title}</h1>
+          <a href="/profile/edit">编辑个人信息</a>
           <h2>账号信息</h2>
           <div className={s.profile_container}>
             <div className={s.profile_item}>

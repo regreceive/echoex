@@ -52,7 +52,7 @@ const routes = {
     },
     {
       path: '/profile/edit',
-      load: () => import(/* webpackChunkName: 'register' */ './profile'),
+      load: () => import(/* webpackChunkName: 'register' */ './profile-edit'),
     },
     {
       path: '/address',

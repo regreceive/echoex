@@ -9,6 +9,7 @@
 
 import path from 'path';
 import express from 'express';
+import multer from 'multer';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import session from 'express-session';
@@ -33,6 +34,9 @@ import chunks from './chunk-manifest.json'; // eslint-disable-line import/no-unr
 import config from './config';
 import { AuthController, HomeController } from './controllers';
 
+const upload = multer({
+  storage: multer.memoryStorage(),
+});
 process.on('unhandledRejection', (reason, p) => {
   console.error('Unhandled Rejection at:', p, 'reason:', reason);
   // send entire app down. Process manager will restart it
@@ -86,7 +90,15 @@ app.post('/api/password/reset-link', AuthController.ResetLink);
 app.post('/api/password/recover', AuthController.Recoverpwd);
 app.post('/password/recover', AuthController.Recoverpwd); // for Test Only
 app.post('/api/join', HomeController.JoinEcho);
-app.get('/api/test', HomeController.ApplyProfile);
+app.get('/api/test', HomeController.Test);
+app.post(
+  '/api/profile',
+  upload.fields([
+    { name: 'passport_01', maxCount: 1 },
+    { name: 'passport_02', maxCount: 1 },
+  ]),
+  HomeController.ApplyProfile,
+);
 app.post('/api/profile/address', HomeController.SubmitEthAddress);
 
 //
