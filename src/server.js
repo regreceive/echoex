@@ -96,19 +96,19 @@ app.use((err, req, res, next) => {
 });
 
 // 路由
-app.post('/login', (req, res, next) => {
+app.post('/api/login', (req, res, next) => {
   passport.authenticate('local', (err, user) => {
     req.user = user;
     AuthController.Login(req, res, next);
   })(req, res, next);
 });
-app.post('/captcha/send', AuthController.SendCaptcha);
-app.post('/register', AuthController.Register);
-app.post('/password/reset-link', AuthController.ResetLink);
-app.post('/password/recover', AuthController.Recoverpwd);
-app.post('/join', HomeController.JoinEcho);
-app.get('/profile', HomeController.ApplyProfile);
-app.post('/profile/address', HomeController.SubmitEthAddress);
+app.post('/api/captcha/send', AuthController.SendCaptcha);
+app.post('/api/register', AuthController.Register);
+app.post('/api/password/reset-link', AuthController.ResetLink);
+app.post('/api/password/recover', AuthController.Recoverpwd);
+app.post('/api/join', HomeController.JoinEcho);
+app.get('/api/test', HomeController.ApplyProfile);
+app.post('/api/profile/address', HomeController.SubmitEthAddress);
 
 //
 // Register API middleware
