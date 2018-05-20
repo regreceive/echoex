@@ -1,0 +1,39 @@
+.root {
+  padding-left: 20px;
+  padding-right: 20px;
+  flex: auto;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 0 0 40px;
+  max-width: 800px;
+}
+
+
+.container h2 {
+  font-weight: 800;
+}
+
+.profile_container {
+  font-size: 2em;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile_container .profile_item {
+  display: flex;
+  flex-direction: row;
+}
+
+.profile_container span {
+  display: flex;
+}
+
+.profile_container span:first-child {
+  width: 10em;
+}
+
+.profile_container span+span {
+  margin-left: 2em;
+}

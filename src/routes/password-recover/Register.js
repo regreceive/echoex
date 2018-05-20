@@ -17,27 +17,92 @@ class Register extends React.Component {
     title: PropTypes.string.isRequired,
   };
 
-  _captcha = function (){
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: 'caotinghan@echo.center',
+      captcha: 'AF34D9',
+      password: '123456',
+      password_confirm: '123456',
+    };
+
+    this.subLogin = this.subLogin.bind(this);
+    this.handleEmail = this.handleEmail.bind(this);
+    this.handleCaptcha = this.handleCaptcha.bind(this);
+    this.handleCaptchaEnter = this.handleCaptchaEnter.bind(this);
+    this.handlePassword = this.handlePassword.bind(this);
+    this.handlePasswordConfirm = this.handlePasswordConfirm.bind(this);
+  }
+
+  handleEmail(event) {
+    this.setState({ email: event.target.value });
+  }
+  handlePassword(event) {
+    this.setState({ password: event.target.value });
+  }
+  handlePasswordConfirm(event) {
+    this.setState({ password_confirm: event.target.value });
+  }
+  handleCaptchaEnter(event) {
+    this.setState({ captcha: event.target.value });
+  }
+  handleCaptcha = function() {
     fetch('http://localhost:3000/api/captcha/send', {
-      credentials: "same-origin",
+      credentials: 'same-origin',
       method: 'POST',
       headers: {
-        'Accept': 'application/json',
+        Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        email: 'caotinghan@echo.center',
+        email: this.state.email,
         scenario: 'reset',
-      })
+      }),
     })
-  }
+      .then(res => res.json())
+      .then(result => {
+        if (result.status === 10000) {
+          this.setState({ captcha: result.data });
+        } else {
+          global.alert(result.info);
+          console.log(result);
+        }
+      });
+  };
+
+  subLogin = function(e) {
+    e.preventDefault();
+
+    fetch(window.location.href, {
+      credentials: 'same-origin',
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(this.state),
+    })
+      .then(res => res.json())
+      .then(result => {
+        if (result.status !== 10000) {
+          window.alert(result.info);
+        }
+        console.log(result);
+      });
+
+    return false;
+  };
 
   render() {
     return (
       <div className={s.root}>
         <div className={s.container}>
           <h1>{this.props.title}</h1>
-          <form method="post" action="/api/password/recover">
+          <form
+            method="post"
+            action="/api/password/recover"
+            onSubmit={this.subLogin}
+          >
             <div className={s.formGroup}>
               <label className={s.label} htmlFor="email">
                 邮箱:
@@ -47,7 +112,8 @@ class Register extends React.Component {
                   type="text"
                   name="email"
                   autoFocus // eslint-disable-line jsx-a11y/no-autofocus
-                  defaultValue="caotinghan@echo.center"
+                  value={this.state.email}
+                  onChange={this.handleEmail}
                 />
               </label>
             </div>
@@ -60,8 +126,9 @@ class Register extends React.Component {
                   id="captcha"
                   type="text"
                   name="captcha"
-                  defaultValue="D3f5"
-                  onClick={this._captcha}
+                  value={this.state.captcha}
+                  onClick={this.handleCaptcha}
+                  onChange={this.handleCaptchaEnter}
                 />
               </label>
             </div>
@@ -74,7 +141,8 @@ class Register extends React.Component {
                   id="password"
                   type="password"
                   name="password"
-                  defaultValue="123456"
+                  value={this.state.password}
+                  onChange={this.handlePassword}
                 />
               </label>
             </div>
@@ -87,7 +155,8 @@ class Register extends React.Component {
                   id="password_confirm"
                   type="password"
                   name="password_confirm"
-                  defaultValue="123456"
+                  value={this.state.password_confirm}
+                  onChange={this.handlePasswordConfirm}
                 />
               </label>
             </div>

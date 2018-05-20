@@ -37,9 +37,15 @@ function HomeController() {}
 
 HomeController.JoinEcho = (req, res) => {
   tryErrors(req, res, async () => {
-    const {organization, industry, mobile, phone, email, description} = req.body;
-
-  })
+    const {
+      organization,
+      industry,
+      mobile,
+      phone,
+      email,
+      description,
+    } = req.body;
+  });
 };
 
 HomeController.ApplyProfile = (req, res) => {
@@ -59,8 +65,8 @@ HomeController.SubmitEthAddress = (req, res) => {
     if (err) throw new WE(Errors.ETH_ADDR_INVALID);
     if (!user) throw new WE(Errors.MUST_LOGIN);
 
-    await User.saveEthAddress(1, address);
-    res.json({info:'success',status:10000,data:null});
+    await User.saveEthAddress(user.id, address);
+    res.json({ info: 'success', status: 10000, data: null });
   });
 };
 

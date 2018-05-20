@@ -34,12 +34,25 @@ const routes = {
       load: () => import(/* webpackChunkName: 'register' */ './register'),
     },
     {
+      path: '/password/reset-link',
+      load: () => import(/* webpackChunkName: 'register' */ './password-link'),
+    },
+    {
       path: '/password/recover',
-      load: () => import(/* webpackChunkName: 'register' */ './password-recover'),
+      load: () =>
+        import(/* webpackChunkName: 'register' */ './password-recover'),
     },
     {
       path: '/join-echo',
       load: () => import(/* webpackChunkName: 'register' */ './join-echo'),
+    },
+    {
+      path: '/profile',
+      load: () => import(/* webpackChunkName: 'register' */ './profile'),
+    },
+    {
+      path: '/profile/edit',
+      load: () => import(/* webpackChunkName: 'register' */ './profile'),
     },
     {
       path: '/address',
