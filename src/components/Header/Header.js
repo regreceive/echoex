@@ -1,7 +1,10 @@
 // @flow
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import intl from 'react-intl-universal';
+import queryString from 'query-string';
 import Navbar from 'react-bootstrap/lib/Navbar';
 import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
@@ -10,6 +13,7 @@ import MenuItem from 'react-bootstrap/lib/MenuItem';
 import s from './Header.css';
 import logoUrl from '../../assets/logo.png';
 import history from '../../history';
+import { mapLocalesName } from '../../locales';
 
 function isLeftClickEvent(event) {
   return event.button === 0;
@@ -18,28 +22,39 @@ function isLeftClickEvent(event) {
 function isModifiedEvent(event) {
   return !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
 }
+
 class Header extends React.Component {
-  onSelect(eventKey: number, event: Event) {
+  static contextTypes = {
+    query: PropTypes.object,
+    pathname: PropTypes.string,
+  };
+
+  constructor(props, context) {
+    super(props, context);
+    this.selectHandle = this.selectHandle.bind(this);
+  }
+
+  selectHandle(eventKey: number, event: Event) {
     if (isModifiedEvent(event) || !isLeftClickEvent(event)) {
       return;
     }
 
-    if (event.defaultPrevented === true) {
-      return;
-    }
+    const { pathname } = event.target;
+    let query = queryString.stringify(
+      Object.assign(
+        {},
+        this.context.query,
+        queryString.parse(event.target.search),
+      ),
+    );
+    query = query ? `?${query}` : query;
+    const to = `${pathname}${query}`;
 
-    let to: string;
-    switch (eventKey) {
-      case 1:
-        to = '/login';
-        break;
-      case 2:
-        to = '/register';
-        break;
-      default:
-        return;
+    if (this.context.pathname !== pathname) {
+      history.push(to);
+    } else {
+      history.replace(to);
     }
-    history.push(to);
     event.preventDefault();
   }
 
@@ -55,16 +70,12 @@ class Header extends React.Component {
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
-          <Nav pullRight onSelect={this.onSelect}>
-            <NavItem eventKey={1} href="/login">
-              登录
-            </NavItem>
-            <NavItem eventKey={2} href="/register">
-              注册
-            </NavItem>
-            <NavDropdown eventKey={3} title="Language" id="basic-nav-dropdown">
-              <MenuItem eventKey={3.1}>中文</MenuItem>
-              <MenuItem eventKey={3.2}>English</MenuItem>
+          <Nav pullRight onSelect={this.selectHandle}>
+            <NavItem href="/login">{intl.get('LOGIN')}</NavItem>
+            <NavItem href="/register">{intl.get('REGISTER')}</NavItem>
+            <NavDropdown title={mapLocalesName()} id="basic-nav-dropdown">
+              <MenuItem href="?lang=en-US">English</MenuItem>
+              <MenuItem href="?lang=zh-CN">中文</MenuItem>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

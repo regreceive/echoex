@@ -21,7 +21,7 @@ import router from './router';
 
 // Global (context) variables that can be easily accessed from any React component
 // https://facebook.github.io/react/docs/context.html
-const context = {
+let context = {
   // Enables critical path CSS rendering
   // https://github.com/kriasoft/isomorphic-style-loader
   insertCss: (...styles) => {
@@ -59,8 +59,10 @@ async function onLocationChange(location, action) {
 
   const isInitialRender = !action;
   try {
-    context.pathname = location.pathname;
-    context.query = queryString.parse(location.search);
+    context = Object.assign({}, context, {
+      pathname: location.pathname,
+      query: queryString.parse(location.search),
+    });
 
     // Traverses the list of routes in the order they are defined until
     // it finds the first route that matches provided URL path string

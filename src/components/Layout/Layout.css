@@ -37,6 +37,10 @@ body {
   flex-direction: column;
 }
 
+.main {
+  flex: auto;
+}
+
 a {
   color: #0074c2;
 }

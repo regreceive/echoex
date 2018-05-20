@@ -10,6 +10,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { loadLocales } from '../locales';
+
 const ContextType = {
   // Enables critical path CSS rendering
   // https://github.com/kriasoft/isomorphic-style-loader
@@ -43,6 +45,7 @@ const ContextType = {
  *     container,
  *   );
  */
+
 class App extends React.PureComponent {
   static propTypes = {
     context: PropTypes.shape(ContextType).isRequired,
@@ -51,14 +54,33 @@ class App extends React.PureComponent {
 
   static childContextTypes = ContextType;
 
+  state = { localesInitDone: false };
+
   getChildContext() {
     return this.props.context;
+  }
+
+  componentDidMount() {
+    loadLocales().then(() => {
+      this.setState({ localesInitDone: true });
+    });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    // 语言切换
+    if (nextProps.context.query.lang !== this.props.context.query.lang) {
+      loadLocales().then(() => {
+        this.forceUpdate();
+      });
+    }
   }
 
   render() {
     // NOTE: If you need to add or modify header, footer etc. of the app,
     // please do that inside the Layout component.
-    return React.Children.only(this.props.children);
+    return (
+      this.state.localesInitDone && React.Children.only(this.props.children)
+    );
   }
 }
 
