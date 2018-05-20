@@ -17,12 +17,27 @@ class Register extends React.Component {
     title: PropTypes.string.isRequired,
   };
 
+  _captcha = function (){
+    fetch('http://localhost:3000/api/captcha/send', {
+      credentials: "same-origin",
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: 'caotinghan@echo.center',
+        scenario: 'reg',
+      })
+    })
+  }
+
   render() {
     return (
       <div className={s.root}>
         <div className={s.container}>
           <h1>{this.props.title}</h1>
-          <form method="post">
+          <form method="post" action="/api/register">
             <div className={s.formGroup}>
               <label className={s.label} htmlFor="email">
                 邮箱:
@@ -46,6 +61,7 @@ class Register extends React.Component {
                   type="text"
                   name="captcha"
                   defaultValue="D3f5"
+                  onClick={this._captcha}
                 />
               </label>
             </div>

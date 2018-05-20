@@ -20,4 +20,4 @@ export const PWD_RESET_LINK_EXPIRED = 30403;
 export const PWD_RESET_LINK_INVALID = 30404;
 
 export const MUST_LOGIN = 40001;
-export const MUST_BE_GUEST = 40001;
+export const MUST_BE_GUEST = 40002;

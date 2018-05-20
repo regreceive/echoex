@@ -22,14 +22,21 @@ const User = Model.define(
       primaryKey: true,
     },
 
-    password: {
-      type: DataType.STRING,
-    },
-
     email: {
       type: DataType.STRING(255),
       validate: { isEmail: true },
       unique: true,
+    },
+
+    address: {
+      type: DataType.CHAR,
+      length: 42,
+      unique: true,
+      default: null,
+    },
+
+    password: {
+      type: DataType.STRING,
     },
   },
   {
@@ -55,6 +62,14 @@ User.changePwd = async (email, password) => {
   user.updateAttributes({ password });
   return true;
 };
+
+User.saveEthAddress = async (uid, address) =>
+  User.update(
+    {
+      address,
+    },
+    { where: { id: uid } },
+  );
 
 User.encryptPassword = function(pwd, s) {
   return new Promise((resolve, reject) => {

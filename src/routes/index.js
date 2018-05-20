@@ -38,6 +38,14 @@ const routes = {
       load: () => import(/* webpackChunkName: 'register' */ './password-recover'),
     },
     {
+      path: '/join-echo',
+      load: () => import(/* webpackChunkName: 'register' */ './join-echo'),
+    },
+    {
+      path: '/address',
+      load: () => import(/* webpackChunkName: 'register' */ './apply-address'),
+    },
+    {
       path: '/about',
       load: () => import(/* webpackChunkName: 'about' */ './about'),
     },

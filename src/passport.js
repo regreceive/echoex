@@ -28,7 +28,6 @@ passport.use(
     },
     (req, email, password, done) => {
       User.encryptPassword(password, null).then(encryptedPassword => {
-        console.info({ email, password: encryptedPassword });
         const fn = async () => {
           const user = await User.findOne({
             where: { email, password: encryptedPassword },
@@ -55,8 +54,6 @@ passport.serializeUser((user, cb) => {
 });
 
 passport.deserializeUser((id, cb) => {
-  console.info('='.repeat(32));
-  console.info(id);
   User.findById(id).then(user => {
     cb(null, user);
   });

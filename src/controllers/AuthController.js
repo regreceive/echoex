@@ -13,9 +13,9 @@ function validEmail(email) {
   return null;
 }
 function validCaptcha(captcha, originInSession) {
-  if (!captcha || /^\s*&/.test(captcha))
-    return Errors.CAPTCHA_EMPTY;
-  if (!originInSession || captcha !== originInSession) return Errors.CAPTCHA_INVALID;
+  if (!captcha || /^\s*&/.test(captcha)) return Errors.CAPTCHA_EMPTY;
+  if (!originInSession || captcha !== originInSession)
+    return Errors.CAPTCHA_INVALID;
   return null;
 }
 function validPassword(p1, p2) {
@@ -72,7 +72,10 @@ AuthController.Register = (req, res) => {
     err = validEmail(email);
     if (err) throw new WE(err);
     // validate catpcha rules
-    err = validCaptcha(captcha, req.session.captcha ? req.session.captcha.reg : null);
+    err = validCaptcha(
+      captcha,
+      req.session.captcha ? req.session.captcha.reg : null,
+    );
     if (err) throw new WE(err);
     // validate password rules
     err = validPassword(password, password2);
@@ -132,7 +135,6 @@ AuthController.ResetLink = (req, res) => {
     }
 
     const mailCount = await PasswordReset.Count(email);
-    console.info(mailCount);
     if (mailCount >= config.mailer.qq.maxPwdReset) {
       throw new WE(Errors.MAIL_SENT_FREQUENT);
     }
@@ -219,7 +221,6 @@ AuthController.Recoverpwd = (req, res) => {
       throw new WE(Errors.USER_NOT_EXISTS);
     }
 
-    console.info(user.email, record.email);
     if (user.email !== record.email) {
       throw new WE(Errors.PWD_RESET_LINK_INVALID);
     }

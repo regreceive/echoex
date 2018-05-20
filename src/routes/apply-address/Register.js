@@ -10,9 +10,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './Login.css';
+import s from '../login/Login.css';
 
-class Login extends React.Component {
+class Register extends React.Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
   };
@@ -22,35 +22,23 @@ class Login extends React.Component {
       <div className={s.root}>
         <div className={s.container}>
           <h1>{this.props.title}</h1>
-          <form method="post" action="/api/login">
+          <form method="post" action="/api/profile/address">
             <div className={s.formGroup}>
-              <label className={s.label} htmlFor="username">
-                Username or email address:
+              <label className={s.label} htmlFor="address">
+                您的以太坊地址:
                 <input
                   className={s.input}
-                  id="email"
+                  id="address"
                   type="text"
-                  name="email"
+                  name="address"
                   autoFocus // eslint-disable-line jsx-a11y/no-autofocus
-                  defaultValue="caotinghan@echo.center"
-                />
-              </label>
-            </div>
-            <div className={s.formGroup}>
-              <label className={s.label} htmlFor="password">
-                Password:
-                <input
-                  className={s.input}
-                  id="password"
-                  type="password"
-                  name="password"
-                  defaultValue="123456"
+                  defaultValue="0x512210A27677616436F05BF0394C6e5068E9e9c6"
                 />
               </label>
             </div>
             <div className={s.formGroup}>
               <button className={s.button} type="submit">
-                Log in
+                提交
               </button>
             </div>
           </form>
@@ -60,4 +48,4 @@ class Login extends React.Component {
   }
 }
 
-export default withStyles(s)(Login);
+export default withStyles(s)(Register);

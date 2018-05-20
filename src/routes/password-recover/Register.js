@@ -18,7 +18,7 @@ class Register extends React.Component {
   };
 
   _captcha = function (){
-    fetch('http://localhost:3000/captcha/send', {
+    fetch('http://localhost:3000/api/captcha/send', {
       credentials: "same-origin",
       method: 'POST',
       headers: {
@@ -37,7 +37,7 @@ class Register extends React.Component {
       <div className={s.root}>
         <div className={s.container}>
           <h1>{this.props.title}</h1>
-          <form method="post">
+          <form method="post" action="/api/password/recover">
             <div className={s.formGroup}>
               <label className={s.label} htmlFor="email">
                 邮箱:
