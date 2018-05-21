@@ -24,6 +24,7 @@ function validPassword(p1, p2) {
   if (/^\s*$/.test(p2)) return Errors.PASSWORD_CONFIRM_EMPTY;
   if (p1.length < 6 || p1.length > 20 || p2.length < 6 || p2.length > 20)
     return Errors.PASSWORD_TOO_SHORT_OR_LONG;
+  if (p1 !== p2) throw new WE(Errors.PASSWORD_INCONSIST);
   return null;
 }
 const tryErrors = function tryErrors(req, res, fn) {
@@ -73,19 +74,14 @@ AuthController.Register = (req, res) => {
     err = validEmail(email);
     if (err) throw new WE(err);
     // validate catpcha rules
-    err = validCaptcha(
-      captcha,
-      req.session.captcha ? req.session.captcha.reg : null,
-    );
+    err = validCaptcha(captcha, req.session.captcha ? req.session.captcha.reg : null,);
     if (err) throw new WE(err);
     // validate password rules
     err = validPassword(password, password2);
     if (err) throw new WE(err);
     // make sure use not exits in database
     const user = await User.findOne({ where: { email } });
-    if (user) {
-      throw new WE(Errors.USER_EXISTS);
-    }
+    if (user) throw new WE(Errors.USER_EXISTS);
 
     // construct user
     // write user into databse
@@ -111,7 +107,7 @@ AuthController.SendCaptcha = (req, res) => {
 
     const captcha = crypto.randomBytes(4).toString('hex').slice(0, 6).toUpperCase();
     req.session.captcha = req.session.captcha || {};
-    req.session.captcha[scenario] = {captcha, expired_at: new Date().getTime()+5*3600*1000};
+    req.session.captcha[scenario] = {captcha, expired_at: new Date().getTime()+5*60*1000}; //验证码过期实践5分钟
     res.json({
       info: 'success',
       status: 10000,
@@ -174,7 +170,6 @@ Echochain团队
     transporter.sendMail(mailOptions, error => {
       if (error) {
         console.error(error);
-        res.json(err);
         throw new WE(Errors.MAIL_SEND_FAILED, error.toString());
       }
       return res.json({
@@ -189,7 +184,6 @@ Echochain团队
 AuthController.Recoverpwd = (req, res) => {
   tryErrors(req, res, async () => {
     const { code } = req.query;
-    console.info(req.body);
     if (!code || code.length !== 64) {
       throw new WE(Errors.PWD_RESET_LINK_INVALID);
     }
@@ -205,10 +199,7 @@ AuthController.Recoverpwd = (req, res) => {
     err = validEmail(email);
     if (err) throw new WE(err);
     // validate catpcha rules
-    err = validCaptcha(
-      captcha,
-      req.session.captcha ? req.session.captcha.reset : null,
-    );
+    err = validCaptcha(captcha, req.session.captcha ? req.session.captcha.reset : null);
     if (err) throw new WE(err);
     // validate password rules
     err = validPassword(password, password2);

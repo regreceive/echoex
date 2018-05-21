@@ -16,7 +16,7 @@ function checkEthAddress(address) {
 }
 function checkUploadFiles(files) {
   if (!files || !files.length) return Errors.PASSPORT_IMAGE_EMPTY;
-  if (!files[0]['originalname'].match(/\.(jpg|jpeg|png|gif)$/)) {
+  if (!files[0]['originalname'].match(/\.(jpg|jpeg|png)$/)) {
     return Errors.MUST_BE_IMAGE;
   }
   return null;
