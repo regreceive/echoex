@@ -45,7 +45,7 @@ PasswordReset.Count = async email => {
     {
       replacements: {
         email,
-        c: new Date(new Date() - 24 * 3600 * 1000),
+        c: new Date(new Date().getTime() - 24 * 3600 * 1000),
         e: new Date(),
       },
       type: DataType.QueryTypes.SELECT,
@@ -61,7 +61,7 @@ PasswordReset.findRecord = async code => {
     {
       replacements: {
         code,
-        c: new Date(new Date() - 24 * 3600 * 1000),
+        c: new Date(new Date().getTime() - 24 * 3600 * 1000),
         e: new Date(),
       },
       type: DataType.QueryTypes.SELECT,
