@@ -9,7 +9,7 @@ import Canvas from './canvas';
 
 function validEmail(email) {
   if (/^\s*$/.test(email)) return Errors.EMAIL_EMPTY;
-  if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,6}$/i.test(email))
+  if (!/^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-?\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/i.test(email))
     return Errors.EMAIL_INVALID_FORMAT;
   return null;
 }
