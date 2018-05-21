@@ -14,7 +14,7 @@ function validEmail(email) {
   return null;
 }
 function validCaptcha(captcha, originInSession) {
-  const {captcha:code, expired_at} = originInSession;
+  const { captcha: code, expired_at } = originInSession;
   if (!captcha || /^\s*&/.test(captcha)) return Errors.CAPTCHA_EMPTY;
   if (!originInSession || captcha !== code || new Date().getTime() > expired_at)
     return Errors.CAPTCHA_INVALID;
@@ -75,7 +75,10 @@ AuthController.Register = (req, res) => {
     err = validEmail(email);
     if (err) throw new WE(err);
     // validate catpcha rules
-    err = validCaptcha(captcha, req.session.captcha ? req.session.captcha.reg : null,);
+    err = validCaptcha(
+      captcha,
+      req.session.captcha ? req.session.captcha.reg : null,
+    );
     if (err) throw new WE(err);
     // validate password rules
     err = validPassword(password, password2);
@@ -106,17 +109,27 @@ AuthController.SendCaptcha = (req, res) => {
       throw new WE(Errors.CAPTCHA_INVALID);
     }
 
-    const captcha = crypto.randomBytes(4).toString('hex').slice(0, 6).toUpperCase();
+    const captcha = crypto
+      .randomBytes(4)
+      .toString('hex')
+      .slice(0, 4)
+      .toUpperCase();
     req.session.captcha = req.session.captcha || {};
-    req.session.captcha[scenario] = {captcha, expired_at: new Date().getTime()+5*60*1000}; //验证码过期实践5分钟
-    Canvas({
-      text: captcha,
-      fileMode: 2,
-      height: 100,
-      width: 250,
-    }, (text, data)=>{
-      res.end(data);
-    })
+    req.session.captcha[scenario] = {
+      captcha,
+      expired_at: new Date().getTime() + 5 * 60 * 1000,
+    }; // 验证码过期实践5分钟
+    Canvas(
+      {
+        text: captcha,
+        fileMode: 2,
+        height: 100,
+        width: 250,
+      },
+      (text, data) => {
+        res.end(data);
+      },
+    );
   });
 };
 
@@ -203,7 +216,10 @@ AuthController.Recoverpwd = (req, res) => {
     err = validEmail(email);
     if (err) throw new WE(err);
     // validate catpcha rules
-    err = validCaptcha(captcha, req.session.captcha ? req.session.captcha.reset : null);
+    err = validCaptcha(
+      captcha,
+      req.session.captcha ? req.session.captcha.reset : null,
+    );
     if (err) throw new WE(err);
     // validate password rules
     err = validPassword(password, password2);
