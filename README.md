@@ -30,6 +30,7 @@
     Api: POST /api/captcha/send
     Params:
       email
+      scenario 枚举['reg', 'reset']
     ```
     
 4. ### 重置密码邮件
@@ -87,3 +88,8 @@
 
 注： \**标识的接口标识需在非登录状态
     \*  标识的接口需在登录状态
+    
+#安装canvas依赖包  
+```bash
+sudo apt-get install libcairo2-dev libjpeg-dev libpango1.0-dev libgif-dev build-essential g++
+```

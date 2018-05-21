@@ -87,7 +87,8 @@ app.post('/api/login', (req, res, next) => {
     AuthController.Login(req, res, next);
   })(req, res, next);
 });
-app.post('/api/captcha/send', AuthController.SendCaptcha);
+app.get('/api/captcha/send', AuthController.SendCaptcha);
+// app.post('/api/captcha/send', AuthController.SendCaptcha);
 app.post('/api/register', AuthController.Register);
 app.post('/api/password/reset-link', AuthController.ResetLink);
 app.post('/api/password/recover', AuthController.Recoverpwd);

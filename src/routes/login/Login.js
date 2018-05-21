@@ -94,6 +94,7 @@ class Login extends React.Component {
                 />
               </label>
             </div>
+            <div className={s.captcha}><img src="http://localhost:3000/api/captcha/send?email=a@qq.com&scenario=reg" alt=""/></div>
             <div className={s.formGroup}>
               <button className={s.button} type="submit">
                 Log in

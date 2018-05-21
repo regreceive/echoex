@@ -5,6 +5,7 @@ import * as Errors from './errors_constant';
 import WE from './exception';
 import config from '../config';
 import PasswordReset from '../data/models/PasswordReset';
+import Canvas from './canvas';
 
 function validEmail(email) {
   if (/^\s*$/.test(email)) return Errors.EMAIL_EMPTY;
@@ -98,7 +99,7 @@ AuthController.Register = (req, res) => {
 
 AuthController.SendCaptcha = (req, res) => {
   tryErrors(req, res, async () => {
-    const { email, scenario } = req.body;
+    const { email, scenario } = req.query;
     const err = validEmail(email);
     if (err) throw new WE(err);
     if (scenario !== 'reg' && scenario !== 'reset') {
@@ -108,11 +109,14 @@ AuthController.SendCaptcha = (req, res) => {
     const captcha = crypto.randomBytes(4).toString('hex').slice(0, 6).toUpperCase();
     req.session.captcha = req.session.captcha || {};
     req.session.captcha[scenario] = {captcha, expired_at: new Date().getTime()+5*60*1000}; //验证码过期实践5分钟
-    res.json({
-      info: 'success',
-      status: 10000,
-      data: captcha,
-    });
+    Canvas({
+      text: captcha,
+      fileMode: 2,
+      height: 100,
+      width: 250,
+    }, (text, data)=>{
+      res.end(data);
+    })
   });
 };
 
