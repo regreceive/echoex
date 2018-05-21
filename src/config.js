@@ -85,14 +85,5 @@ module.exports = {
       from: 'echo <echo@echo.center>',
       maxPwdReset: 5,
     },
-    net163: {
-      host: 'smtp.163.com',
-      port: 465,
-      secure: true,
-      user: 'straysh@163.com', // echo@echo.center
-      pass: '884168a@', // Ec4116
-      from: 'straysh <straysh@163.com>',
-      maxPwdReset: 5,
-    },
   },
 };

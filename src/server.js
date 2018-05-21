@@ -73,7 +73,7 @@ app.use(
     secret: 'powerchain-kyc',
     name: 'kycd',
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     // cookie: { secure: false },
   }),
 );

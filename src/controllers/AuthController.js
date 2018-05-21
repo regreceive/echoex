@@ -13,8 +13,9 @@ function validEmail(email) {
   return null;
 }
 function validCaptcha(captcha, originInSession) {
+  const {captcha:code, expired_at} = originInSession;
   if (!captcha || /^\s*&/.test(captcha)) return Errors.CAPTCHA_EMPTY;
-  if (!originInSession || captcha !== originInSession)
+  if (!originInSession || captcha !== code || new Date().getTime() > expired_at)
     return Errors.CAPTCHA_INVALID;
   return null;
 }
@@ -108,13 +109,9 @@ AuthController.SendCaptcha = (req, res) => {
       throw new WE(Errors.CAPTCHA_INVALID);
     }
 
-    const captcha = crypto
-      .randomBytes(4)
-      .toString('hex')
-      .slice(0, 6)
-      .toUpperCase();
+    const captcha = crypto.randomBytes(4).toString('hex').slice(0, 6).toUpperCase();
     req.session.captcha = req.session.captcha || {};
-    req.session.captcha[scenario] = captcha;
+    req.session.captcha[scenario] = {captcha, expired_at: new Date().getTime()+5*3600*1000};
     res.json({
       info: 'success',
       status: 10000,
@@ -150,8 +147,8 @@ AuthController.ResetLink = (req, res) => {
       port,
       secure, // true for 465, false for other ports
       auth: {
-        user, // generated ethereal user
-        pass, // generated ethereal password
+        user,
+        pass,
       },
     });
 
@@ -229,9 +226,9 @@ AuthController.Recoverpwd = (req, res) => {
     const encryptedPassword = await User.encryptPassword(password, null);
     // @should use transaction, but here's 2 simple SQL query, we just call them sequencially.
     // 修改密码
-    User.changePwd(email, encryptedPassword);
+    await User.changePwd(email, encryptedPassword);
     // 删除 reset links
-    PasswordReset.destroy({ where: { email } });
+    await PasswordReset.destroy({ where: { email } });
     delete req.session.captcha.reset;
     res.json({
       info: 'success',

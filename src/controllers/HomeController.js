@@ -16,7 +16,7 @@ function checkEthAddress(address) {
 }
 function checkUploadFiles(files) {
   if (!files || !files.length) return Errors.PASSPORT_IMAGE_EMPTY;
-  if (!files[0].originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
+  if (!files[0]['originalname'].match(/\.(jpg|jpeg|png|gif)$/)) {
     return Errors.MUST_BE_IMAGE;
   }
   return null;
@@ -59,22 +59,8 @@ function HomeController() {}
 
 HomeController.JoinEcho = (req, res) => {
   tryErrors(req, res, async () => {
-    const {
-      organization,
-      industry,
-      mobile,
-      phone,
-      email,
-      description,
-    } = req.body;
-    await ContactUs.createNewRecord(
-      organization,
-      industry,
-      email,
-      mobile,
-      phone,
-      description,
-    );
+    const {organization, industry, mobile, phone, email, description} = req.body;
+    await ContactUs.createNewRecord(organization, industry, email, mobile, phone, description);
 
     res.json({ info: 'success', status: 10000, data: null });
   });
@@ -84,42 +70,21 @@ HomeController.ApplyProfile = (req, res) => {
   tryErrors(req, res, async () => {
     const { user } = req;
     if (!req.files) throw new WE(Errors.PASSPORT_IMAGE_EMPTY);
-    let err = checkUploadFiles(req.files.passport_01);
+    let err = checkUploadFiles(req.files['passport_01']);
     if (err) throw new WE(err);
-    err = checkUploadFiles(req.files.passport_02);
+    err = checkUploadFiles(req.files['passport_02']);
     if (err) throw new WE(err);
 
     const uploadPath = path.resolve(`${__dirname}../../uploads`);
-    let file = req.files.passport_01[0];
-    let ext = file.mimetype.split('/')[1];
+    let file = req.files['passport_01'][0];
+    let ext = file['mimetype'].split('/')[1];
     await saveFile(file.buffer, `${uploadPath}/${user.id}_01.${ext}`);
 
-    file = req.files.passport_02[0];
-    ext = file.mimetype.split('/')[1];
+    file = req.files['passport_02'][0];
+    ext = file['mimetype'].split('/')[1];
     await saveFile(file.buffer, `${uploadPath}/${user.id}_02.${ext}`);
-    const {
-      username,
-      firstname,
-      lastname,
-      gender,
-      birthday,
-      country,
-      city,
-      location,
-      passport,
-    } = req.body;
-    UserProfile.insertNewRecord(
-      user.id,
-      username,
-      firstname,
-      lastname,
-      gender,
-      birthday,
-      country,
-      city,
-      location,
-      passport,
-    );
+    const {username, firstname, lastname, gender, birthday, country, city, location, passport} = req.body;
+    await UserProfile.insertNewRecord( user.id, username, firstname, lastname, gender, birthday, country, city, location, passport);
     res.json({ info: 'success', status: 10000, data: null });
   });
 };
