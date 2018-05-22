@@ -62,6 +62,7 @@ AuthController.Login = (req, res, next) => {
       if (err) {
         return next(err);
       }
+      res.cookie('username', req.body.email);
       return res.json({ info: 'success', status: 10000, data: req.user.id });
     });
   });
@@ -109,6 +110,7 @@ AuthController.SendCaptcha = (req, res) => {
     req.session.captcha[scenario] = {captcha, expired_at: new Date().getTime()+5*60*1000}; //验证码过期实时间5分钟
     Canvas({
       text: captcha,
+      size: 5,
       fileMode: 2,
       height: 100,
       width: 250,
