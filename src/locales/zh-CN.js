@@ -29,30 +29,31 @@ export default {
   FORGOT_PASSWORD: '忘记密码？',
 
   // error messages
-  30001: '邮箱地址为空',
-  30002: '不是有效的邮箱格式',
-  30003: '不是有效的以太地址',
-  30004: '错误的图片格式',
-  30005: '缺少护照照片',
+  [Constant.EMAIL_EMPTY]: '邮箱地址为空',
+  [Constant.EMAIL_INVALID_FORMAT]: '不是有效的邮箱格式',
+  [Constant.ETH_ADDR_INVALID]: '不是有效的以太地址',
+  [Constant.MUST_BE_IMAGE]: '错误的图片格式',
+  [Constant.PASSPORT_IMAGE_EMPTY]: '缺少护照照片',
 
-  30101: '验证码为空',
-  30102: '错误的验证码',
+  [Constant.CAPTCHA_EMPTY]: '验证码为空',
+  [Constant.CAPTCHA_INVALID]: '错误的验证码',
 
-  30201: '密码为空',
-  30202: '确认密码为空',
-  30203: '密码格式错误',
-  30204: '前后密码不匹配',
-  30205: '密码长度太短或超出限制',
+  [Constant.PASSWORD_EMPTY]: '密码为空',
+  [Constant.PASSWORD_CONFIRM_EMPTY]: '确认密码为空',
+  [Constant.PASSWORD_INVALID]: '密码格式错误',
+  [Constant.PASSWORD_INCONSIST]: '前后密码不匹配',
+  [Constant.PASSWORD_TOO_SHORT_OR_LONG]: '密码长度太短或超出限制',
 
-  30301: '用户已存在',
-  30302: '用户不存在',
+  [Constant.USER_EXISTS]: '用户已存在',
+  [Constant.USER_NOT_EXISTS]: '用户不存在',
 
-  30401: '邮件发送失败',
-  30402: '邮件发送过于频繁',
-  30403: '密码重置链接失效',
-  30404: '违规的密码重置链接',
+  [Constant.MAIL_SEND_FAILED]: '邮件发送失败',
+  [Constant.MAIL_SENT_FREQUENT]: '邮件发送过于频繁',
+  [Constant.PWD_RESET_LINK_EXPIRED]: '密码重置链接失效',
+  [Constant.PWD_RESET_LINK_INVALID]: '违规的密码重置链接',
 
-  40001: '必须登录',
-  40002: 'must be guest',
-  40003: 'passport saving failed',
+  [Constant.MUST_LOGIN]: '必须登录',
+  [Constant.MUST_BE_GUEST]: 'must be guest',
+  [Constant.PASSPORT_SAVE_FAILED]: 'passport saving failed',
 };
+

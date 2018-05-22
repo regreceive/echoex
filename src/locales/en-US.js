@@ -13,6 +13,8 @@
 }
 */
 
+import * as Constant from "../controllers/errors_constant";
+
 export default {
   LOGIN: 'Login',
   LOGIN_TITLE: 'Login In',
@@ -26,30 +28,30 @@ export default {
   FORGOT_PASSWORD: '忘记密码？',
 
   // error messages
-  30001: 'empty email',
-  30002: 'invalid email format',
-  30003: 'invalid ethereum address',
-  30004: 'invalid image type',
-  30005: 'passport image missing',
+  [Constant.EMAIL_EMPTY]: 'empty email',
+  [Constant.EMAIL_INVALID_FORMAT]: 'invalid email format',
+  [Constant.ETH_ADDR_INVALID]: 'invalid ethereum address',
+  [Constant.MUST_BE_IMAGE]: 'invalid image type',
+  [Constant.PASSPORT_IMAGE_EMPTY]: 'passport image missing',
 
-  30101: 'empty captcha',
-  30102: 'invalid captcha',
+  [Constant.CAPTCHA_EMPTY]: 'empty captcha',
+  [Constant.CAPTCHA_INVALID]: 'invalid captcha',
 
-  30201: 'password empty',
-  30202: 'password_confirm empty',
-  30203: 'password format invalid',
-  30204: 'password mismatch',
-  30205: 'password too short or long',
+  [Constant.PASSWORD_EMPTY]: 'password empty',
+  [Constant.PASSWORD_CONFIRM_EMPTY]: 'password_confirm empty',
+  [Constant.PASSWORD_INVALID]: 'password format invalid',
+  [Constant.PASSWORD_INCONSIST]: 'password mismatch',
+  [Constant.PASSWORD_TOO_SHORT_OR_LONG]: 'password too short or long',
 
-  30301: 'user already exists',
-  30302: 'user not exists',
+  [Constant.USER_EXISTS]: 'user already exists',
+  [Constant.USER_NOT_EXISTS]: 'user not exists',
 
-  30401: 'mail send failed',
-  30402: 'mail sent frequent',
-  30403: 'password reset link expired',
-  30404: 'password reset link invalid',
+  [Constant.MAIL_SEND_FAILED]: 'mail send failed',
+  [Constant.MAIL_SENT_FREQUENT]: 'mail sent frequent',
+  [Constant.PWD_RESET_LINK_EXPIRED]: 'password reset link expired',
+  [Constant.PWD_RESET_LINK_INVALID]: 'password reset link invalid',
 
-  40001: 'must login',
-  40002: 'must be guest',
-  40003: 'passport saving failed',
+  [Constant.MUST_LOGIN]: 'must login',
+  [Constant.MUST_BE_GUEST]: 'must be guest',
+  [Constant.PASSPORT_SAVE_FAILED]: 'passport saving failed',
 };
