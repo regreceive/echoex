@@ -88,7 +88,8 @@ UserProfile.insertNewRecord = async (
   passport_02,
 ) =>
   Model.query(
-    'INSERT IGNORE INTO `UserProfile` (userId, username, firstname, lastname, gender, birthday, country, city, location, passport,passport_01,passport_02,`createdAt`,`updatedAt`) values(:userId, :username, :firstname, :lastname, :gender, :birthday, :country, :city, :location, :passport,:passport_01,:passport_02,:date,:date)',
+    'INSERT IGNORE INTO `UserProfile` (userId, username, firstname, lastname, gender, birthday, country, city, location, passport,passport_01,passport_02,`createdAt`,`updatedAt`) values(:userId, :username, :firstname, :lastname, :gender, :birthday, :country, :city, :location, :passport,:passport_01,:passport_02,:date,:date) ' +
+    'ON DUPLICATE KEY UPDATE username=:username,firstname=:firstname, lastname=:lastname, gender=:gender, birthday=:birthday, country=:country, city=:city, location=:location, passport=:passport,passport_01=:passport_01,passport_02=:passport_02,updatedAt=:date',
     {
       replacements: {
         userId,

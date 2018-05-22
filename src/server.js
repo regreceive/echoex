@@ -93,7 +93,6 @@ app.get('/api/captcha/send', AuthController.SendCaptcha);
 app.post('/api/register', AuthController.Register);
 app.post('/api/password/reset-link', AuthController.ResetLink);
 app.post('/api/password/recover', AuthController.Recoverpwd);
-app.post('/password/recover', AuthController.Recoverpwd); // for Test Only
 app.post('/api/join', HomeController.JoinEcho);
 app.get('/api/test', HomeController.Test);
 app.post(
