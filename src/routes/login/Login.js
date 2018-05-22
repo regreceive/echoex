@@ -51,6 +51,7 @@ class Login extends React.Component {
           this.context.login.out();
           history.replace('/login');
         }
+        alert(status);
         this.setState({ help: intl.get(status) });
       });
   }

@@ -28,6 +28,7 @@ export default {
   REFRESH_CAPTCHA: '更换验证码',
   FORGOT_PASSWORD: '忘记密码？',
   PROFILE_TITLE: '个人信息',
+  PROFILE_SUBMIT: '提交信息',
   ACCOUNT: '账号信息',
   KYC_TITLE: 'KYC信息',
   KYC_AUTH: 'KYC认证',

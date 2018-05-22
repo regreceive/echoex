@@ -1,6 +1,6 @@
 // @flow
 
-const serverUrl = 'http://localhost:3000';
+const serverUrl = '';
 
 async function post(fetch, serviceName, body) {
   let result;
@@ -63,9 +63,14 @@ function register(fetch, payload: object): Promise<object | number> {
   return post(fetch, '/api/register', JSON.stringify(payload));
 }
 
-// 个人信息
+// 拿个人信息
 function profile(fetch): Promise {
   return get(fetch, '/api/profile');
 }
 
-export { login, register, profile };
+// 改个人信息
+function profilePost(fetch, payload: object): Promise {
+  return post(fetch, '/api/profile', JSON.stringify(payload));
+}
+
+export { login, register, profile, profilePost };
