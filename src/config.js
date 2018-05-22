@@ -86,4 +86,7 @@ module.exports = {
       maxPwdReset: 5,
     },
   },
+
+  authList: [],
+  guestList: [],
 };

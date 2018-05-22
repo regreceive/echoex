@@ -18,6 +18,11 @@ const UserProfile = Model.define('UserProfile', {
     primaryKey: true,
   },
 
+  status: {
+    type: DataType.TINYINT,
+    defaultValue: 0,
+  },
+
   userId: {
     type: DataType.INTEGER,
     unique: true,
@@ -58,6 +63,14 @@ const UserProfile = Model.define('UserProfile', {
   passport: {
     type: DataType.STRING(255),
   },
+
+  passport_01: {
+    type: DataType.STRING(255),
+  },
+
+  passport_02: {
+    type: DataType.STRING(255),
+  },
 });
 
 UserProfile.insertNewRecord = async (
@@ -71,9 +84,11 @@ UserProfile.insertNewRecord = async (
   city,
   location,
   passport,
+  passport_01,
+  passport_02,
 ) =>
   Model.query(
-    'INSERT IGNORE INTO `UserProfile` (userId, username, firstname, lastname, gender, birthday, country, city, location, passport,`createdAt`,`updatedAt`) values(:userId, :username, :firstname, :lastname, :gender, :birthday, :country, :city, :location, :passport,:date,:date)',
+    'INSERT IGNORE INTO `UserProfile` (userId, username, firstname, lastname, gender, birthday, country, city, location, passport,passport_01,passport_02,`createdAt`,`updatedAt`) values(:userId, :username, :firstname, :lastname, :gender, :birthday, :country, :city, :location, :passport,:passport_01,:passport_02,:date,:date)',
     {
       replacements: {
         userId,
@@ -86,6 +101,8 @@ UserProfile.insertNewRecord = async (
         city,
         location,
         passport,
+        passport_01,
+        passport_02,
         date: new Date(),
       },
     },

@@ -103,6 +103,7 @@ app.post(
   ]),
   HomeController.ApplyProfile,
 );
+app.get('/api/profile', HomeController.getProfile);
 app.post('/api/profile/address', HomeController.SubmitEthAddress);
 
 //

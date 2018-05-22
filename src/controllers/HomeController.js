@@ -1,10 +1,12 @@
 import path from 'path';
 import fs from 'fs';
+import crypto from 'crypto';
 import * as Errors from './errors_constant';
 import WE from './exception';
 import User from '../data/models/User';
 import ContactUs from '../data/models/ContactUs';
 import UserProfile from '../data/models/UserProfile';
+import config from "../config";
 
 function checkEthAddress(address) {
   const addr = address.toLowerCase();
@@ -20,6 +22,9 @@ function checkUploadFiles(files) {
     return Errors.MUST_BE_IMAGE;
   }
   return null;
+}
+function getFileName(f) {
+  return crypto.createHash('md5').update(`${f}_powerchain`).digest("hex");
 }
 async function saveFile(data, filePath) {
   return new Promise((resolve, reject) => {
@@ -69,6 +74,8 @@ HomeController.JoinEcho = (req, res) => {
 HomeController.ApplyProfile = (req, res) => {
   tryErrors(req, res, async () => {
     const { user } = req;
+    if (!user) throw new WE(Errors.MUST_LOGIN);
+
     if (!req.files) throw new WE(Errors.PASSPORT_IMAGE_EMPTY);
     let err = checkUploadFiles(req.files['passport_01']);
     if (err) throw new WE(err);
@@ -78,15 +85,50 @@ HomeController.ApplyProfile = (req, res) => {
     const uploadPath = path.resolve(`${__dirname}../../uploads`);
     let file = req.files['passport_01'][0];
     let ext = file['mimetype'].split('/')[1];
-    await saveFile(file.buffer, `${uploadPath}/${user.id}_01.${ext}`);
+    let passport_01 = getFileName(`${user.id}_01`) + '.' + ext;
+    await saveFile(file.buffer, `${uploadPath}/${passport_01}`);
 
     file = req.files['passport_02'][0];
     ext = file['mimetype'].split('/')[1];
-    await saveFile(file.buffer, `${uploadPath}/${user.id}_02.${ext}`);
+    let passport_02 = getFileName(`${user.id}_02`) + '.' + ext;
+    await saveFile(file.buffer, `${uploadPath}/${passport_02}`);
     const {username, firstname, lastname, gender, birthday, country, city, location, passport} = req.body;
-    await UserProfile.insertNewRecord( user.id, username, firstname, lastname, gender, birthday, country, city, location, passport);
+    await UserProfile.insertNewRecord( user.id, username, firstname, lastname, gender, birthday, country, city, location, passport, passport_01, passport_02);
     res.json({ info: 'success', status: 10000, data: null });
   });
+};
+
+HomeController.getProfile = (req, res) => {
+  tryErrors(req, res, async () => {
+    const { user } = req;
+    if (!user) throw new WE(Errors.MUST_LOGIN);
+
+    const profile = await UserProfile.findOne({ where: { userId: user.id } });
+    profile.passport_01 = `${config.api.serverUrl}/uploads/${profile.passport_01}`;
+    profile.passport_02 = `${config.api.serverUrl}/uploads/${profile.passport_02}`;
+    const result = {
+      status: profile.status,
+      userId: profile.userId,
+      username: profile.username,
+      firstname: profile.firstname,
+      lastname: profile.lastname,
+      gender: profile.gender,
+      birthday: profile.birthday,
+      country: profile.country,
+      city: profile.city,
+      location: profile.location,
+      passport: profile.passport,
+      passport_01: profile.passport_01,
+      passport_02: profile.passport_02,
+    };
+
+    console.log(result);
+    res.json({
+      info: 'success',
+      status: 10000,
+      data: result,
+    });
+  })
 };
 
 HomeController.Test = (req, res) => {
@@ -102,6 +144,7 @@ HomeController.SubmitEthAddress = (req, res) => {
   tryErrors(req, res, async () => {
     const { address } = req.body;
     const { user } = req;
+    if (!user) throw new WE(Errors.MUST_LOGIN);
     const err = checkEthAddress(address);
     if (err) throw new WE(Errors.ETH_ADDR_INVALID);
     if (!user) throw new WE(Errors.MUST_LOGIN);
