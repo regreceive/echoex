@@ -1,170 +1,115 @@
-/**
- * React Starter Kit (https://www.reactstarterkit.com/)
- *
- * Copyright © 2014-present Kriasoft, LLC. All rights reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
- */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from '../login/Login.css';
+import intl from 'react-intl-universal';
+import Form from 'react-bootstrap/lib/Form';
+import FormGroup from 'react-bootstrap/lib/FormGroup';
+import Button from 'react-bootstrap/lib/Button';
+import Row from 'react-bootstrap/lib/Row';
+import Col from 'react-bootstrap/lib/Col';
+import EmailFieldGroup from '../../components/Form/EmailFieldGroup';
+import PasswordGroup from '../../components/Form/PasswordGroup';
+import { register } from '../api';
+import history from '../../history';
+import Section from '../../components/Section';
+import Captcha from './Captcha';
+import s from './Register.css';
 
 class Register extends React.Component {
+  static contextTypes = {
+    fetch: PropTypes.func.isRequired,
+  };
+
   static propTypes = {
     title: PropTypes.string.isRequired,
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: 'caotinghan@echo.center',
-      captcha: 'AF34D9',
-      password: '123456',
-      password_confirm: '123456',
-    };
+  constructor(props, context) {
+    super(props, context);
 
-    this.subLogin = this.subLogin.bind(this);
-    this.handleEmail = this.handleEmail.bind(this);
-    this.handleCaptcha = this.handleCaptcha.bind(this);
-    this.handleCaptchaEnter = this.handleCaptchaEnter.bind(this);
-    this.handlePassword = this.handlePassword.bind(this);
-    this.handlePasswordConfirm = this.handlePasswordConfirm.bind(this);
+    this.state = { help: '' };
+
+    this.submit = this.submit.bind(this);
   }
 
-  handleEmail(event) {
-    this.setState({ email: event.target.value });
-    console.log(this.state);
-  }
-  handlePassword(event) {
-    this.setState({ password: event.target.value });
-  }
-  handlePasswordConfirm(event) {
-    this.setState({ password_confirm: event.target.value });
-  }
-  handleCaptchaEnter(event) {
-    this.setState({ captcha: event.target.value });
-  }
-  handleCaptcha = function() {
-    fetch('http://localhost:3000/api/captcha/send', {
-      credentials: 'same-origin',
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: this.state.email,
-        scenario: 'reg',
-      }),
+  submit() {
+    const email = this.email.value;
+    const captcha = this.captcha.value;
+    const password = this.password.value;
+    const passwordConfirm = this.passwordConfirm.value;
+
+    register(this.context.fetch, {
+      email,
+      captcha,
+      password,
+      password_confirm: passwordConfirm,
     })
-      .then(res => res.json())
-      .then(result => {
-        if (result.status === 10000) {
-          this.setState({ captcha: result.data });
-        } else {
-          global.alert(result.info);
-          console.log(result);
-        }
+      .then(() => history.replace('/home'))
+      .catch(status => {
+        this.setState({ help: status });
       });
-  };
-
-  subLogin = function(e) {
-    e.preventDefault();
-
-    fetch('http://localhost:3000/api/register', {
-      credentials: 'same-origin',
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(this.state),
-    })
-      .then(res => res.json())
-      .then(result => {
-        if (result.status !== 10000) {
-          window.alert(result.info);
-        }
-        console.log(result);
-      });
-
-    return false;
-  };
+  }
 
   render() {
+    const { help } = this.state;
     return (
-      <div className={s.root}>
-        <div className={s.container}>
-          <h1>{this.props.title}</h1>
-          <form method="post" action="/api/register" onSubmit={this.subLogin}>
-            <div className={s.formGroup}>
-              <label className={s.label} htmlFor="email">
-                邮箱:
-                <input
-                  className={s.input}
-                  id="email"
-                  type="text"
-                  name="email"
-                  autoFocus // eslint-disable-line jsx-a11y/no-autofocus
-                  value={this.state.email}
-                  onChange={this.handleEmail}
-                />
-              </label>
-            </div>
-            {/* 验证码 */}
-            <div className={s.formGroup}>
-              <label className={s.label} htmlFor="captcha">
-                验证码:
-                <input
-                  className={s.input}
-                  id="captcha"
-                  type="text"
-                  name="captcha"
-                  value={this.state.captcha}
-                  onClick={this.handleCaptcha}
-                  onChange={this.handleCaptchaEnter}
-                />
-              </label>
-            </div>
-            {/* 密码 */}
-            <div className={s.formGroup}>
-              <label className={s.label} htmlFor="password">
-                密码:
-                <input
-                  className={s.input}
-                  id="password"
-                  type="password"
-                  name="password"
-                  value={this.state.password}
-                  onChange={this.handlePassword}
-                />
-              </label>
-            </div>
-            {/* 密码2 */}
-            <div className={s.formGroup}>
-              <label className={s.label} htmlFor="password_confirm">
-                确认密码:
-                <input
-                  className={s.input}
-                  id="password_confirm"
-                  type="password"
-                  name="password_confirm"
-                  value={this.state.password_confirm}
-                  onChange={this.handlePasswordConfirm}
-                />
-              </label>
-            </div>
-            <div className={s.formGroup}>
-              <button className={s.button} type="submit">
-                Log in
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
+      <Section
+        rootClassName={s.root}
+        containerClassName={s.container}
+        title={this.props.title}
+      >
+        <Form horizontal>
+          <EmailFieldGroup
+            id="email"
+            type="email"
+            label={intl.get('EMAIL_DESCRIPTION')}
+            inputRef={ref => {
+              this.email = ref;
+            }}
+          />
+
+          <Captcha
+            label={intl.get('CAPTCHA')}
+            inputRef={ref => {
+              this.captcha = ref;
+            }}
+            btnClassName={s.btn}
+            addonClassName={s.addon}
+            captchaClassName={s.captcha}
+            refreshCaptcha={() => {
+              this.captchaImg.src = `/api/captcha/send?scenario=reg&${Math.random()}`;
+            }}
+            imgRef={ref => {
+              this.captchaImg = ref;
+            }}
+          />
+
+          <PasswordGroup
+            passwordRef={ref => {
+              this.password = ref;
+            }}
+            passwordConfirmRef={ref => {
+              this.passwordConfirm = ref;
+            }}
+          />
+
+          <FormGroup>
+            <Button
+              bsStyle="primary"
+              bsSize="large"
+              block
+              onClick={this.submit}
+            >
+              {intl.get('REGISTER_TITLE')}
+            </Button>
+          </FormGroup>
+          <Row>
+            {help && (
+              <Col className="text-right text-danger">{intl.get(help)}</Col>
+            )}
+          </Row>
+        </Form>
+      </Section>
     );
   }
 }
