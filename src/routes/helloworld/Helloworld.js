@@ -32,8 +32,9 @@ class Register extends React.Component {
 
 
     this.state = { deadline: '2018-05-24', timer: 'NA:NA:NA' };
-    setInterval(()=>{
+    const t = setInterval(()=>{
       left--;
+      if(left<=0) clearInterval(t);
       this.setState({timer: formatTimeLeft(left)})
     }, 1000);
   }
