@@ -48,6 +48,7 @@ class Login extends React.Component {
       .then(loginHandle(this.context.login, this.email.value))
       .catch(status => {
         if (status === 40001) {
+          this.context.login.out();
           history.replace('/login');
         }
         this.setState({ help: intl.get(status) });
@@ -62,7 +63,7 @@ class Login extends React.Component {
         containerClassName={s.container}
         title={this.props.title}
       >
-        <Form horizontal>
+        <Form>
           <FieldGroup
             id="email"
             type="email"

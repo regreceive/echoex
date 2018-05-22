@@ -2,14 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import intl from 'react-intl-universal';
+import Row from 'react-bootstrap/lib/Row';
+import Col from 'react-bootstrap/lib/Col';
 import Section from '../../components/Section';
 import { profile } from '../api';
 import history from '../../history';
+import FieldGroup from '../../components/Form/FieldGroup';
 import s from './Profile.css';
 
 class Login extends React.Component {
   static contextTypes = {
     fetch: PropTypes.func.isRequired,
+    login: PropTypes.object.isRequired,
   };
 
   static propTypes = {
@@ -22,17 +26,19 @@ class Login extends React.Component {
     this.state = { help: '' };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     profile(this.context.fetch)
       .then(data => {
         this.profile = data || {};
       })
       .catch(status => {
         if (status === 40001) {
+          this.context.login.out();
           history.replace('/login');
         }
         this.setState({ help: intl.get(status) });
       });
+    this.email = this.context.login.check();
   }
 
   render() {
@@ -43,65 +49,29 @@ class Login extends React.Component {
         containerClassName={s.container}
         title={this.props.title}
       >
-        <h2>账号信息</h2>
-        <div className={s.profile_container}>
-          <div className={s.profile_item}>
-            <span>邮箱</span>
-            <span>xxxxx@qq.com</span>
-          </div>
-          <div className={s.profile_item}>
-            <span>密码</span>
-            <span>******</span>
-          </div>
-          <div className={s.profile_item}>
-            <span>以太地址</span>
-            <span>ox.........</span>
-          </div>
-        </div>
+        <h2>{intl.get('ACCOUNT')}</h2>
+        <Row>
+          <Col xs={3}>{intl.get('EMAIL')}</Col>
+          <Col xs={9}>{this.email || this.context.login.check()}</Col>
+        </Row>
+        <Row>
+          <Col xs={3}>{intl.get('PASSWORD_DESCRIPTION')}</Col>
+          <Col xs={9}>******</Col>
+        </Row>
 
-        <h2>KYC 信息</h2>
-        <div className={s.profile_container}>
-          <div className={s.profile_item}>
-            <span>kyc认证</span>
-            <span>审核中</span>
-          </div>
-          <div className={s.profile_item}>
-            <span>姓名</span>
-            <span>kk</span>
-          </div>
-          <div className={s.profile_item}>
-            <span>名</span>
-            <span>k</span>
-          </div>
-          <div className={s.profile_item}>
-            <span>姓</span>
-            <span>k</span>
-          </div>
-          <div className={s.profile_item}>
-            <span>性别</span>
-            <span>男</span>
-          </div>
-          <div className={s.profile_item}>
-            <span>出生日期</span>
-            <span>1987.01.01</span>
-          </div>
-        </div>
+        <h2>{intl.get('KYC_TITLE')}</h2>
+        <Row>
+          <Col xs={3}>{intl.get('KYC_AUTH')}</Col>
+          <Col xs={9}>
+            {1 ? intl.get('KYC_AUTH_DONE') : intl.get('KYC_AUTH_WAITING')}
+          </Col>
+        </Row>
 
-        <h2>国际信息</h2>
-        <div className={s.profile_container}>
-          <div className={s.profile_item}>
-            <span>护照id</span>
-            <span>112313213131</span>
-          </div>
-          <div className={s.profile_item}>
-            <span>护照正面</span>
-            <img src="" alt="" />
-          </div>
-          <div className={s.profile_item}>
-            <span>护照反面</span>
-            <img src="" alt="" />
-          </div>
-        </div>
+        <form>
+          <FieldGroup id="name" label={intl.get('NAME')} />
+          <FieldGroup id="firstname" label={intl.get('FIRST_NAME')} />
+          <FieldGroup id="lastname" label={intl.get('LAST_NAME')} />
+        </form>
       </Section>
     );
   }

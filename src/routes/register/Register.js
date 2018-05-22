@@ -58,7 +58,7 @@ class Register extends React.Component {
         containerClassName={s.container}
         title={this.props.title}
       >
-        <Form horizontal>
+        <Form>
           <EmailFieldGroup
             id="email"
             type="email"
