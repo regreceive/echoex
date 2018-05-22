@@ -82,7 +82,7 @@ HomeController.ApplyProfile = (req, res) => {
     err = checkUploadFiles(req.files['passport_02']);
     if (err) throw new WE(err);
 
-    const uploadPath = path.resolve(`${__dirname}../../uploads`);
+    const uploadPath = path.resolve(`${__dirname}../../public/uploads/`);
     let file = req.files['passport_01'][0];
     let ext = file['mimetype'].split('/')[1];
     let passport_01 = getFileName(`${user.id}_01`) + '.' + ext;

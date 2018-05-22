@@ -16,7 +16,7 @@ function validEmail(email) {
 function validCaptcha(captcha, originInSession) {
   const {captcha:code, expired_at} = originInSession;
   if (!captcha || /^\s*&/.test(captcha)) return Errors.CAPTCHA_EMPTY;
-  if (!originInSession || captcha !== code || new Date().getTime() > expired_at)
+  if (!originInSession || captcha.toLowerCase() !== code.toLowerCase() || new Date().getTime() > expired_at)
     return Errors.CAPTCHA_INVALID;
   return null;
 }
