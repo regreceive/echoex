@@ -104,6 +104,13 @@ HomeController.getProfile = (req, res) => {
     if (!user) throw new WE(Errors.MUST_LOGIN);
 
     const profile = await UserProfile.findOne({ where: { userId: user.id } });
+    if(!profile) {
+      return res.json({
+        info: "success",
+        status: 10000,
+        data: null,
+      })
+    }
     profile.passport_01 = `${config.api.serverUrl}/uploads/${profile.passport_01}`;
     profile.passport_02 = `${config.api.serverUrl}/uploads/${profile.passport_02}`;
     const result = {
