@@ -17,7 +17,7 @@ module.exports = function(config, callback){
   config.spacing = config.spacing || 2;
   config.spacing = (config.spacing < 1 || config.spacing > 3) ? 2 : config.spacing;
 
-  const fontSize = Math.round(config.height * 0.3 + (15 - config.complexity * 3));
+  const fontSize = 50;//Math.round(config.height * 0.3 + (15 - config.complexity * 3));
   const canvas = new Canvas(config.width, config.height);
   const ctx = canvas.getContext('2d');
   ctx.fillStyle = config.background;
@@ -39,9 +39,12 @@ module.exports = function(config, callback){
   const modifier = config.complexity / 5;
   ctx.strokeStyle = config.color;
   for (let i = 0; i < config.text.length; i++) {
-    ctx.setTransform(Math.random() * modifier + 1 + modifier/3, Math.random() * modifier + modifier/3,
-        Math.random() * modifier + modifier/3, Math.random() * modifier + 1 + modifier/3,
-        (config.height * i)/(4-config.spacing) + (config.height-fontSize)/3 + 10, config.height-(config.height-fontSize)/2);
+    ctx.setTransform(
+        Math.random() * modifier + 1 + modifier/3, Math.random() * modifier + modifier/3,
+        Math.random() * modifier + modifier/3, Math.random() * modifier + 1 + modifier/3 + 0.1,
+        (config.height * i)/(4-config.spacing) + (config.height-fontSize)/3 + 10,
+        config.height-(config.height-fontSize)/2
+    );
     ctx.fillText(config.text.charAt(i), 0, 30);
   }
 

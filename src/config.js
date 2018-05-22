@@ -87,6 +87,8 @@ module.exports = {
     },
   },
 
-  authList: [],
-  guestList: [],
+  authList: ['/profile', '/address'],
+  guestList: ['/login', '/register'],
+  authRedirectUrl: '/login', //需要登录但未登录, 跳转到登录页
+  guestRedirectUrl: '/', //需要游客但已经登录, 跳转到首页
 };

@@ -34,7 +34,7 @@ import schema from './data/schema';
 // import assets from './asset-manifest.json'; // eslint-disable-line import/no-unresolved
 import chunks from './chunk-manifest.json'; // eslint-disable-line import/no-unresolved
 import config from './config';
-import { AuthController, HomeController } from './controllers';
+import { AuthController, HomeController, GuestFilter } from './controllers';
 import { loadLocales } from './locales';
 
 const upload = multer({
@@ -81,6 +81,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // 路由
+app.use(GuestFilter);
 app.post('/api/login', (req, res, next) => {
   passport.authenticate('local', (err, user) => {
     req.user = user;

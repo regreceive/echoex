@@ -114,6 +114,7 @@ AuthController.SendCaptcha = (req, res) => {
       fileMode: 2,
       height: 100,
       width: 250,
+      complexity:2,
     }, (text, data)=>{
       res.end(data);
     })
