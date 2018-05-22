@@ -62,6 +62,11 @@
        description 机构简介及合作计划
     ```
 
+6. ### 获取个人资料
+    ```
+    * Api: GET /api/profile
+    ```
+
 7. ### 提交个人资料
     ```
     * Api: POST /api/profile
