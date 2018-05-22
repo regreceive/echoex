@@ -150,6 +150,12 @@ app.get('*', async (req, res, next) => {
       // The twins below are wild, be careful!
       pathname: req.path,
       query: req.query,
+      // 返回用户cookie的邮箱，用于server侧的react导航条右上角渲染
+      login: {
+        check() {
+          return req.cookies && req.cookies.username;
+        },
+      },
     };
 
     const { query } = url.parse(req.url);

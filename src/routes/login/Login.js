@@ -13,11 +13,21 @@ import FieldGroup from '../../components/Form/FieldGroup';
 import { login } from '../api';
 import history from '../../history';
 import Section from '../../components/Section';
+import type { LoginFlowType } from '../../components/App';
 import s from './Login.css';
+
+export const loginHandle = (
+  loginProvider: LoginFlowType,
+  email: string,
+) => () => {
+  loginProvider.in(email);
+  history.replace('/profile');
+};
 
 class Login extends React.Component {
   static contextTypes = {
     fetch: PropTypes.func.isRequired,
+    login: PropTypes.object.isRequired,
   };
 
   static propTypes = {
@@ -35,8 +45,11 @@ class Login extends React.Component {
     const email = this.email.value;
     const password = this.password.value;
     login(this.context.fetch, { email, password })
-      .then(data => history.replace('/home'))
+      .then(loginHandle(this.context.login, this.email.value))
       .catch(status => {
+        if (status === 40001) {
+          history.replace('/login');
+        }
         this.setState({ help: intl.get(status) });
       });
   }

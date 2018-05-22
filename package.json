@@ -49,6 +49,7 @@
     "sequelize": "^4.37.6",
     "serialize-javascript": "^1.4.0",
     "source-map-support": "^0.5.4",
+    "universal-cookie": "^2.1.5",
     "universal-router": "^6.0.0",
     "whatwg-fetch": "^2.0.4"
   },

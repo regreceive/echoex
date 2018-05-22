@@ -48,6 +48,7 @@ const routes = {
     },
     {
       path: '/profile',
+      needLogin,
       load: () => import(/* webpackChunkName: 'register' */ './profile'),
     },
     {

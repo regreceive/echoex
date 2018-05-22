@@ -12,7 +12,7 @@ import routes from './routes';
 
 export default new UniversalRouter(routes, {
   resolveRoute(context, params) {
-    if (context.route.needLogin && !context.isLogin) {
+    if (context.route.needLogin && !context.login.check()) {
       return { redirect: '/login' };
     }
     if (typeof context.route.load === 'function') {

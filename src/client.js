@@ -6,6 +6,7 @@ import deepForceUpdate from 'react-deep-force-update';
 import queryString from 'query-string';
 import { createPath } from 'history/PathUtils';
 import intl from 'react-intl-universal';
+import Cookies from 'universal-cookie';
 import App from './components/App';
 import createFetch from './createFetch';
 import history from './history';
@@ -29,8 +30,27 @@ let context = {
   fetch: createFetch(fetch, {
     baseUrl: window.App.apiUrl,
   }),
-  isLogin: true,
+  // Store the state of login by parameter or cookie
+  login: {
+    in(email) {
+      if (email) {
+        this.email = email;
+      } else {
+        const cookies = new Cookies();
+        this.email = cookies.get('username');
+      }
+    },
+    out() {
+      this.email = '';
+    },
+    check() {
+      return this.email;
+    },
+  },
 };
+
+// 如果浏览器刷新，通过cookie记录用户的登录状态
+context.login.in();
 
 const container = document.getElementById('app');
 let currentLocation = history.location;

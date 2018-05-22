@@ -27,6 +27,7 @@ export default {
   CAPTCHA: '验证码',
   REFRESH_CAPTCHA: '更换验证码',
   FORGOT_PASSWORD: '忘记密码？',
+  PROFILE_TITLE: '个人信息',
 
   // error messages
   [Constant.EMAIL_EMPTY]: '邮箱地址为空',

@@ -1,14 +1,19 @@
-/**
- * React Starter Kit (https://www.reactstarterkit.com/)
- *
- * Copyright © 2014-present Kriasoft, LLC. All rights reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
- */
+// @flow
 
 import React from 'react';
 import PropTypes from 'prop-types';
+
+export const LoginType = {
+  in: PropTypes.func.isRequired,
+  out: PropTypes.func.isRequired,
+  check: PropTypes.func.isRequired,
+};
+
+export type LoginFlowType = {
+  in: void,
+  out: void,
+  check: void => string,
+};
 
 const ContextType = {
   // Enables critical path CSS rendering
@@ -18,7 +23,7 @@ const ContextType = {
   fetch: PropTypes.func.isRequired,
   pathname: PropTypes.string.isRequired,
   query: PropTypes.object,
-  isLogin: PropTypes.bool,
+  login: PropTypes.shape(LoginType),
 };
 
 /**

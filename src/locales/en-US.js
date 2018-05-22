@@ -13,7 +13,7 @@
 }
 */
 
-import * as Constant from "../controllers/errors_constant";
+import * as Constant from '../controllers/errors_constant';
 
 export default {
   LOGIN: 'Login',
@@ -26,6 +26,7 @@ export default {
   CAPTCHA: 'Captcha',
   REFRESH_CAPTCHA: '更换验证码',
   FORGOT_PASSWORD: '忘记密码？',
+  PROFILE_TITLE: 'profile',
 
   // error messages
   [Constant.EMAIL_EMPTY]: 'empty email',
