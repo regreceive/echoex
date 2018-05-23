@@ -3,6 +3,7 @@ export const EMAIL_INVALID_FORMAT = 30002;
 export const ETH_ADDR_INVALID = 30003;
 export const MUST_BE_IMAGE = 30004;
 export const PASSPORT_IMAGE_EMPTY = 30005;
+export const INCOMPLETE_FORM = 30006;
 
 export const CAPTCHA_EMPTY = 30101;
 export const CAPTCHA_INVALID = 30102;

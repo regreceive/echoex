@@ -15,7 +15,7 @@ if (process.env.BROWSER) {
   );
 }
 
-module.exports = {
+const config = {
   // Node.js app
   port: process.env.PORT || 3000,
 
@@ -92,3 +92,13 @@ module.exports = {
   authRedirectUrl: '/login', //需要登录但未登录, 跳转到登录页
   guestRedirectUrl: '/', //需要游客但已经登录, 跳转到首页
 };
+
+if(process.env.NODE_ENV === "production") {
+  config.database = {
+    db: 'kyc',
+    user: 'kyc',
+    pass: 'DrFUn8hinyv2hTOXXNiX56zneUyGZj9Rak7mIT3YHio=',
+  };
+}
+
+module.exports = config;

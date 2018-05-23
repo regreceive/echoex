@@ -62,6 +62,7 @@ export default {
   [Constant.ETH_ADDR_INVALID]: '不是有效的以太地址',
   [Constant.MUST_BE_IMAGE]: '错误的图片格式',
   [Constant.PASSPORT_IMAGE_EMPTY]: '缺少护照照片',
+  [Constant.INCOMPLETE_FORM]: '强填写完整表单',
 
   [Constant.CAPTCHA_EMPTY]: '验证码为空',
   [Constant.CAPTCHA_INVALID]: '错误的验证码',

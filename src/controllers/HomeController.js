@@ -23,6 +23,11 @@ function checkUploadFiles(files) {
   }
   return null;
 }
+function isEmptyString(s) {
+  if(!s) return true;
+  if(/^\s*$/.test(s)) return true;
+  return false;
+}
 function getFileName(f) {
   return crypto.createHash('md5').update(`${f}_powerchain`).digest("hex");
 }
@@ -76,6 +81,10 @@ HomeController.ApplyProfile = (req, res) => {
     const { user } = req;
     if (!user) throw new WE(Errors.MUST_LOGIN);
 
+    let {username, firstname, lastname, gender, birthday, country, city, location, passport} = req.body;
+    if(isEmptyString(username, firstname, lastname, birthday, country, city, location, passport) || (gender!=="0"&&gender!=="1")) {
+      throw new WE(Errors.INCOMPLETE_FORM);
+    }
     if (!req.files) throw new WE(Errors.PASSPORT_IMAGE_EMPTY);
     let err = checkUploadFiles(req.files['passport_01']);
     if (err) throw new WE(err);
@@ -92,7 +101,6 @@ HomeController.ApplyProfile = (req, res) => {
     ext = file['mimetype'].split('/')[1];
     let passport_02 = getFileName(`${user.id}_02`) + '.' + ext;
     await saveFile(file.buffer, `${uploadPath}/${passport_02}`);
-    const {username, firstname, lastname, gender, birthday, country, city, location, passport} = req.body;
     await UserProfile.insertNewRecord( user.id, username, firstname, lastname, gender, birthday, country, city, location, passport, passport_01, passport_02);
     res.json({ info: 'success', status: 10000, data: null });
   });
@@ -129,7 +137,6 @@ HomeController.getProfile = (req, res) => {
       passport_02: profile.passport_02,
     };
 
-    console.log(result);
     res.json({
       info: 'success',
       status: 10000,
