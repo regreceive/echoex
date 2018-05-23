@@ -50,6 +50,12 @@ export default {
   PASSPORT_FULL_FACE: '护照正面',
   PASSPORT_BACK: '护照北面',
 
+  APPLY_ADDRESS_TITLE: '填写以太坊钱包地址才能购买ECHO令牌',
+  ETH_ADDRESS: '您的以太坊地址',
+  SUBMIT: 'Submit',
+  ADDRESS_STATEMENT:
+    '我在此確認，我不是禁止參與令牌銷售（ICO）的任何司法管轄區的居民。',
+
   // error messages
   [Constant.EMAIL_EMPTY]: 'empty email',
   [Constant.EMAIL_INVALID_FORMAT]: 'invalid email format',

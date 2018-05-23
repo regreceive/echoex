@@ -57,6 +57,7 @@ const routes = {
     },
     {
       path: '/address',
+      needLogin,
       load: () => import(/* webpackChunkName: 'register' */ './apply-address'),
     },
     {

@@ -79,4 +79,9 @@ function profilePost(fetch, payload: object): Promise {
   return filePost(fetch, '/api/profile', payload);
 }
 
-export { login, register, profile, profilePost };
+// 以太地址
+function postAddress(fetch, payload: object): Promise<object | number> {
+  return post(fetch, '/api/profile/address', JSON.stringify(payload));
+}
+
+export { login, register, profile, profilePost, postAddress };
