@@ -11,6 +11,7 @@ async function post(fetch, serviceName, body) {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
       },
       body,
     });
