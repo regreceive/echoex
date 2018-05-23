@@ -154,7 +154,9 @@ class Login extends React.Component {
           />
           <Row>
             {help && (
-              <Col className="text-right text-danger">{intl.get(help)}</Col>
+              <Col xs={12} className="text-right text-danger">
+                {help}
+              </Col>
             )}
           </Row>
         </form>
