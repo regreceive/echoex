@@ -3,24 +3,17 @@
 const serverUrl = '';
 
 async function post(fetch, serviceName, body) {
-  let result;
-  try {
-    const text = await fetch(serverUrl + serviceName, {
-      credentials: 'same-origin',
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body,
-    });
+  const text = await window.fetch(serverUrl + serviceName, {
+    credentials: 'same-origin',
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      // 'Content-Type': 'multipart/form-data',
+    },
+    body,
+  });
 
-    result = await text.json();
-  } catch (error) {
-    if (__DEV__) {
-      throw error;
-    }
-  }
+  const result = await text.json();
 
   if (result.status === 10000) {
     return Promise.resolve(result.data);
@@ -29,23 +22,16 @@ async function post(fetch, serviceName, body) {
 }
 
 async function get(fetch, serviceName) {
-  let result;
-  try {
-    const text = await fetch(serverUrl + serviceName, {
-      credentials: 'same-origin',
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-    });
+  const text = await fetch(serverUrl + serviceName, {
+    credentials: 'same-origin',
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+  });
 
-    result = await text.json();
-  } catch (error) {
-    if (__DEV__) {
-      throw error;
-    }
-  }
+  const result = await text.json();
 
   if (result.status === 10000) {
     return Promise.resolve(result.data);
@@ -70,7 +56,7 @@ function profile(fetch): Promise {
 
 // 改个人信息
 function profilePost(fetch, payload: object): Promise {
-  return post(fetch, '/api/profile', JSON.stringify(payload));
+  return post(fetch, '/api/profile', payload);
 }
 
 export { login, register, profile, profilePost };

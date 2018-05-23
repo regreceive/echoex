@@ -33,6 +33,7 @@ class FieldGroup extends React.Component {
         <ControlLabel>{label}</ControlLabel>
         <FormControl
           {...props}
+          name={id}
           onChange={this.handleChange}
           value={this.state.value}
         />

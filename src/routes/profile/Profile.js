@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
@@ -12,6 +14,7 @@ import PanelGroup from '../../components/Form/PanelGroup';
 import FieldGroup from '../../components/Form/FieldGroup';
 import RadioGroup from '../../components/Form/RadioGroup';
 import SubmitGroup from '../../components/Form/SubmitGroup';
+import serialize from './serialize';
 import s from './Profile.css';
 
 class Login extends React.Component {
@@ -40,13 +43,22 @@ class Login extends React.Component {
           this.context.login.out();
           history.replace('/login');
         }
-        this.setState({ help: intl.get(status) });
+        try {
+          this.setState({ help: intl.get(status) });
+        } catch (error) {
+          if (__DEV__) {
+            throw error;
+          } else {
+            console.warn(error);
+          }
+        }
       });
     this.email = this.context.login.check();
   }
 
-  submit() {
-    profilePost(this.context.fetch)
+  submitHandle(): Promise {
+    const fd = serialize(this.profileForm);
+    return profilePost(this.context.fetch, fd)
       .then(data => {
         this.profile = data || {};
       })
@@ -55,6 +67,7 @@ class Login extends React.Component {
           this.context.login.out();
           history.replace('/login');
         }
+        console.log(status);
         this.setState({ help: intl.get(status) });
       });
   }
@@ -87,17 +100,25 @@ class Login extends React.Component {
           </Row>
         </PanelGroup>
 
-        <form>
-          <FieldGroup id="name" label={intl.get('NAME')} />
-          <FieldGroup id="firstname" label={intl.get('FIRST_NAME')} />
-          <FieldGroup id="lastname" label={intl.get('LAST_NAME')} />
+        <form
+          ref={ref => {
+            this.profileForm = ref;
+          }}
+        >
+          <FieldGroup id="name" type="text" label={intl.get('NAME')} />
+          <FieldGroup
+            id="firstname"
+            type="text"
+            label={intl.get('FIRST_NAME')}
+          />
+          <FieldGroup id="lastname" type="text" label={intl.get('LAST_NAME')} />
           <RadioGroup label={intl.get('GENDER')}>
             <Row>
               <Col xs={12}>
-                <Radio name="gender" inline>
+                <Radio name="gender" value="1" inline>
                   {intl.get('MALE')}
                 </Radio>
-                <Radio name="gender" inline>
+                <Radio name="gender" value="0" inline>
                   {intl.get('FEMALE')}
                 </Radio>
               </Col>
@@ -105,13 +126,37 @@ class Login extends React.Component {
           </RadioGroup>
           <FieldGroup id="birthday" label={intl.get('BIRTHDAY')} type="date" />
           <h3>{intl.get('INTERNATIONAL_INFORMATION')}</h3>
-          <FieldGroup id="country" label={intl.get('COUNTRY')} />{' '}
-          <FieldGroup id="city" label={intl.get('CITY')} />{' '}
-          <FieldGroup id="location" label={intl.get('LOCATION')} />
-          <FieldGroup id="passport_id" label={intl.get('PASSPORT_ID')} />
-          <FieldGroup id="passport01" type="file" label="护照正面" />
-          <FieldGroup id="passport02" type="file" label="护照背面" />
-          <SubmitGroup title={intl.get('PROFILE_SUBMIT')} />
+          <FieldGroup
+            id="country"
+            type="text"
+            label={intl.get('COUNTRY')}
+          />{' '}
+          <FieldGroup id="city" type="text" label={intl.get('CITY')} />{' '}
+          <FieldGroup id="location" type="text" label={intl.get('LOCATION')} />
+          <FieldGroup
+            id="passport_id"
+            type="text"
+            label={intl.get('PASSPORT_ID')}
+          />
+          <FieldGroup
+            id="passport01"
+            type="file"
+            label={intl.get('PASSPORT_FULL_FACE')}
+          />
+          <FieldGroup
+            id="passport02"
+            type="file"
+            label={intl.get('PASSPORT_BACK')}
+          />
+          <SubmitGroup
+            title={intl.get('PROFILE_SUBMIT')}
+            onClick={() => this.submitHandle()}
+          />
+          <Row>
+            {help && (
+              <Col className="text-right text-danger">{intl.get(help)}</Col>
+            )}
+          </Row>
         </form>
       </Section>
     );
