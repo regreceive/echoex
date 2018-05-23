@@ -56,6 +56,7 @@ export default {
   [Constant.ETH_ADDR_INVALID]: 'invalid ethereum address',
   [Constant.MUST_BE_IMAGE]: 'invalid image type',
   [Constant.PASSPORT_IMAGE_EMPTY]: 'passport image missing',
+  [Constant.INCOMPLETE_FORM]: 'incomplete form',
 
   [Constant.CAPTCHA_EMPTY]: 'empty captcha',
   [Constant.CAPTCHA_INVALID]: 'invalid captcha',

@@ -6,6 +6,7 @@ errors[Constant.EMAIL_INVALID_FORMAT] = 'invalid email format';
 errors[Constant.ETH_ADDR_INVALID] = 'invalid ethereum address';
 errors[Constant.MUST_BE_IMAGE] = 'invalid image type, jpg|jpeg|png';
 errors[Constant.PASSPORT_IMAGE_EMPTY] = 'passport image missing';
+errors[Constant.INCOMPLETE_FORM] = 'incomplete form';
 
 errors[Constant.CAPTCHA_EMPTY] = 'empty captcha';
 errors[Constant.CAPTCHA_INVALID] = 'invalid captcha';

@@ -30,7 +30,24 @@ class Login extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = { help: '' };
+    this.state = { help: '' , passport_01:null, passport_02:null };
+    this._changePassport01 = this._changePassport01.bind(this);
+    this._changePassport02 = this._changePassport02.bind(this);
+  }
+
+  _changePassport01 = function (e){
+    let reader = new FileReader();
+    reader.onload = (e)=>{
+      this.setState({passport_01: e.target.result});
+    }
+    reader.readAsDataURL(e.target.files[0]);
+  }
+  _changePassport02 = function (e){
+    let reader = new FileReader();
+    reader.onload = (e)=>{
+      this.setState({passport_02: e.target.result});
+    }
+    reader.readAsDataURL(e.target.files[0]);
   }
 
   componentDidMount() {
@@ -67,7 +84,6 @@ class Login extends React.Component {
           this.context.login.out();
           history.replace('/login');
         }
-        console.log(status);
         this.setState({ help: intl.get(status) });
       });
   }
@@ -105,7 +121,7 @@ class Login extends React.Component {
             this.profileForm = ref;
           }}
         >
-          <FieldGroup id="name" type="text" label={intl.get('NAME')} />
+          <FieldGroup id="username" type="text" label={intl.get('NAME')} />
           <FieldGroup
             id="firstname"
             type="text"
@@ -134,20 +150,24 @@ class Login extends React.Component {
           <FieldGroup id="city" type="text" label={intl.get('CITY')} />{' '}
           <FieldGroup id="location" type="text" label={intl.get('LOCATION')} />
           <FieldGroup
-            id="passport_id"
+            id="passport"
             type="text"
             label={intl.get('PASSPORT_ID')}
           />
           <FieldGroup
-            id="passport01"
+            id="passport_01"
             type="file"
             label={intl.get('PASSPORT_FULL_FACE')}
+            onChange={this._changePassport01}
           />
+          <div><img src={this.state.passport_01} alt=""/></div>
           <FieldGroup
-            id="passport02"
+            id="passport_02"
             type="file"
             label={intl.get('PASSPORT_BACK')}
+            onChange={this._changePassport02}
           />
+          <div><img src={this.state.passport_02} alt=""/></div>
           <SubmitGroup
             title={intl.get('PROFILE_SUBMIT')}
             onClick={() => this.submitHandle()}
