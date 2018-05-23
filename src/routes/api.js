@@ -3,12 +3,32 @@
 const serverUrl = '';
 
 async function post(fetch, serviceName, body) {
+  const text = await fetch(serverUrl + serviceName, {
+    credentials: 'same-origin',
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      'X-Requested-With': 'XMLHttpRequest',
+    },
+    body,
+  });
+
+  const result = await text.json();
+
+  if (result.status === 10000) {
+    return Promise.resolve(result.data);
+  }
+  return Promise.reject(result.status);
+}
+
+async function filePost(fetch, serviceName, body) {
   const text = await window.fetch(serverUrl + serviceName, {
     credentials: 'same-origin',
     method: 'POST',
     headers: {
       Accept: 'application/json',
-      // 'Content-Type': 'multipart/form-data',
+      'X-Requested-With': 'XMLHttpRequest',
     },
     body,
   });
@@ -56,7 +76,7 @@ function profile(fetch): Promise {
 
 // 改个人信息
 function profilePost(fetch, payload: object): Promise {
-  return post(fetch, '/api/profile', payload);
+  return filePost(fetch, '/api/profile', payload);
 }
 
 export { login, register, profile, profilePost };
