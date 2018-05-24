@@ -34,7 +34,9 @@ export const expireHandle = (
   }
 
   try {
-    cb(status);
+    if (typeof cb === 'function') {
+      cb(status);
+    }
   } catch (error) {
     if (__DEV__) {
       throw error;

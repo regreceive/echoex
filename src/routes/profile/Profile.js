@@ -9,7 +9,6 @@ import Col from 'react-bootstrap/lib/Col';
 import Radio from 'react-bootstrap/lib/Radio';
 import Section from '../../components/Section';
 import { profile, profilePost } from '../api';
-import history from '../../history';
 import PanelGroup from '../../components/Form/PanelGroup';
 import FieldGroup from '../../components/Form/FieldGroup';
 import RadioGroup from '../../components/Form/RadioGroup';
@@ -79,6 +78,7 @@ class Profile extends React.Component {
 
   render() {
     const { help } = this.state;
+    this.email = this.email || this.context.login.check();
     return (
       <Section
         rootClassName={s.root}
@@ -88,7 +88,7 @@ class Profile extends React.Component {
         <PanelGroup header={intl.get('ACCOUNT')}>
           <Row>
             <Col xs={3}>{intl.get('EMAIL')}</Col>
-            <Col xs={9}>{this.email || this.context.login.check()}</Col>
+            <Col xs={9}>{this.email}</Col>
           </Row>
           <Row>
             <Col xs={3}>{intl.get('PASSWORD_DESCRIPTION')}</Col>
