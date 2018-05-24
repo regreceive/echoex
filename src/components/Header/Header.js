@@ -59,15 +59,21 @@ class Header extends React.Component {
     event.preventDefault();
   }
 
+  toIndex() {
+    let query = queryString.stringify(this.context.query);
+    query = query ? `?${query}` : query;
+    return `http://echo.center/${query}`;
+  }
+
   render() {
     const email = this.context.login.check();
     return (
       <Navbar inverse collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
-            <span>
+            <a href={this.toIndex()}>
               <img src={logoUrl} width="99" height="32" alt="echo" />
-            </span>
+            </a>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
