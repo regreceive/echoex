@@ -39,6 +39,7 @@ body {
 
 .main {
   flex: auto;
+  position: relative;
 }
 
 a {

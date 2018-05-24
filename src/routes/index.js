@@ -21,11 +21,6 @@ const routes = {
       load: () => import(/* webpackChunkName: 'home' */ './home'),
     },
     {
-      path: '/contact',
-      needLogin,
-      load: () => import(/* webpackChunkName: 'contact' */ './contact'),
-    },
-    {
       path: '/login',
       load: () => import(/* webpackChunkName: 'login' */ './login'),
     },
@@ -50,6 +45,11 @@ const routes = {
       path: '/profile',
       needLogin,
       load: () => import(/* webpackChunkName: 'register' */ './profile'),
+    },
+    {
+      path: '/subscribe',
+      needLogin,
+      load: () => import(/* webpackChunkName: 'register' */ './subscribe'),
     },
     {
       path: '/profile/edit',

@@ -56,6 +56,13 @@ export default {
   ADDRESS_STATEMENT:
     '我在此確認，我不是禁止參與令牌銷售（ICO）的任何司法管轄區的居民。',
 
+  SUBSCRIBE_TITLE: '如何购买ECHO的令牌？',
+  SUBSCRIBE_DESCRIPTION: '要获得ECHO的令牌，清将ETH转移到下方钱包地址',
+  COPY: 'Copy',
+  SUBSCRIBE_DOWNLOAD_EXCEL: '打币后需要填写Excel表格信息到ECHO官方邮箱',
+  COPIED: '已复制',
+  DOWNLOAD_TABLE: '下载表格',
+
   // error messages
   [Constant.EMAIL_EMPTY]: '邮箱地址为空',
   [Constant.EMAIL_INVALID_FORMAT]: '不是有效的邮箱格式',
