@@ -4,5 +4,5 @@ git pull && \
 yarn install && \
 yarn build --release && \
 cd build && \
-cp ../echosystem.config.js . && \
+cp ../ecosystem.config.js . && \
 pm2 reload 0
