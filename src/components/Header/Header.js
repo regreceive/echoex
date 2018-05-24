@@ -73,15 +73,16 @@ class Header extends React.Component {
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav pullRight onSelect={this.selectHandle}>
-            <NavItem href="/login">{intl.get('LOGIN')}</NavItem>
-            <NavItem href="/register">{intl.get('REGISTER')}</NavItem>
-            <NavDropdown
-              title={email || 'abc'}
-              id="personal-center"
-            >
-              <MenuItem href="/profile">{intl.get('PROFILE_TITLE')}</MenuItem>
-              <MenuItem href="/logout">{intl.get('LOGOUT')}</MenuItem>
-            </NavDropdown>
+            {email && (
+              <NavDropdown title={email} id="personal-center">
+                <MenuItem href="/profile">{intl.get('PROFILE_TITLE')}</MenuItem>
+                <MenuItem href="/logout">{intl.get('LOGOUT')}</MenuItem>
+              </NavDropdown>
+            )}
+            {!email && <NavItem href="/login">{intl.get('LOGIN')}</NavItem>}
+            {!email && (
+              <NavItem href="/register">{intl.get('REGISTER')}</NavItem>
+            )}
             <NavDropdown title={mapLocalesName()} id="language-you-choose">
               <MenuItem href="?lang=en-US">English</MenuItem>
               <MenuItem href="?lang=zh-CN">中文</MenuItem>
