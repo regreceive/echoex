@@ -33,8 +33,8 @@ export default {
   ACCOUNT: '账号信息',
   KYC_TITLE: 'KYC信息',
   KYC_AUTH: 'KYC认证',
-  KYC_AUTH_NONE: '未认证',
-  KYC_AUTH_DONE: '已认证',
+  KYC_AUTH_FAILURE: '未认证',
+  KYC_AUTH_SUCCESS: '已认证',
   KYC_AUTH_WAITING: '审核中',
   NAME: '姓名',
   FIRST_NAME: '名',
@@ -48,6 +48,7 @@ export default {
   CITY: '城市',
   LOCATION: '街道信息',
   PASSPORT_ID: '护照ID',
+  PASSPORT_TITLE: '护照照片',
   PASSPORT_FULL_FACE: '护照正面',
   PASSPORT_BACK: '护照北面',
 
