@@ -64,6 +64,7 @@ class ApplyAddress extends React.Component {
               this.address = ref;
             }}
             autoFocus
+            className={s.formGroup}
           />
           <FormGroup>
             <Col smOffset={3} sm={9}>

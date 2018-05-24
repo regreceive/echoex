@@ -6,7 +6,7 @@ import Profile from './Profile';
 function action() {
   const title = intl.get('PROFILE_TITLE');
   return {
-    chunks: ['login'],
+    chunks: ['register'],
     title,
     component: (
       <Layout>
