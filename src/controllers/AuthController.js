@@ -53,6 +53,18 @@ const tryErrors = function tryErrors(req, res, fn) {
 };
 function AuthController() {}
 
+AuthController.Logout = (req, res, next) => {
+  const backURL=req.header('Referer') || '/';
+  try{
+    if(!req.user) return res.redirect(backURL);
+    req.logOut();
+    res.redirect(config.logoutRedirectUrl);
+  }catch (e) {
+    console.error(e);
+    return res.redirect(backURL);
+  }
+}
+
 AuthController.Login = (req, res, next) => {
   tryErrors(req, res, async () => {
     if (!req.user) {
