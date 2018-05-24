@@ -90,7 +90,7 @@ const config = {
   authList: ['/profile', '/address', '/api/profile', '/api/profile/address'],
   guestList: ['/login', '/register', '/api/login', '/api/register'],
   authRedirectUrl: '/login', //需要登录但未登录, 跳转到登录页
-  guestRedirectUrl: '/', //需要游客但已经登录, 跳转到首页
+  guestRedirectUrl: '/profile', //需要游客但已经登录, 跳转到首页
 };
 
 if(process.env.NODE_ENV === "production") {
