@@ -35,10 +35,6 @@ class Header extends React.Component {
     this.selectHandle = this.selectHandle.bind(this);
   }
 
-  componentDidMount() {
-    this.email = this.context.login.check();
-  }
-
   selectHandle(eventKey: number, event: Event) {
     if (isModifiedEvent(event) || !isLeftClickEvent(event)) {
       return;
@@ -64,6 +60,7 @@ class Header extends React.Component {
   }
 
   render() {
+    const email = this.context.login.check();
     return (
       <Navbar inverse collapseOnSelect>
         <Navbar.Header>
@@ -79,7 +76,7 @@ class Header extends React.Component {
             <NavItem href="/login">{intl.get('LOGIN')}</NavItem>
             <NavItem href="/register">{intl.get('REGISTER')}</NavItem>
             <NavDropdown
-              title={this.email || this.context.login.check()}
+              title={email || 'abc'}
               id="personal-center"
             >
               <MenuItem href="/profile">{intl.get('PROFILE_TITLE')}</MenuItem>
