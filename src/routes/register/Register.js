@@ -13,11 +13,13 @@ import { register } from '../api';
 import history from '../../history';
 import Section from '../../components/Section';
 import Captcha from './Captcha';
+import { loginHandle, expireHandle } from '../login/Login';
 import s from './Register.css';
 
 class Register extends React.Component {
   static contextTypes = {
     fetch: PropTypes.func.isRequired,
+    login: PropTypes.object.isRequired,
   };
 
   static propTypes = {
@@ -44,10 +46,12 @@ class Register extends React.Component {
       password,
       password_confirm: passwordConfirm,
     })
-      .then(() => history.replace('/home'))
-      .catch(status => {
-        this.setState({ help: status });
-      });
+      .then(loginHandle(this.context.login, this.email.value))
+      .catch(
+        expireHandle(this.context.login, status => {
+          this.setState({ help: intl.get(status) });
+        }),
+      );
   }
 
   render() {

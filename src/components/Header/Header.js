@@ -27,11 +27,16 @@ class Header extends React.Component {
   static contextTypes = {
     query: PropTypes.object,
     pathname: PropTypes.string,
+    login: PropTypes.object.isRequired,
   };
 
   constructor(props, context) {
     super(props, context);
     this.selectHandle = this.selectHandle.bind(this);
+  }
+
+  componentDidMount() {
+    this.email = this.context.login.check();
   }
 
   selectHandle(eventKey: number, event: Event) {
@@ -73,7 +78,14 @@ class Header extends React.Component {
           <Nav pullRight onSelect={this.selectHandle}>
             <NavItem href="/login">{intl.get('LOGIN')}</NavItem>
             <NavItem href="/register">{intl.get('REGISTER')}</NavItem>
-            <NavDropdown title={mapLocalesName()} id="basic-nav-dropdown">
+            <NavDropdown
+              title={this.email || this.context.login.check()}
+              id="personal-center"
+            >
+              <MenuItem href="/profile">{intl.get('PROFILE_TITLE')}</MenuItem>
+              <MenuItem href="/logout">{intl.get('LOGOUT')}</MenuItem>
+            </NavDropdown>
+            <NavDropdown title={mapLocalesName()} id="language-you-choose">
               <MenuItem href="?lang=en-US">English</MenuItem>
               <MenuItem href="?lang=zh-CN">中文</MenuItem>
             </NavDropdown>

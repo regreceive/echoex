@@ -15,9 +15,12 @@ async function post(fetch, serviceName, body) {
   });
 
   const result = await text.json();
-
   if (result.status === 10000) {
     return Promise.resolve(result.data);
+  }
+  // 服务器未捕获的系统错误
+  if (!result.status) {
+    console.warn(result);
   }
   return Promise.reject(result.status);
 }
@@ -38,6 +41,10 @@ async function filePost(fetch, serviceName, body) {
   if (result.status === 10000) {
     return Promise.resolve(result.data);
   }
+  // 服务器未捕获的系统错误
+  if (!result.status) {
+    console.warn(result);
+  }
   return Promise.reject(result.status);
 }
 
@@ -55,6 +62,10 @@ async function get(fetch, serviceName) {
 
   if (result.status === 10000) {
     return Promise.resolve(result.data);
+  }
+  // 服务器未捕获的系统错误
+  if (!result.status) {
+    console.warn(result);
   }
   return Promise.reject(result.status);
 }

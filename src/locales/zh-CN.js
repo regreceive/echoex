@@ -18,6 +18,7 @@ import * as Constant from '../controllers/errors_constant';
 export default {
   LOGIN: '登录',
   LOGIN_TITLE: '登录',
+  LOGOUT: '退出',
   REGISTER: '注册',
   REGISTER_TITLE: '注册',
   EMAIL: '邮箱',

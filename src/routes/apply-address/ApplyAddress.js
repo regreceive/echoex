@@ -11,12 +11,14 @@ import history from '../../history';
 import SubmitGroup from '../../components/Form/SubmitGroup';
 import FieldInlineGroup from '../../components/Form/FieldInlineGroup';
 import Section from '../../components/Section';
+import { expireHandle } from '../login/Login';
 import { postAddress } from '../api';
 import s from './ApplyAddress.css';
 
 class ApplyAddress extends React.Component {
   static contextTypes = {
     fetch: PropTypes.func.isRequired,
+    login: PropTypes.object.isRequired,
   };
 
   static propTypes = {
@@ -33,14 +35,14 @@ class ApplyAddress extends React.Component {
   submitHandle() {
     const address = this.address.value;
     postAddress(this.context.fetch, { address })
-      .then(() => {alert('success')})
-      .catch(status => {
-        if (status === 40001) {
-          this.context.login.out();
-          history.replace('/login');
-        }
-        this.setState({ help: intl.get(status) });
-      });
+      .then(() => {
+        history.replace('/subscribe');
+      })
+      .catch(
+        expireHandle(this.context.login, status => {
+          this.setState({ help: intl.get(status) });
+        }),
+      );
   }
 
   checkHandle(e) {

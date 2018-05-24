@@ -14,10 +14,11 @@ import PanelGroup from '../../components/Form/PanelGroup';
 import FieldGroup from '../../components/Form/FieldGroup';
 import RadioGroup from '../../components/Form/RadioGroup';
 import SubmitGroup from '../../components/Form/SubmitGroup';
+import { expireHandle } from '../login/Login';
 import serialize from './serialize';
 import s from './Profile.css';
 
-class Login extends React.Component {
+class Profile extends React.Component {
   static contextTypes = {
     fetch: PropTypes.func.isRequired,
     login: PropTypes.object.isRequired,
@@ -30,46 +31,36 @@ class Login extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = { help: '' , passport_01:null, passport_02:null };
+    this.state = { help: '', passport_01: null, passport_02: null };
     this._changePassport01 = this._changePassport01.bind(this);
     this._changePassport02 = this._changePassport02.bind(this);
   }
 
-  _changePassport01 = function (e){
-    let reader = new FileReader();
-    reader.onload = (e)=>{
-      this.setState({passport_01: e.target.result});
-    }
+  _changePassport01 = function(e) {
+    const reader = new FileReader();
+    reader.onload = e => {
+      this.setState({ passport_01: e.target.result });
+    };
     reader.readAsDataURL(e.target.files[0]);
-  }
-  _changePassport02 = function (e){
-    let reader = new FileReader();
-    reader.onload = (e)=>{
-      this.setState({passport_02: e.target.result});
-    }
+  };
+  _changePassport02 = function(e) {
+    const reader = new FileReader();
+    reader.onload = e => {
+      this.setState({ passport_02: e.target.result });
+    };
     reader.readAsDataURL(e.target.files[0]);
-  }
+  };
 
   componentDidMount() {
     profile(this.context.fetch)
       .then(data => {
         this.profile = data || {};
       })
-      .catch(status => {
-        if (status === 40001) {
-          this.context.login.out();
-          history.replace('/login');
-        }
-        try {
+      .catch(
+        expireHandle(this.context.login, status => {
           this.setState({ help: intl.get(status) });
-        } catch (error) {
-          if (__DEV__) {
-            throw error;
-          } else {
-            console.warn(error);
-          }
-        }
-      });
+        }),
+      );
     this.email = this.context.login.check();
   }
 
@@ -79,13 +70,11 @@ class Login extends React.Component {
       .then(data => {
         this.profile = data || {};
       })
-      .catch(status => {
-        if (status === 40001) {
-          this.context.login.out();
-          history.replace('/login');
-        }
-        this.setState({ help: intl.get(status) });
-      });
+      .catch(
+        expireHandle(this.context.login, status => {
+          this.setState({ help: intl.get(status) });
+        }),
+      );
   }
 
   render() {
@@ -160,14 +149,18 @@ class Login extends React.Component {
             label={intl.get('PASSPORT_FULL_FACE')}
             onChange={this._changePassport01}
           />
-          <div><img src={this.state.passport_01} alt=""/></div>
+          <div>
+            <img src={this.state.passport_01} alt="" />
+          </div>
           <FieldGroup
             id="passport_02"
             type="file"
             label={intl.get('PASSPORT_BACK')}
             onChange={this._changePassport02}
           />
-          <div><img src={this.state.passport_02} alt=""/></div>
+          <div>
+            <img src={this.state.passport_02} alt="" />
+          </div>
           <SubmitGroup
             title={intl.get('PROFILE_SUBMIT')}
             onClick={() => this.submitHandle()}
@@ -185,4 +178,4 @@ class Login extends React.Component {
   }
 }
 
-export default withStyles(s)(Login);
+export default withStyles(s)(Profile);

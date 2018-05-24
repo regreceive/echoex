@@ -24,6 +24,26 @@ export const loginHandle = (
   history.replace('/profile');
 };
 
+export const expireHandle = (
+  loginProvider: LoginFlowType,
+  cb: void,
+) => status => {
+  if (status === 40001) {
+    loginProvider.out();
+    history.replace('/login');
+  }
+
+  try {
+    cb(status);
+  } catch (error) {
+    if (__DEV__) {
+      throw error;
+    } else {
+      console.warn(error);
+    }
+  }
+};
+
 class Login extends React.Component {
   static contextTypes = {
     fetch: PropTypes.func.isRequired,
@@ -46,13 +66,11 @@ class Login extends React.Component {
     const password = this.password.value;
     login(this.context.fetch, { email, password })
       .then(loginHandle(this.context.login, this.email.value))
-      .catch(status => {
-        if (status === 40001) {
-          this.context.login.out();
-          history.replace('/login');
-        }
-        this.setState({ help: intl.get(status) });
-      });
+      .catch(
+        expireHandle(this.context.login, status => {
+          this.setState({ help: intl.get(status) });
+        }),
+      );
   }
 
   render() {

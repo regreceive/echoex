@@ -18,6 +18,7 @@ import * as Constant from '../controllers/errors_constant';
 export default {
   LOGIN: 'Login',
   LOGIN_TITLE: 'Login In',
+  LOGOUT: '退出',
   REGISTER: 'Register',
   REGISTER_TITLE: 'Register',
   EMAIL: 'Email',
