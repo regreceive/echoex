@@ -62,7 +62,9 @@ AuthController.Login = (req, res, next) => {
       if (err) {
         return next(err);
       }
-      res.cookie('username', req.body.email);
+      let host = req.hostname.split('.');
+      host = host.slice(host.length-2).join('.')
+      res.cookie('username', req.body.email, {domain: host});
       return res.json({ info: 'success', status: 10000, data: req.user.id });
     });
   });
