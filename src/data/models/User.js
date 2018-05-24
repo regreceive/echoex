@@ -44,7 +44,7 @@ const User = Model.define(
   },
 );
 
-User.createNewUser = async (email, password) => {
+User.createNewUser = async (email, password, activateCode) => {
   await Model.query(
     'INSERT IGNORE INTO `User` (`email`,`password`,`createdAt`,`updatedAt`) values(:email,:password,:date,:date)',
     { replacements: { email, password, date: new Date() } },

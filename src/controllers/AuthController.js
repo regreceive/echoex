@@ -28,6 +28,51 @@ function validPassword(p1, p2) {
   if (p1 !== p2) throw new WE(Errors.PASSWORD_INCONSIST);
   return null;
 }
+async function sendRegSuccessEmail(email, code) {
+  const s = crypto.createHash('sha256').update(email).digest('hex').slice(0,32);
+  const link = `${config.api.serverUrl}/api/user/activate?s=${s}&code=${code}`;
+
+  // send mail
+  const { host, port, secure, user, pass, from } = config.mailer.qq;
+  const transporter = nodemailer.createTransport({
+    host,
+    port,
+    secure, // true for 465, false for other ports
+    auth: {
+      user,
+      pass,
+    },
+  });
+
+  // setup email data with unicode symbols
+  const mailOptions = {
+    from, // sender address
+    to: email, // list of receivers
+    subject: '测试邮件', // Subject line
+    text: '这是一封测试邮件', // plain text body
+    html: `
+      感谢您注册 <b>EchoChain</b><br /><br />
+为了保证您正常接收到我们的通知，请验证您的邮件地址。<br /><br />
+<a href="${link}">立即验证邮箱</a><br /><br />
+或复制以下链接到浏览器中以完成验证：<br /><br />
+${link}<br /><br />
+ 
+此致<br />
+Echochain团队
+      `, // html body
+  };
+
+  return new Promise((resolve, reject) => {
+    // send mail with defined transport object
+    transporter.sendMail(mailOptions, error => {
+      if (error) {
+        console.error(error);
+        throw new WE(Errors.MAIL_SEND_FAILED, error.toString());
+      }
+      resolve(true);
+    });
+  })
+}
 const tryErrors = function tryErrors(req, res, fn) {
   try {
     fn().catch(err => {
@@ -101,9 +146,11 @@ AuthController.Register = (req, res) => {
 
     // construct user
     // write user into databse
+    const code = crypto.randomBytes(32).toString('hex');
     const encryptedPassword = await User.encryptPassword(password, null);
-    const newuser = await User.createNewUser(email, encryptedPassword);
+    const newuser = await User.createNewUser(email, encryptedPassword, code);
     delete req.session.captcha.reg;
+    await sendRegSuccessEmail(email, code);
     return res.json({
       info: 'success',
       status: 10000,
