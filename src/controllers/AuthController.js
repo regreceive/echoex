@@ -103,6 +103,11 @@ AuthController.Logout = (req, res, next) => {
   try{
     if(!req.user) return res.redirect(backURL);
     req.logOut();
+    let host = req.hostname.split('.');
+    host = host.slice(host.length-2).join('.')
+    res.clearCookie("kycd");
+    res.clearCookie("username", {maxAge: -1, domain: host});
+    res.clearCookie("username", {maxAge: -1});
     res.redirect(config.logoutRedirectUrl);
   }catch (e) {
     console.error(e);
