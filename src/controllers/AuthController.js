@@ -115,6 +115,10 @@ AuthController.Login = (req, res, next) => {
     if (!req.user) {
       throw new WE(Errors.USER_NOT_EXISTS);
     }
+
+    if(req.user.status != 1) {
+      throw new WE(Errors.ACCOUNT_NOT_ACTIVATED);
+    }
     req.logIn(req.user, err => {
       if (err) {
         return next(err);
@@ -168,6 +172,8 @@ AuthController.RegisterActivate = (req, res) => {
     if(s !== crypto.createHash('sha256').update(originEmail).digest('hex').slice(0,32)) {
       throw new WE(Errors.ACTIVATE_LINK_INVALID);
     }
+
+    await User.setActivate(originEmail);
     res.json({
       info: 'success',
       status: 10000,
