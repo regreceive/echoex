@@ -5,8 +5,6 @@ import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import intl from 'react-intl-universal';
 import Form from 'react-bootstrap/lib/Form';
-import FormGroup from 'react-bootstrap/lib/FormGroup';
-import Button from 'react-bootstrap/lib/Button';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import FieldGroup from '../../components/Form/FieldGroup';
@@ -16,14 +14,6 @@ import history from '../../history';
 import Section from '../../components/Section';
 import type { LoginFlowType } from '../../components/App';
 import s from './Login.css';
-
-export const loginHandle = (
-  loginProvider: LoginFlowType,
-  email: string,
-) => () => {
-  loginProvider.in(email);
-  history.replace('/profile');
-};
 
 export const expireHandle = (
   loginProvider: LoginFlowType,
@@ -45,6 +35,14 @@ export const expireHandle = (
       console.warn(error);
     }
   }
+};
+
+const loginHandle = (
+  loginProvider: LoginFlowType,
+  email: string,
+) => () => {
+  loginProvider.in(email);
+  history.replace('/profile');
 };
 
 class Login extends React.Component {

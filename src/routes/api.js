@@ -102,4 +102,23 @@ function regActivate(fetch, payload: {}): Promise<object | number> {
   return post(fetch, '/api/user/activate', JSON.stringify(payload));
 }
 
-export { login, register, profile, profilePost, postAddress, regActivate };
+// 密码找回
+function reset(fetch, payload: {}): Promise<object | number> {
+  return post(fetch, '/api/password/reset-link', JSON.stringify(payload));
+}
+
+// 重置密码
+function recover(fetch, payload: {}): Promise<object | number> {
+  return post(fetch, '/api/password/recover', JSON.stringify(payload));
+}
+
+export {
+  login,
+  register,
+  profile,
+  profilePost,
+  postAddress,
+  regActivate,
+  reset,
+  recover,
+};

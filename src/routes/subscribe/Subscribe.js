@@ -11,8 +11,8 @@ import Button from 'react-bootstrap/lib/Button';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import debounce from 'lodash/debounce';
 import cs from 'classnames';
-
 import Section from '../../components/Section';
+
 import s from './Subscribe.css';
 
 const EthAddress = '0xfCD65569C82A6555EA9FED6f21a66EaeDd9Ab008';
@@ -51,9 +51,7 @@ class Subscribe extends React.Component {
                 text={EthAddress}
                 onCopy={() => this.onCopyHandle()}
               >
-                <Button bsStyle="primary">
-                  {intl.get('COPY')}
-                </Button>
+                <Button bsStyle="primary">{intl.get('COPY')}</Button>
               </CopyToClipboard>
             </InputGroup.Button>
           </InputGroup>

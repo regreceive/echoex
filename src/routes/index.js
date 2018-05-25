@@ -40,7 +40,7 @@ const routes = {
     },
     {
       path: '/password/reset-link',
-      load: () => import(/* webpackChunkName: 'register' */ './password-link'),
+      load: () => import(/* webpackChunkName: 'login' */ './password-link'),
     },
     {
       path: '/password/recover',

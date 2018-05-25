@@ -28,6 +28,12 @@ export default {
   CAPTCHA: 'Captcha',
   REFRESH_CAPTCHA: '更换验证码',
   FORGOT_PASSWORD: '忘记密码？',
+
+  PASSWORD_LINK: '请输入您注册的邮箱',
+  SEND_EMAIL: '发送邮件',
+  PASSWORD_LINK_SENT_TITLE: '发送成功！',
+  PASSWORD_LINK_SENT: '已发送重置账号密码的邮件到您的邮箱，请接收。',
+
   PROFILE_TITLE: '个人信息',
   PROFILE_SUBMIT: '提交信息',
   ACCOUNT: '账号信息',
