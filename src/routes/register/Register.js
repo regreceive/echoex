@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import intl from 'react-intl-universal';
 import Form from 'react-bootstrap/lib/Form';
-import FormGroup from 'react-bootstrap/lib/FormGroup';
-import Button from 'react-bootstrap/lib/Button';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import EmailFieldGroup from '../../components/Form/EmailFieldGroup';
 import PasswordGroup from '../../components/Form/PasswordGroup';
+import SubmitGroup from '../../components/Form/SubmitGroup';
 import { register } from '../api';
 import history from '../../history';
 import Section from '../../components/Section';
@@ -26,21 +25,15 @@ class Register extends React.Component {
     title: PropTypes.string.isRequired,
   };
 
-  constructor(props, context) {
-    super(props, context);
+  state = { help: '' };
 
-    this.state = { help: '' };
-
-    this.submit = this.submit.bind(this);
-  }
-
-  submit() {
+  submitHandle() {
     const email = this.email.value;
     const captcha = this.captcha.value;
     const password = this.password.value;
     const passwordConfirm = this.passwordConfirm.value;
 
-    register(this.context.fetch, {
+    return register(this.context.fetch, {
       email,
       captcha,
       password,
@@ -97,19 +90,16 @@ class Register extends React.Component {
             }}
           />
 
-          <FormGroup>
-            <Button
-              bsStyle="primary"
-              bsSize="large"
-              block
-              onClick={this.submit}
-            >
-              {intl.get('REGISTER_TITLE')}
-            </Button>
-          </FormGroup>
+          <SubmitGroup
+            block
+            title={intl.get('REGISTER_TITLE')}
+            onSubmit={() => this.submitHandle()}
+          />
           <Row>
             {help && (
-              <Col className="text-right text-danger">{intl.get(help)}</Col>
+              <Col xs={12} className="text-right text-danger">
+                {help}
+              </Col>
             )}
           </Row>
         </Form>

@@ -45,13 +45,13 @@ class Subscribe extends React.Component {
         <h5 className={s.h5}>{intl.get('SUBSCRIBE_DESCRIPTION')}</h5>
         <FormGroup className={s.formGroup}>
           <InputGroup>
-            <FormControl type="text" bsSize="large" defaultValue={EthAddress} />
+            <FormControl type="text" defaultValue={EthAddress} />
             <InputGroup.Button>
               <CopyToClipboard
                 text={EthAddress}
                 onCopy={() => this.onCopyHandle()}
               >
-                <Button bsStyle="primary" bsSize="large">
+                <Button bsStyle="primary">
                   {intl.get('COPY')}
                 </Button>
               </CopyToClipboard>

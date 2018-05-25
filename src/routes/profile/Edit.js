@@ -20,23 +20,7 @@ class Edit extends React.Component {
     onSubmitted: PropTypes.func.isRequired,
   };
 
-  state = { help: '', front: '', verso: '' };
-
-  frontOnChangeHandle(event) {
-    const reader = new FileReader();
-    reader.addEventListener('load', (e: Event) => {
-      this.setState({ verso: e.target.result });
-    });
-    reader.readAsDataURL(event.target.files[0]);
-  }
-
-  versoOnChangeHandle(event) {
-    const reader = new FileReader();
-    reader.addEventListener('load', e => {
-      this.setState({ verso: e.target.result });
-    });
-    reader.readAsDataURL(event.target.files[0]);
-  }
+  state = { help: '' };
 
   submitHandle(): Promise {
     const fd = serialize(this.formEl);
@@ -52,7 +36,7 @@ class Edit extends React.Component {
   }
 
   render() {
-    const { help, front, verso } = this.state;
+    const { help } = this.state;
     return (
       <form
         ref={ref => {
@@ -93,7 +77,7 @@ class Edit extends React.Component {
         </Row>
         <SubmitGroup
           title={intl.get('PROFILE_SUBMIT')}
-          onClick={() => this.submitHandle()}
+          onSubmit={() => this.submitHandle()}
         />
         <Row>
           {help && (

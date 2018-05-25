@@ -10,6 +10,7 @@ import Button from 'react-bootstrap/lib/Button';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import FieldGroup from '../../components/Form/FieldGroup';
+import SubmitGroup from '../../components/Form/SubmitGroup';
 import { login } from '../api';
 import history from '../../history';
 import Section from '../../components/Section';
@@ -56,17 +57,12 @@ class Login extends React.Component {
     title: PropTypes.string.isRequired,
   };
 
-  constructor(props, context) {
-    super(props, context);
+  state = { help: '' };
 
-    this.state = { help: '' };
-    this.submit = this.submit.bind(this);
-  }
-
-  submit() {
+  submitHandle() {
     const email = this.email.value;
     const password = this.password.value;
-    login(this.context.fetch, { email, password })
+    return login(this.context.fetch, { email, password })
       .then(loginHandle(this.context.login, this.email.value))
       .catch(
         expireHandle(this.context.login, status => {
@@ -100,16 +96,11 @@ class Login extends React.Component {
               this.password = ref;
             }}
           />
-          <FormGroup>
-            <Button
-              bsStyle="primary"
-              bsSize="large"
-              block
-              onClick={this.submit}
-            >
-              {intl.get('LOGIN_TITLE')}
-            </Button>
-          </FormGroup>
+          <SubmitGroup
+            block
+            title={intl.get('LOGIN_TITLE')}
+            onSubmit={() => this.submitHandle()}
+          />
           <Row>
             <Col xs={4}>
               <a href="/password/reset-link">{intl.get('FORGOT_PASSWORD')}</a>

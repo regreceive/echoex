@@ -34,7 +34,7 @@ class ApplyAddress extends React.Component {
 
   submitHandle() {
     const address = this.address.value;
-    postAddress(this.context.fetch, { address })
+    return postAddress(this.context.fetch, { address })
       .then(() => {
         history.replace('/subscribe');
       })
@@ -78,7 +78,7 @@ class ApplyAddress extends React.Component {
 
           <SubmitGroup
             title={intl.get('SUBMIT')}
-            onClick={() => this.submitHandle()}
+            onSubmit={() => this.submitHandle()}
             disabled={!this.state.agree}
           />
 
