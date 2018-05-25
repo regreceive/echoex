@@ -87,6 +87,7 @@ const config = {
     },
   },
 
+  upload_path: null,
   authList: ['/profile', '/address', '/subscribe', '/api/profile', '/api/profile/address',],
   guestList: ['/login', '/register', '/api/login', '/api/register'],
   authRedirectUrl: '/login', //需要登录但未登录, 跳转到登录页
@@ -95,6 +96,7 @@ const config = {
 };
 
 if(process.env.NODE_ENV === "production") {
+  config.upload_path = '/data0/www/kyc/build/public/uploads';
   config.database = {
     db: 'kyc',
     user: 'kyc',
