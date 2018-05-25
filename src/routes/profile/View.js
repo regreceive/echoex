@@ -5,6 +5,9 @@ import PropTypes from 'prop-types';
 import intl from 'react-intl-universal';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
+import Image from 'react-bootstrap/lib/Image';
+
+import PanelGroup from '../../components/Form/PanelGroup';
 
 const profileType = {
   username: PropTypes.string.isRequired,
@@ -37,15 +40,14 @@ Field.propTypes = {
 function ImageField(props) {
   return (
     <div>
+      <h4>{props.item}</h4>
+
       <Row>
-        <Col xs={12}>{props.item}</Col>
-      </Row>
-      <Row>
-        <Col xs={12}>
-          <image src={props.front} />
+        <Col sm={6}>
+          <Image src={props.front} responsive thumbnail />
         </Col>
-        <Col xs={12}>
-          <image src={props.verso} />
+        <Col sm={6}>
+          <Image src={props.verso} responsive thumbnail />
         </Col>
       </Row>
     </div>
@@ -78,19 +80,25 @@ class View extends React.Component {
     } = this.props.profile;
     return (
       <div>
-        <Field item={intl.get('NAME')} value={username} />
-        <Field item={intl.get('FIRST_NAME')} value={firstname} />
-        <Field item={intl.get('LAST_NAME')} value={lastname} />
-        <Field
-          item={intl.get('GENDER')}
-          value={gender ? intl.get('MALE') : intl.get('FEMALE')}
+        <PanelGroup header="个人信息">
+          <Field item={intl.get('NAME')} value={username} />
+          <Field item={intl.get('FIRST_NAME')} value={firstname} />
+          <Field item={intl.get('LAST_NAME')} value={lastname} />
+          <Field
+            item={intl.get('GENDER')}
+            value={gender ? intl.get('MALE') : intl.get('FEMALE')}
+          />
+          <Field item={intl.get('BIRTHDAY')} value={birthday} />
+          <Field item={intl.get('COUNTRY')} value={country} />
+          <Field item={intl.get('CITY')} value={city} />
+          <Field item={intl.get('LOCATION')} value={location} />
+          <Field item={intl.get('PASSPORT_ID')} value={passport} />
+        </PanelGroup>
+        <ImageField
+          item={intl.get('PASSPORT_TITLE')}
+          front={passport_01}
+          verso={passport_02}
         />
-        <Field item={intl.get('BIRTHDAY')} value={birthday} />
-        <Field item={intl.get('COUNTRY')} value={country} />
-        <Field item={intl.get('CITY')} value={city} />
-        <Field item={intl.get('LOCATION')} value={location} />
-        <Field item={intl.get('PASSPORT_ID')} value={passport} />
-        <ImageField item={intl.get('PASSPORT_TITLE')} front={passport_01} verso={passport_02} />
       </div>
     );
   }

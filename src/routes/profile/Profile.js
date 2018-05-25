@@ -77,9 +77,10 @@ class Profile extends React.Component {
           </Row>
         </PanelGroup>
 
-        {status === 2 && (
-          <Edit onSubmitted={data => this.onSubmittedHandle(data)} />
-        )}
+        {status === undefined &&
+          status === 2 && (
+            <Edit onSubmitted={data => this.onSubmittedHandle(data)} />
+          )}
         {(status === 0 || status === 1) && (
           <View profile={this.state.profile} />
         )}

@@ -23,17 +23,17 @@ class Edit extends React.Component {
 
   frontOnChangeHandle(event) {
     const reader = new FileReader();
-    reader.onload = e => {
-      this.setState({ front: e.target.result });
-    };
+    reader.addEventListener('load', (e: Event) => {
+      this.setState({ verso: e.target.result });
+    });
     reader.readAsDataURL(event.target.files[0]);
   }
 
   versoOnChangeHandle(event) {
     const reader = new FileReader();
-    reader.onload = e => {
+    reader.addEventListener('load', e => {
       this.setState({ verso: e.target.result });
-    };
+    });
     reader.readAsDataURL(event.target.files[0]);
   }
 
