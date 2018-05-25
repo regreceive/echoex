@@ -65,13 +65,18 @@ export default {
   COPIED: '已复制',
   DOWNLOAD_TABLE: '下载表格',
 
+  REGACTIVATE_TITLE: '激活账号',
+  REGACTIVATE_SUCCESS: '邮箱验证成功, 立即登录',
+
   // error messages
+  [Constant.FAILS]: '出了点小意外',
   [Constant.EMAIL_EMPTY]: '邮箱地址为空',
   [Constant.EMAIL_INVALID_FORMAT]: '不是有效的邮箱格式',
   [Constant.ETH_ADDR_INVALID]: '不是有效的以太地址',
   [Constant.MUST_BE_IMAGE]: '错误的图片格式',
   [Constant.PASSPORT_IMAGE_EMPTY]: '缺少护照照片',
   [Constant.INCOMPLETE_FORM]: '强填写完整表单',
+  [Constant.ACTIVATE_LINK_INVALID]: '无效的激活邮件',
 
   [Constant.CAPTCHA_EMPTY]: '验证码为空',
   [Constant.CAPTCHA_INVALID]: '错误的验证码',
@@ -89,6 +94,7 @@ export default {
   [Constant.MAIL_SENT_FREQUENT]: '邮件发送过于频繁',
   [Constant.PWD_RESET_LINK_EXPIRED]: '密码重置链接失效',
   [Constant.PWD_RESET_LINK_INVALID]: '违规的密码重置链接',
+  [Constant.ACCOUNT_NOT_ACTIVATED]: '账号尚未激活',
 
   [Constant.MUST_LOGIN]: '必须登录',
   [Constant.MUST_BE_GUEST]: 'must be guest',

@@ -94,6 +94,7 @@ app.get('/api/logout', AuthController.Logout);
 app.get('/logout', AuthController.Logout);
 app.post('/api/password/reset-link', AuthController.ResetLink);
 app.post('/api/password/recover', AuthController.Recoverpwd);
+app.post('/api/user/activate', AuthController.RegisterActivate);
 app.post('/api/join', HomeController.JoinEcho);
 app.get('/api/test', HomeController.Test);
 app.post(

@@ -1,0 +1,38 @@
+
+.root {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 0 0 40px;
+  max-width: 768px;
+}
+
+.h5 {
+  font-weight: bold;
+  margin-bottom: 40px;
+}
+
+.formGroup {
+  margin-bottom: 30px;
+}
+
+.toast {
+  position: absolute;
+  right: 15px;
+  top: 0;
+  background-color: rgba(0, 0, 0, .6);
+  border-radius: 5px;
+  padding: 5px;
+  text-align: center;
+  color: #fff;
+  transition: opacity 1s;
+  font-size: 12px;
+  opacity: 0;
+}
+
+.mailMe {
+  margin-bottom: 20px;
+}

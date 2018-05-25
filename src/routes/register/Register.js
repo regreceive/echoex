@@ -49,6 +49,7 @@ class Register extends React.Component {
       .then(loginHandle(this.context.login, this.email.value))
       .catch(
         expireHandle(this.context.login, status => {
+          console.log(status, intl.get(status))
           this.setState({ help: intl.get(status) });
         }),
       );

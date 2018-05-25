@@ -29,6 +29,10 @@ const routes = {
       load: () => import(/* webpackChunkName: 'register' */ './register'),
     },
     {
+      path: '/activate',
+      load: () => import(/* webpackChunkName: 'register' */ './register-activate'),
+    },
+    {
       path: '/password/reset-link',
       load: () => import(/* webpackChunkName: 'register' */ './password-link'),
     },

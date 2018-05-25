@@ -65,13 +65,18 @@ export default {
   COPIED: 'Copied',
   DOWNLOAD_TABLE: '下载表格',
 
+  REGACTIVATE_TITLE: 'Activate Account',
+  REGACTIVATE_SUCCESS: 'Your email has\' been activated, LOGIN now!',
+
   // error messages
+  [Constant.FAILS]: 'whoops ...',
   [Constant.EMAIL_EMPTY]: 'empty email',
   [Constant.EMAIL_INVALID_FORMAT]: 'invalid email format',
   [Constant.ETH_ADDR_INVALID]: 'invalid ethereum address',
   [Constant.MUST_BE_IMAGE]: 'invalid image type',
   [Constant.PASSPORT_IMAGE_EMPTY]: 'passport image missing',
   [Constant.INCOMPLETE_FORM]: 'incomplete form',
+  [Constant.ACTIVATE_LINK_INVALID]: 'invalid activate email',
 
   [Constant.CAPTCHA_EMPTY]: 'empty captcha',
   [Constant.CAPTCHA_INVALID]: 'invalid captcha',
@@ -89,6 +94,7 @@ export default {
   [Constant.MAIL_SENT_FREQUENT]: 'mail sent frequent',
   [Constant.PWD_RESET_LINK_EXPIRED]: 'password reset link expired',
   [Constant.PWD_RESET_LINK_INVALID]: 'password reset link invalid',
+  [Constant.ACCOUNT_NOT_ACTIVATED]: 'account not activate',
 
   [Constant.MUST_LOGIN]: 'must login',
   [Constant.MUST_BE_GUEST]: 'must be guest',

@@ -1,9 +1,13 @@
+export const FAILS = -1;
+export const SUCCESS = 10000;
+
 export const EMAIL_EMPTY = 30001;
 export const EMAIL_INVALID_FORMAT = 30002;
 export const ETH_ADDR_INVALID = 30003;
 export const MUST_BE_IMAGE = 30004;
 export const PASSPORT_IMAGE_EMPTY = 30005;
 export const INCOMPLETE_FORM = 30006;
+export const ACTIVATE_LINK_INVALID = 30007;
 
 export const CAPTCHA_EMPTY = 30101;
 export const CAPTCHA_INVALID = 30102;
@@ -25,3 +29,4 @@ export const PWD_RESET_LINK_INVALID = 30404;
 export const MUST_LOGIN = 40001;
 export const MUST_BE_GUEST = 40002;
 export const PASSPORT_SAVE_FAILED = 40003;
+export const ACCOUNT_NOT_ACTIVATED = 40004;

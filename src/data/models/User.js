@@ -35,6 +35,16 @@ const User = Model.define(
       default: null,
     },
 
+    status: {
+      type: DataType.TINYINT,
+      defaultValue: 0,
+    },
+
+    code: {
+      type: DataType.CHAR,
+      length: 32,
+    },
+
     password: {
       type: DataType.STRING,
     },
@@ -46,8 +56,8 @@ const User = Model.define(
 
 User.createNewUser = async (email, password, activateCode) => {
   await Model.query(
-    'INSERT IGNORE INTO `User` (`email`,`password`,`createdAt`,`updatedAt`) values(:email,:password,:date,:date)',
-    { replacements: { email, password, date: new Date() } },
+    'INSERT IGNORE INTO `User` (`email`,`password`, `code`, `createdAt`,`updatedAt`) values(:email,:password,:code,:date,:date)',
+    { replacements: { email, password, code:activateCode, date: new Date() } },
   );
   const user = await User.findOne({ where: { email } });
   return user;

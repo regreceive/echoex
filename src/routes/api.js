@@ -21,6 +21,7 @@ async function post(fetch, serviceName, body) {
   // 服务器未捕获的系统错误
   if (!result.status) {
     console.warn(result);
+    return Promise.reject('-1');
   }
   return Promise.reject(result.status);
 }
@@ -96,4 +97,9 @@ function postAddress(fetch, payload: object): Promise<object | number> {
   return post(fetch, '/api/profile/address', JSON.stringify(payload));
 }
 
-export { login, register, profile, profilePost, postAddress };
+// 激活账号
+function regActivate(fetch, payload: {}): Promise<object | number> {
+  return post(fetch, '/api/user/activate', JSON.stringify(payload));
+}
+
+export { login, register, profile, profilePost, postAddress, regActivate };

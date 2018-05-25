@@ -30,7 +30,7 @@ function validPassword(p1, p2) {
 }
 async function sendRegSuccessEmail(email, code) {
   const s = crypto.createHash('sha256').update(email).digest('hex').slice(0,32);
-  const link = `${config.api.serverUrl}/api/user/activate?s=${s}&code=${code}`;
+  const link = `${config.api.serverUrl}/activate?s=${s}&code=${code}`;
 
   // send mail
   const { host, port, secure, user, pass, from } = config.mailer.qq;
@@ -157,6 +157,23 @@ AuthController.Register = (req, res) => {
       data: newuser.id,
     });
   });
+};
+
+AuthController.RegisterActivate = (req, res) => {
+  tryErrors(req, res, async ()=>{
+    const {s, code} = req.body;
+    const record = await User.findOne({ where: {code} });
+    if(!record) throw new WE(Errors.ACTIVATE_LINK_INVALID);
+    const {email:originEmail} = record;
+    if(s !== crypto.createHash('sha256').update(originEmail).digest('hex').slice(0,32)) {
+      throw new WE(Errors.ACTIVATE_LINK_INVALID);
+    }
+    res.json({
+      info: 'success',
+      status: 10000,
+      data: null,
+    });
+  })
 };
 
 AuthController.SendCaptcha = (req, res) => {
