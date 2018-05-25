@@ -8,6 +8,11 @@ class FieldGroup extends React.Component {
   static propTypes = {
     id: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
+    onChange: PropTypes.func,
+  };
+
+  static defaultProps = {
+    onChange: () => {},
   };
 
   constructor(props, context) {
@@ -24,7 +29,7 @@ class FieldGroup extends React.Component {
 
   handleChange(e) {
     this.setState({ value: e.target.value });
-    if(this.props.onChange) this.props.onChange(e);
+    if (this.props.onChange) this.props.onChange(e);
   }
 
   render() {

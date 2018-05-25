@@ -13,7 +13,7 @@ import { register } from '../api';
 import history from '../../history';
 import Section from '../../components/Section';
 import Captcha from './Captcha';
-import { loginHandle, expireHandle } from '../login/Login';
+import { expireHandle } from '../login/Login';
 import s from './Register.css';
 
 class Register extends React.Component {
@@ -46,10 +46,9 @@ class Register extends React.Component {
       password,
       password_confirm: passwordConfirm,
     })
-      .then(loginHandle(this.context.login, this.email.value))
+      .then(() => history.replace('/register/validation', { email }))
       .catch(
         expireHandle(this.context.login, status => {
-          console.log(status, intl.get(status))
           this.setState({ help: intl.get(status) });
         }),
       );

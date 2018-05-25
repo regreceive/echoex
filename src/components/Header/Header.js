@@ -41,6 +41,11 @@ class Header extends React.Component {
     }
 
     const { pathname } = event.target;
+    if (pathname === '/logout') {
+      // 退出,直接走链接
+      this.context.login.out();
+      return;
+    }
     let query = queryString.stringify(
       Object.assign(
         {},

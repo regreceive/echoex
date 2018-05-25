@@ -10,6 +10,7 @@ import Radio from 'react-bootstrap/lib/Radio';
 import FieldGroup from '../../components/Form/FieldGroup';
 import RadioGroup from '../../components/Form/RadioGroup';
 import SubmitGroup from '../../components/Form/SubmitGroup';
+import FileGroup from '../../components/Form/FileGroup';
 import serialize from './serialize';
 import { profilePost } from '../api';
 import { expireHandle } from '../login/Login';
@@ -79,28 +80,17 @@ class Edit extends React.Component {
         <FieldGroup id="city" type="text" label={intl.get('CITY')} />{' '}
         <FieldGroup id="location" type="text" label={intl.get('LOCATION')} />
         <FieldGroup id="passport" type="text" label={intl.get('PASSPORT_ID')} />
-        <FieldGroup
-          id="passport_01"
-          type="file"
-          label={intl.get('PASSPORT_FULL_FACE')}
-          onChange={e => {
-            this.frontOnChangeHandle(e);
-          }}
-        />
-        <div>
-          <img src={front} alt="" />
-        </div>
-        <FieldGroup
-          id="passport_02"
-          type="file"
-          label={intl.get('PASSPORT_BACK')}
-          onChange={e => {
-            this.versoOnChangeHandle(e);
-          }}
-        />
-        <div>
-          <img src={verso} alt="" />
-        </div>
+        <Row>
+          <Col sm={6}>
+            <FileGroup
+              id="passport_01"
+              label={intl.get('PASSPORT_FULL_FACE')}
+            />
+          </Col>
+          <Col sm={6}>
+            <FileGroup id="passport_02" label={intl.get('PASSPORT_BACK')} />
+          </Col>
+        </Row>
         <SubmitGroup
           title={intl.get('PROFILE_SUBMIT')}
           onClick={() => this.submitHandle()}

@@ -66,7 +66,11 @@ export default {
   DOWNLOAD_TABLE: '下载表格',
 
   REGACTIVATE_TITLE: 'Activate Account',
-  REGACTIVATE_SUCCESS: 'Your email has\' been activated, LOGIN now!',
+  REGACTIVATE_SUCCESS: "Your email has' been activated, LOGIN now!",
+
+  REG_VALIDATION_TITLE: '邮箱验证',
+  REG_VALIDATION_DESCRIPTION:
+    '已发送至您的邮箱 <em>{email}</em> ，请去邮箱验证',
 
   // error messages
   [Constant.FAILS]: 'whoops ...',

@@ -68,6 +68,10 @@ export default {
   REGACTIVATE_TITLE: '激活账号',
   REGACTIVATE_SUCCESS: '邮箱验证成功, 立即登录',
 
+  REG_VALIDATION_TITLE: '邮箱验证',
+  REG_VALIDATION_DESCRIPTION:
+    '已发送至您的邮箱 <em>{email}</em> ，请去邮箱验证',
+
   // error messages
   [Constant.FAILS]: '出了点小意外',
   [Constant.EMAIL_EMPTY]: '邮箱地址为空',

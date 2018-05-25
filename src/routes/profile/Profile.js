@@ -37,13 +37,17 @@ class Profile extends React.Component {
   componentDidMount() {
     profile(this.context.fetch)
       .then(data => {
-        this.setState({ profile: data });
+        this.setState({ profile: data || {} });
       })
       .catch(expireHandle(this.context.login));
   }
 
-  onSubmittedHandle(data) {
-    this.setState({ profile: data });
+  onSubmittedHandle() {
+    profile(this.context.fetch)
+      .then(data => {
+        this.setState({ profile: data || {} });
+      })
+      .catch(expireHandle(this.context.login));
   }
 
   render() {
@@ -77,10 +81,9 @@ class Profile extends React.Component {
           </Row>
         </PanelGroup>
 
-        {status === undefined &&
-          status === 2 && (
-            <Edit onSubmitted={data => this.onSubmittedHandle(data)} />
-          )}
+        {(status === undefined || status === 2) && (
+          <Edit onSubmitted={data => this.onSubmittedHandle(data)} />
+        )}
         {(status === 0 || status === 1) && (
           <View profile={this.state.profile} />
         )}

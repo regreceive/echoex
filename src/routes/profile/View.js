@@ -8,6 +8,7 @@ import Col from 'react-bootstrap/lib/Col';
 import Image from 'react-bootstrap/lib/Image';
 
 import PanelGroup from '../../components/Form/PanelGroup';
+import s from './Profile.css';
 
 const profileType = {
   username: PropTypes.string.isRequired,
@@ -43,10 +44,10 @@ function ImageField(props) {
       <h4>{props.item}</h4>
 
       <Row>
-        <Col sm={6}>
+        <Col className={s.photoBoundary} sm={6}>
           <Image src={props.front} responsive thumbnail />
         </Col>
-        <Col sm={6}>
+        <Col className={s.photoBoundary} sm={6}>
           <Image src={props.verso} responsive thumbnail />
         </Col>
       </Row>

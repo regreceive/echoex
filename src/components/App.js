@@ -23,6 +23,7 @@ const ContextType = {
   fetch: PropTypes.func.isRequired,
   pathname: PropTypes.string.isRequired,
   query: PropTypes.object,
+  state: PropTypes.object,
   login: PropTypes.shape(LoginType),
 };
 

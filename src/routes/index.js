@@ -30,7 +30,13 @@ const routes = {
     },
     {
       path: '/activate',
-      load: () => import(/* webpackChunkName: 'register' */ './register-activate'),
+      load: () =>
+        import(/* webpackChunkName: 'register' */ './register-activate'),
+    },
+    {
+      path: '/register/validation',
+      load: () =>
+        import(/* webpackChunkName: 'register' */ './register-validation'),
     },
     {
       path: '/password/reset-link',

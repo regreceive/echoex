@@ -41,6 +41,8 @@ let context = {
       }
     },
     out() {
+      const cookies = new Cookies();
+      cookies.set('username', '');
       this.email = '';
     },
     check() {
@@ -79,6 +81,7 @@ async function onLocationChange(location, action) {
     context = Object.assign({}, context, {
       pathname: location.pathname,
       query: queryString.parse(location.search),
+      state: location.state || {},
     });
 
     if (
