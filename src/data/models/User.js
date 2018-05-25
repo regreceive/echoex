@@ -81,6 +81,15 @@ User.saveEthAddress = async (uid, address) =>
     { where: { id: uid } },
   );
 
+User.setActivate = async (email) =>
+  User.update(
+      {
+        status: 1,
+        code: null,
+      },
+      { where: { email } },
+  );
+
 User.encryptPassword = function(pwd, s) {
   return new Promise((resolve, reject) => {
     let salt = s || 'power-chain-kyc';
