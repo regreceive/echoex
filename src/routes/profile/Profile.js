@@ -6,15 +6,14 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import intl from 'react-intl-universal';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
-import Radio from 'react-bootstrap/lib/Radio';
+
 import Section from '../../components/Section';
-import { profile, profilePost } from '../api';
+import { profile } from '../api';
 import PanelGroup from '../../components/Form/PanelGroup';
-import FieldGroup from '../../components/Form/FieldGroup';
-import RadioGroup from '../../components/Form/RadioGroup';
-import SubmitGroup from '../../components/Form/SubmitGroup';
 import { expireHandle } from '../login/Login';
-import serialize from './serialize';
+import Edit from './Edit';
+import View from './View';
+
 import s from './Profile.css';
 
 class Profile extends React.Component {
@@ -30,54 +29,25 @@ class Profile extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = { help: '', passport_01: null, passport_02: null };
-    this._changePassport01 = this._changePassport01.bind(this);
-    this._changePassport02 = this._changePassport02.bind(this);
+    this.state = {
+      profile: {},
+    };
   }
-
-  _changePassport01 = function(e) {
-    const reader = new FileReader();
-    reader.onload = e => {
-      this.setState({ passport_01: e.target.result });
-    };
-    reader.readAsDataURL(e.target.files[0]);
-  };
-  _changePassport02 = function(e) {
-    const reader = new FileReader();
-    reader.onload = e => {
-      this.setState({ passport_02: e.target.result });
-    };
-    reader.readAsDataURL(e.target.files[0]);
-  };
 
   componentDidMount() {
     profile(this.context.fetch)
       .then(data => {
-        this.profile = data || {};
+        this.setState({ profile: data });
       })
-      .catch(
-        expireHandle(this.context.login, status => {
-          this.setState({ help: intl.get(status) });
-        }),
-      );
-    this.email = this.context.login.check();
+      .catch(expireHandle(this.context.login));
   }
 
-  submitHandle(): Promise {
-    const fd = serialize(this.profileForm);
-    return profilePost(this.context.fetch, fd)
-      .then(data => {
-        this.profile = data || {};
-      })
-      .catch(
-        expireHandle(this.context.login, status => {
-          this.setState({ help: intl.get(status) });
-        }),
-      );
+  onSubmittedHandle(data) {
+    this.setState({ profile: data });
   }
 
   render() {
-    const { help } = this.state;
+    const { status } = this.state.profile;
     this.email = this.email || this.context.login.check();
     return (
       <Section
@@ -100,79 +70,20 @@ class Profile extends React.Component {
           <Row>
             <Col xs={3}>{intl.get('KYC_AUTH')}</Col>
             <Col xs={9}>
-              {1 ? intl.get('KYC_AUTH_DONE') : intl.get('KYC_AUTH_WAITING')}
+              {status === 0 && intl.get('KYC_AUTH_WAITING')}
+              {status === 1 && intl.get('KYC_AUTH_FAILURE')}
+              {status === 2 && intl.get('KYC_AUTH_SUCCESS')}
             </Col>
           </Row>
         </PanelGroup>
 
-        <form
-          ref={ref => {
-            this.profileForm = ref;
-          }}
-        >
-          <FieldGroup id="username" type="text" label={intl.get('NAME')} />
-          <FieldGroup
-            id="firstname"
-            type="text"
-            label={intl.get('FIRST_NAME')}
-          />
-          <FieldGroup id="lastname" type="text" label={intl.get('LAST_NAME')} />
-          <RadioGroup label={intl.get('GENDER')}>
-            <Row>
-              <Col xs={12}>
-                <Radio name="gender" value="1" inline>
-                  {intl.get('MALE')}
-                </Radio>
-                <Radio name="gender" value="0" inline>
-                  {intl.get('FEMALE')}
-                </Radio>
-              </Col>
-            </Row>
-          </RadioGroup>
-          <FieldGroup id="birthday" label={intl.get('BIRTHDAY')} type="date" />
-          <h3>{intl.get('INTERNATIONAL_INFORMATION')}</h3>
-          <FieldGroup
-            id="country"
-            type="text"
-            label={intl.get('COUNTRY')}
-          />{' '}
-          <FieldGroup id="city" type="text" label={intl.get('CITY')} />{' '}
-          <FieldGroup id="location" type="text" label={intl.get('LOCATION')} />
-          <FieldGroup
-            id="passport"
-            type="text"
-            label={intl.get('PASSPORT_ID')}
-          />
-          <FieldGroup
-            id="passport_01"
-            type="file"
-            label={intl.get('PASSPORT_FULL_FACE')}
-            onChange={this._changePassport01}
-          />
-          <div>
-            <img src={this.state.passport_01} alt="" />
-          </div>
-          <FieldGroup
-            id="passport_02"
-            type="file"
-            label={intl.get('PASSPORT_BACK')}
-            onChange={this._changePassport02}
-          />
-          <div>
-            <img src={this.state.passport_02} alt="" />
-          </div>
-          <SubmitGroup
-            title={intl.get('PROFILE_SUBMIT')}
-            onClick={() => this.submitHandle()}
-          />
-          <Row>
-            {help && (
-              <Col xs={12} className="text-right text-danger">
-                {help}
-              </Col>
-            )}
-          </Row>
-        </form>
+        {status === undefined &&
+          status === 2 && (
+            <Edit onSubmitted={data => this.onSubmittedHandle(data)} />
+          )}
+        {(status === 0 || status === 1) && (
+          <View profile={this.state.profile} />
+        )}
       </Section>
     );
   }
