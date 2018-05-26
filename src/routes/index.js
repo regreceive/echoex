@@ -49,7 +49,7 @@ const routes = {
     },
     {
       path: '/join-echo',
-      load: () => import(/* webpackChunkName: 'register' */ './join-echo'),
+      load: () => import(/* webpackChunkName: 'join-echo' */ './join-echo'),
     },
     {
       path: '/profile',

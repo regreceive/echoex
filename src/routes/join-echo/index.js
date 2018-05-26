@@ -1,25 +1,16 @@
-/**
- * React Starter Kit (https://www.reactstarterkit.com/)
- *
- * Copyright © 2014-present Kriasoft, LLC. All rights reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
- */
-
 import React from 'react';
+import intl from 'react-intl-universal';
 import Layout from '../../components/Layout';
-import Register from './Register';
-
-const title = '加入ECHO生态，共建新一代供应链分布式链';
+import JoinEcho from './JoinEcho';
 
 function action() {
+  const title = intl.get('JOIN_ECHO');
   return {
-    chunks: ['register'],
+    chunks: ['join-echo'],
     title,
     component: (
       <Layout>
-        <Register title={title} />
+        <JoinEcho title={title} />
       </Layout>
     ),
   };

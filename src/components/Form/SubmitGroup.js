@@ -17,24 +17,40 @@ class SubmitGroup extends React.Component {
     disabled: false,
   };
 
+  constructor(props) {
+    super(props);
+
+    this.loading = false;
+    this.mount = false;
+  }
+
   state = { disabled: false };
 
   componentWillMount() {
     this.setState({ disabled: this.props.disabled || this.loading });
   }
 
+  componentDidMount() {
+    this.mount = true;
+  }
+
   componentWillReceiveProps(nextProps) {
     this.setState({ disabled: nextProps.disabled || this.loading });
   }
 
-  loading = false;
+  componentWillUnmount() {
+    this.mount = false;
+  }
 
   handleClick() {
     this.loading = true;
     this.setState({ disabled: true });
     this.props.onSubmit().then(() => {
       this.loading = false;
-      this.setState({ disabled: false });
+      // 执行父级submit后，可能会unmount此类，这样本类setState后会产生错误
+      if (this.mount) {
+        this.setState({ disabled: false });
+      }
     });
   }
 

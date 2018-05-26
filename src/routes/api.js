@@ -73,52 +73,46 @@ async function get(fetch, serviceName) {
 }
 
 // 登录
-function login(fetch, payload: object): Promise<object | number> {
+export function login(fetch, payload: object): Promise<object | number> {
   return post(fetch, '/api/login', JSON.stringify(payload));
 }
 
 // 注册
-function register(fetch, payload: object): Promise<object | number> {
+export function register(fetch, payload: object): Promise<object | number> {
   return post(fetch, '/api/register', JSON.stringify(payload));
 }
 
 // 拿个人信息
-function profile(fetch): Promise {
+export function profile(fetch): Promise {
   return get(fetch, '/api/profile');
 }
 
 // 改个人信息
-function profilePost(fetch, payload: object): Promise {
+export function profilePost(fetch, payload: object): Promise {
   return filePost(fetch, '/api/profile', payload);
 }
 
 // 以太地址
-function postAddress(fetch, payload: object): Promise<object | number> {
+export function postAddress(fetch, payload: object): Promise<object | number> {
   return post(fetch, '/api/profile/address', JSON.stringify(payload));
 }
 
 // 激活账号
-function regActivate(fetch, payload: {}): Promise<object | number> {
+export function regActivate(fetch, payload: {}): Promise<object | number> {
   return post(fetch, '/api/user/activate', JSON.stringify(payload));
 }
 
 // 密码找回
-function reset(fetch, payload: {}): Promise<object | number> {
+export function reset(fetch, payload: {}): Promise<object | number> {
   return post(fetch, '/api/password/reset-link', JSON.stringify(payload));
 }
 
 // 重置密码
-function recover(fetch, payload: {}): Promise<object | number> {
+export function recover(fetch, payload: {}): Promise<object | number> {
   return post(fetch, '/api/password/recover', JSON.stringify(payload));
 }
 
-export {
-  login,
-  register,
-  profile,
-  profilePost,
-  postAddress,
-  regActivate,
-  reset,
-  recover,
-};
+// 加入echo
+export function joinEcho(fetch, payload: {}): Promise<object | number> {
+  return post(fetch, '/api/join', JSON.stringify(payload));
+}

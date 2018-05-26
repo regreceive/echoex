@@ -21,7 +21,7 @@ class PasswordLink extends React.Component {
     title: PropTypes.string.isRequired,
   };
 
-  state = { help: '', sent: true };
+  state = { help: '', sent: false };
 
   submitHandle() {
     const { value: email } = this.email;

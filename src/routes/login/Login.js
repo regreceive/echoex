@@ -37,10 +37,7 @@ export const expireHandle = (
   }
 };
 
-const loginHandle = (
-  loginProvider: LoginFlowType,
-  email: string,
-) => () => {
+const loginHandle = (loginProvider: LoginFlowType, email: string) => () => {
   loginProvider.in(email);
   history.replace('/profile');
 };

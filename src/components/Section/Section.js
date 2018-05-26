@@ -14,7 +14,7 @@ class Section extends React.Component {
     return (
       <div className={rootClassName}>
         <div className={containerClassName}>
-          <h3>{title}</h3>
+          {title && <h3>{title}</h3>}
           {children}
         </div>
       </div>

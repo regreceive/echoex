@@ -78,6 +78,15 @@ export default {
   REG_VALIDATION_DESCRIPTION:
     '已发送至您的邮箱 <em>{email}</em> ，请去邮箱验证',
 
+  JOIN_ECHO: '加入ECHO生态，共建新一代供应链分布式链',
+  JOIN_ECHO_ORGANIZATION: '机构名称',
+  JOIN_ECHO_INDUSTRY: '行业',
+  JOIN_ECHO_TEXTAREA: '请提供您的机构简介以及合作计划',
+  JOIN_ECHO_REPLY: '提交成功，ECHO会与您取得联系',
+
+  MOBILE: '移动电话',
+  PHONE: '座机',
+
   // error messages
   [Constant.FAILS]: '出了点小意外',
   [Constant.EMAIL_EMPTY]: '邮箱地址为空',
