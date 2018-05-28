@@ -48,7 +48,7 @@ async function sendRegSuccessEmail(email, code) {
   const mailOptions = {
     from, // sender address
     to: email, // list of receivers
-    subject: '测试邮件', // Subject line
+    subject: '注册成功', // Subject line
     text: '这是一封测试邮件', // plain text body
     html: `
       感谢您注册 <b>EchoChain</b><br /><br />
@@ -246,7 +246,7 @@ AuthController.ResetLink = (req, res) => {
     const mailOptions = {
       from, // sender address
       to: email, // list of receivers
-      subject: '测试邮件', // Subject line
+      subject: '修改密码', // Subject line
       text: '这是一封测试邮件', // plain text body
       html: `
       尊敬的Echochain用户：<br /><br />
