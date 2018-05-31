@@ -1,6 +1,5 @@
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import MediaQuery from 'react-responsive';
 
 import Navigator from './Navigator';
 import Banner from './Banner';
@@ -13,16 +12,12 @@ import Partners from './Partners';
 import Media from './Media';
 import s from './Home.scss';
 
-const Mobile = props => <MediaQuery {...props} minWidth={768} />;
-
 class Home extends React.Component {
   render() {
     return (
       <div className={s.root}>
         <div className={s.container}>
-          <Mobile>
-            <Navigator />
-          </Mobile>
+          <Navigator />
           <Banner />
           <Background />
           <Principle />
