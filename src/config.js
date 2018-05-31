@@ -99,7 +99,7 @@ const config = {
 
 if(process.env.NODE_ENV === "production") {
   config.api.serverUrl = 'http://www_echoex_dev.echo.center';
-  config.upload_path = '/data0/www/kyc/build/public/uploads';
+  config.upload_path = '/tmp/uploads';
   config.database = {
     db: 'kyc',
     user: 'root',
