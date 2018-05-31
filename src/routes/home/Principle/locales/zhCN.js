@@ -6,7 +6,7 @@ const dicts = {
       title1: '安全性',
       ol1: '<li>密码学安全</li><li>数据安全</li><li>资产安全</li><li>共识安全</li><li>身份安全</li>',
       title2: '安全实现',
-      ol2: '<ol><li>量子加密</li><li>量子通信</li></ol>',
+      ol2: '<li>量子加密</li><li>量子通信</li>',
     },
     {
       title1: '扩展性',
