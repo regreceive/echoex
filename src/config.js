@@ -39,6 +39,8 @@ const config = {
     db: 'kyc',
     user: 'root',
     pass: '123456',
+    host: 'localhost',
+    port: '3306',
   },
 
   // Web analytics
@@ -102,6 +104,8 @@ if(process.env.NODE_ENV === "production") {
     db: 'kyc',
     user: 'kyc',
     pass: 'DrFUn8hinyv2hTOXXNiX56zneUyGZj9Rak7mIT3YHio=',
+    host: '172.31.1.170',
+    port: '20201',
   };
 }
 

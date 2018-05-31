@@ -10,8 +10,10 @@
 import Sequelize, { Op } from 'sequelize';
 import config from '../config';
 
-const { db, user, pass } = config.database;
+const { db, user, pass, host, port } = config.database;
 const sequelize = new Sequelize(db, user, pass, {
+  host,
+  port,
   operatorsAliases: Op,
   dialect: 'mysql',
   define: {
