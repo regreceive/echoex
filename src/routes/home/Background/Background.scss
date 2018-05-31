@@ -4,7 +4,7 @@
   padding: 0 20px;
   display: flex;
 
-  @media (max-width: 767px) { // <=767px
+  @media (max-width: 767px) {
     display: block;
   }
 
@@ -16,11 +16,15 @@
 }
 
 .canvas {
-  flex: 1 0 auto;
+  flex: 1;
+
+  @media (max-width: 767px) {
+    display: none;
+  }
 }
 
 .descr {
-  flex: auto;
+  flex: 1;
   color: #474847;
 
   ul {

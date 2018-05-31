@@ -10,7 +10,7 @@ function Background() {
 
   return (
     <div className={s.container}>
-      <div className={s.canvas}>123</div>
+      <div className={s.canvas}></div>
       <div className={s.descr}>
         <h2>{title}</h2>
         <ul dangerouslySetInnerHTML={{ __html: content }} />
