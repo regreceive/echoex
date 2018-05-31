@@ -23,9 +23,10 @@ function checkUploadFiles(files) {
   }
   return null;
 }
-function isEmptyString(s) {
-  if(!s) return true;
-  if(/^\s*$/.test(s)) return true;
+function isEmptyString(...args) {
+  if(!args) return true;
+  for(let s of args)
+    if(/^\s*$/.test(s)) return true;
   return false;
 }
 function getFileName(f) {
@@ -70,6 +71,9 @@ function HomeController() {}
 HomeController.JoinEcho = (req, res) => {
   tryErrors(req, res, async () => {
     const {organization, industry, mobile, phone, email, description} = req.body;
+    if(isEmptyString(organization, industry, mobile, phone, email, description)) {
+      throw new WE(Errors.INCOMPLETE_FORM);
+    }
     await ContactUs.createNewRecord(organization, industry, email, mobile, phone, description);
 
     res.json({ info: 'success', status: 10000, data: null });
