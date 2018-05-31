@@ -102,8 +102,8 @@ if(process.env.NODE_ENV === "production") {
   config.upload_path = '/data0/www/kyc/build/public/uploads';
   config.database = {
     db: 'kyc',
-    user: 'kyc',
-    pass: 'DrFUn8hinyv2hTOXXNiX56zneUyGZj9Rak7mIT3YHio=',
+    user: 'root',
+    pass: 'my-secret-pw',
     host: '172.31.1.170',
     port: '20201',
   };
