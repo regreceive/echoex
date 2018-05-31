@@ -17,11 +17,10 @@
 
 .logos {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   flex-wrap: wrap;
 
   span {
-    flex: 1;
     box-shadow: 0 0 0 1px #E2E9ED;
   }
 }

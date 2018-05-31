@@ -87,9 +87,7 @@ class Header extends React.Component {
         <Navbar.Header>
           <Navbar.Brand>
             <span>
-              <a href={this.toIndex()}>
-                <img src={logoUrl} width="99" height="32" alt="echo" />
-              </a>
+              <img src={logoUrl} width="99" height="32" alt="echo" />
             </span>
           </Navbar.Brand>
           <Navbar.Toggle />

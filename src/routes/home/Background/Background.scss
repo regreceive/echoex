@@ -21,6 +21,10 @@
   @media (max-width: 767px) {
     display: none;
   }
+
+  img {
+    max-width: 100%;
+  }
 }
 
 .descr {
