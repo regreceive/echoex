@@ -14,7 +14,7 @@ module.exports = {
       max_memory_restart: '200M',
       env: {
         NODE_ENV: 'production',
-        API_SERVER_URL: 'http://user.echo.center',
+        API_SERVER_URL: 'http://www_echoex_dev.echo.center',
       },
     },
 
