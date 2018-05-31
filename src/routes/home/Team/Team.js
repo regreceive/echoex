@@ -45,7 +45,7 @@ function Team() {
   const dict = lang();
   const { title, persons } = dict;
   return (
-    <div className={s.root}>
+    <div id="team" className={s.root}>
       <div className={s.container}>
         <h2>{title}</h2>
         <Swiper {...params}>

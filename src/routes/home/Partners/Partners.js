@@ -27,7 +27,7 @@ function Partners() {
   const dict = lang();
   const { title } = dict;
   return (
-    <div className={s.root}>
+    <div id="partners" className={s.root}>
       <div className={s.container}>
         <h2>{title}</h2>
         <div className={s.logos}>

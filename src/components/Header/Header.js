@@ -76,7 +76,7 @@ class Header extends React.Component {
   toIndex() {
     let query = queryString.stringify(this.context.query);
     query = query ? `?${query}` : query;
-    return `http://echo.center/${query}`;
+    return `http://echoex.io/${query}`;
   }
 
   render() {

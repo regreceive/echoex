@@ -1,6 +1,6 @@
 export default [
   { icon: require('./gg.png'), url: 'https://discord.gg/FKvngzE' },
-  { icon: require('./qq.png'), url: 'https://jq.qq.com/?_wv=1027&k=5wbofre' },
+  // { icon: require('./qq.png'), url: 'https://jq.qq.com/?_wv=1027&k=5wbofre' },
   { icon: require('./medium.png'), url: 'https://medium.com/@echorealm_64486' },
   { icon: require('./twitter.png'), url: 'https://twitter.com/ECHO_Realm' },
   {

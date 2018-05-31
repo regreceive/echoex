@@ -32,7 +32,10 @@ class Footer extends React.Component {
   render() {
     const { home } = this.props;
     return (
-      <footer className={cs('container-fluid', s.root, home && s.homeFooter)}>
+      <footer
+        id="contact"
+        className={cs('container-fluid', s.root, home && s.homeFooter)}
+      >
         <Grid>
           <Row className={s.firstRow}>
             <Col className={s.logoContainer}>

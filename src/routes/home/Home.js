@@ -1,6 +1,7 @@
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
+import Navigator from './Navigator';
 import Banner from './Banner';
 import Background from './Background';
 import Principle from './Principle';
@@ -16,12 +17,13 @@ class Home extends React.Component {
     return (
       <div className={s.root}>
         <div className={s.container}>
-          {/*<Banner />*/}
-          {/*<Background />*/}
-          {/*<Principle />*/}
-          {/*<Ecology />*/}
-          {/*<Team />*/}
-          {/*<Consultant />*/}
+          <Navigator />
+          <Banner />
+          <Background />
+          <Principle />
+          <Ecology />
+          <Team />
+          <Consultant />
           <Partners />
           <Media />
         </div>

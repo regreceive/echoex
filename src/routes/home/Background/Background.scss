@@ -1,12 +1,10 @@
-@import '../../../assets/bootstrap/bootstrap/_variables.scss';
-
 .container {
   max-width: 1200px;
   margin: 60px auto;
   padding: 0 20px;
   display: flex;
 
-  @media (max-width: $screen-sm - 1) { // <=767px
+  @media (max-width: 767px) { // <=767px
     display: block;
   }
 

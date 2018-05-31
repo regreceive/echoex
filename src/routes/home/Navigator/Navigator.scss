@@ -1,0 +1,49 @@
+.root {
+  height: 98px;
+  background: rgba(0, 0, 0, .3);
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 999;
+  transition: .5s all;
+
+  @media (max-width: 992px) {
+    transform: translateY(-200px);
+    opacity: 0;
+  }
+}
+
+.container {
+  margin: auto;
+  max-width: 1200px;
+  padding: 0 20px;
+}
+
+.logo {
+  width: 109px;
+  float: left;
+  padding-top: 28px;
+
+  img {
+    width: 100%;
+  }
+}
+
+.nav {
+  float: right;
+
+  a {
+    display: inline-block;
+    font-size: 18px;
+    color: rgba(255,255,255,1);
+    padding: 40px 0 22px;
+    margin-left: 55px;
+  }
+
+  a:hover, .active {
+    color: #04A0EF;
+    border-bottom: 2px solid #04A0EF;
+    text-decoration: none;
+  }
+}
