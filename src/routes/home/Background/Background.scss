@@ -1,0 +1,38 @@
+@import '../../../assets/bootstrap/bootstrap/_variables.scss';
+
+.container {
+  max-width: 1200px;
+  margin: 60px auto;
+  padding: 0 20px;
+  display: flex;
+
+  @media (max-width: $screen-sm - 1) { // <=767px
+    display: block;
+  }
+
+  h2 {
+    margin-left: 30px;
+    color: #0080dd;
+    font-size: 4.17rem;
+  }
+}
+
+.canvas {
+  flex: 1 0 auto;
+}
+
+.descr {
+  flex: auto;
+  color: #474847;
+
+  ul {
+    margin-top: 40px;
+    font-size: 1.5rem;
+    line-height: 2rem;
+
+    li {
+      list-style-image: url('./assets/polyhedron.png');
+      margin: 20px 0;
+    }
+  }
+}

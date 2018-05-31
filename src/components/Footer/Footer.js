@@ -1,6 +1,7 @@
 // @flow
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Grid from 'react-bootstrap/lib/Grid';
 import Row from 'react-bootstrap/lib/Row';
@@ -20,11 +21,18 @@ const renderSns = () =>
   ));
 
 class Footer extends React.Component {
-  componentDidMount() {}
+  static propTypes = {
+    home: PropTypes.bool,
+  };
+
+  static defaultProps = {
+    home: false,
+  };
 
   render() {
+    const { home } = this.props;
     return (
-      <footer className={cs('container-fluid', s.root)}>
+      <footer className={cs('container-fluid', s.root, home && s.homeFooter)}>
         <Grid>
           <Row className={s.firstRow}>
             <Col className={s.logoContainer}>

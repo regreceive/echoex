@@ -88,23 +88,28 @@ class JoinEcho extends React.Component {
             />
           </Col>
         </Row>
-        <FieldGroup
-          id="mobile"
-          type="tel"
-          label={intl.get('MOBILE')}
-          inputRef={ref => {
-            this.mobile = ref;
-          }}
-        />
-
-        <FieldGroup
-          id="phone"
-          type="tel"
-          label={intl.get('PHONE')}
-          inputRef={ref => {
-            this.phone = ref;
-          }}
-        />
+        <Row>
+          <Col sm={6}>
+            <FieldGroup
+              id="mobile"
+              type="tel"
+              label={intl.get('MOBILE')}
+              inputRef={ref => {
+                this.mobile = ref;
+              }}
+            />
+          </Col>
+          <Col sm={6}>
+            <FieldGroup
+              id="phone"
+              type="tel"
+              label={intl.get('PHONE')}
+              inputRef={ref => {
+                this.phone = ref;
+              }}
+            />
+          </Col>
+        </Row>
 
         <FieldGroup
           id="email"

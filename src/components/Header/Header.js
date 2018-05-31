@@ -10,10 +10,11 @@ import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
 import NavDropdown from 'react-bootstrap/lib/NavDropdown';
 import MenuItem from 'react-bootstrap/lib/MenuItem';
-import s from './Header.css';
 import logoUrl from '../../assets/logo.png';
 import history from '../../history';
 import { mapLocalesName } from '../../locales';
+
+import s from './Header.css';
 
 function isLeftClickEvent(event) {
   return event.button === 0;
@@ -28,6 +29,14 @@ class Header extends React.Component {
     query: PropTypes.object,
     pathname: PropTypes.string,
     login: PropTypes.object.isRequired,
+  };
+
+  static propTypes = {
+    home: PropTypes.bool,
+  };
+
+  static defaultProps = {
+    home: false,
   };
 
   constructor(props, context) {
@@ -72,8 +81,9 @@ class Header extends React.Component {
 
   render() {
     const email = this.context.login.check();
+    const { home } = this.props;
     return (
-      <Navbar inverse collapseOnSelect>
+      <Navbar inverse collapseOnSelect className={home && s.absoluteBanner}>
         <Navbar.Header>
           <Navbar.Brand>
             <span>

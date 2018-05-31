@@ -1,0 +1,6 @@
+{
+  "name": "Consultant",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./Consultant.js"
+}

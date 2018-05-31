@@ -1,0 +1,129 @@
+@import '../../../assets/bootstrap/bootstrap/_variables.scss';
+
+.root {
+  height: 999px;
+  padding-top: 13rem;
+  background: url('./assets/bg.png') center;
+
+  h2 {
+    margin-bottom: 80px;
+    font-size: 4.17rem;
+    color: #fff;
+    text-align: center;
+  }
+}
+
+.container {
+  margin: auto;
+  // 屏幕太大，左右两栏就跑开了
+  max-width: 1200px;
+
+  span{
+    display: block;
+    width: 282px;
+    height: 110px;
+    padding-left: 20px;
+    font-size: 2.33rem;
+    color: #fff;
+    text-align: center;
+    line-height: 110px;
+    background: url('./assets/btn.png') no-repeat;
+    position: relative;
+    cursor: pointer;
+    transition: .3s all;
+
+    &:before {
+      content: '';
+      width: 40px;
+      height: 38px;
+      position: absolute;
+      left: 40px;
+      top: 30px;
+    }
+
+    &:hover, &.active {
+      z-index: 10;
+      background: url('./assets/btn_active.png') no-repeat;
+      box-shadow: -4px 6px 28px 0px rgba(0, 0, 0, .5);
+    }
+  }
+}
+
+// 交错菜单
+.menu {
+  margin: 0 20px;
+}
+
+.content {
+  display: none;
+  margin: 0 20px;
+  color: #fff;
+  font-size: 1.33rem;
+  line-height: 2.5rem;
+  overflow: hidden;
+
+  @media (max-width: $screen-sm - 1) { // <=767px
+    display: block;
+    margin: 0 auto 40px;
+    width: fit-content;
+  }
+
+  h4 {
+    font-size: 2.5rem;
+  }
+
+  ol {
+    padding-left: 20px;
+  }
+
+  &.show {
+    display: block;
+  }
+}
+
+.swipeUnit {
+  margin: 0 5px;
+  padding: 10px 10px 0;
+  background-color: rgba(255,255,255,.1);
+  border-radius: 5px;
+}
+
+.link1 {
+  margin: 0 0 0 130px;
+
+  &:before {
+    background: url('./assets/icon1.png') no-repeat center center;
+  }
+}
+
+.link2 {
+  margin: -10px 0 0 0;
+
+  &:before {
+    background: url('./assets/icon2.png') no-repeat center center;
+  }
+}
+
+.link3 {
+  margin: -10px 0 0 52px;
+
+  &:before {
+    background: url('./assets/icon3.png') no-repeat center center;
+  }
+}
+
+.link4 {
+  margin: -10px 0 0 195px;
+
+  &:before {
+    background: url('./assets/icon4.png') no-repeat center center;
+  }
+}
+
+.link5 {
+  margin: -10px 0 0 120px;
+
+  &:before {
+    background: url('./assets/icon5.png') no-repeat center center;
+  }
+}

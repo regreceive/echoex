@@ -1,0 +1,27 @@
+.root {
+  background-color: #fff;
+}
+
+.container {
+  margin: auto;
+  padding: 60px 20px;
+  max-width: 1200px;
+
+  h2 {
+    margin-bottom: 40px;
+    text-align: center;
+    color: #04a0ef;
+    font-size: 4.17rem;
+  }
+}
+
+.logos {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+
+  span {
+    flex: 1;
+    box-shadow: 0 0 0 1px #E2E9ED;
+  }
+}

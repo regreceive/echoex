@@ -6,10 +6,10 @@ import Register from './Helloworld';
 function action() {
   const title = intl.get('REGISTER_TITLE');
   return {
-    chunks: ['register'],
+    chunks: ['admin'],
     title,
     component: (
-      <Layout>
+      <Layout home>
         <Register title={title} />
       </Layout>
     ),

@@ -1,0 +1,31 @@
+.banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 1079px;
+  background: url('./assets/banner.jpg') center;
+}
+
+.container {
+  flex: auto;
+  max-width: 960px;
+  height: 200px;
+  margin-bottom: 100px;
+}
+
+.slogan {
+  color: #fff;
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.btnWrap {
+  text-align: center;
+
+  img {
+    width: 190px;
+    height: 40px;
+    margin: 10px;
+  }
+}

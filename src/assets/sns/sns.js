@@ -7,7 +7,7 @@ export default [
     icon: require('./facebook.png'),
     url: 'https://www.facebook.com/EchoRealm',
   },
-  { icon: require('./tme.png'), url: 'https://www.facebook.com/EchoRealm' },
+  { icon: require('./tme.png'), url: 'https://t.me/ECHOCN' },
   {
     icon: require('./beechat.png'),
     url: 'https://beechat.io/join?g=3b88c9d4ff6b469fb78cce0a775b95a0&lang=zh',

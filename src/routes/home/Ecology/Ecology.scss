@@ -1,0 +1,33 @@
+.container {
+  margin: auto;
+  padding: 60px 20px;
+  max-width: 1200px;
+
+  h2 {
+    text-align: center;
+    color: #0080dd;
+    font-size: 4.17rem;
+  }
+}
+
+.wrap {
+  max-width: 343px;
+  margin: 30px auto;
+  position: relative;
+
+  img:last-child {
+    position: absolute;
+    top: 10%;
+    opacity: 0;
+    transition: .3s all;
+  }
+
+  &:hover {
+
+    img:last-child {
+      top: 0;
+      opacity: 1;
+      top: 0;
+    }
+  }
+}

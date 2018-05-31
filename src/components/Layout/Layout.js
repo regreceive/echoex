@@ -10,6 +10,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import cs from 'classnames';
 
 // external-global styles must be imported in your JS.
 import s from './Layout.css';
@@ -19,13 +20,19 @@ import Footer from '../Footer';
 class Layout extends React.Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
+    home: PropTypes.bool,
+  };
+
+  static defaultProps = {
+    home: false,
   };
 
   render() {
+    const { home } = this.props;
     return (
       <div className={s.root}>
-        <Header />
-        <main className={s.main}>{this.props.children}</main>
+        <Header home={home} />
+        <main>{this.props.children}</main>
         <Footer />
       </div>
     );

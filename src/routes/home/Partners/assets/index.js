@@ -1,0 +1,14 @@
+export * as yl from './yl.png';
+export * as sm from './sm.png';
+export * as inc from './inc.png';
+export * as csl from './csl.png';
+export * as wj from './wj.png';
+export * as gvc from './gvc.png';
+export * as pusu from './pusu.png';
+export * as dfj from './dfj.png';
+export * as zh from './zh.png';
+export * as zy from './zy.png';
+export * as zhsy from './zhsy.png';
+export * as ztny from './ztny.png';
+export * as zhy from './zhy.png';
+export * as czb from './czb.png';

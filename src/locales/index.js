@@ -61,4 +61,6 @@ const loadLocales = (lang: string, acceptLanguage?: string): Promise => {
 
 const mapLocalesName = () => name[currentLocale];
 
-export { loadLocales, mapLocalesName };
+const getLocale = () => currentLocale.replace('-', '');
+
+export { loadLocales, mapLocalesName, getLocale };
