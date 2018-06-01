@@ -12,6 +12,10 @@
     text-align: center;
     color: #04a0ef;
     font-size: 4.17rem;
+
+    @media (max-width: 767px) {
+      font-size: 3rem;
+    }
   }
 }
 

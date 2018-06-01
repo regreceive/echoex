@@ -56,7 +56,7 @@ export default {
   PASSPORT_ID: '护照ID',
   PASSPORT_TITLE: '护照照片',
   PASSPORT_FULL_FACE: '护照正面',
-  PASSPORT_BACK: '护照北面',
+  PASSPORT_BACK: '护照反面',
 
   APPLY_ADDRESS_TITLE: '填写以太坊钱包地址才能购买ECHO令牌',
   ETH_ADDRESS: '您的以太坊地址',

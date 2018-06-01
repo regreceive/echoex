@@ -10,6 +10,10 @@
     font-size: 4.17rem;
     color: #fff;
     text-align: center;
+
+    @media (max-width: 767px) {
+      font-size: 3rem;
+    }
   }
 }
 

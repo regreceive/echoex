@@ -86,9 +86,9 @@ class Header extends React.Component {
       <Navbar inverse collapseOnSelect className={home && s.absoluteBanner}>
         <Navbar.Header>
           <Navbar.Brand>
-            <span>
+            <a href={this.toIndex()}>
               <img src={logoUrl} width="99" height="32" alt="echo" />
-            </span>
+            </a>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>

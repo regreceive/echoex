@@ -98,7 +98,7 @@ class Login extends React.Component {
           />
           <Row>
             <Col xs={4}>
-              <a href="/password/reset-link">{intl.get('FORGOT_PASSWORD')}</a>
+              {/*<a href="/password/reset-link">{intl.get('FORGOT_PASSWORD')}</a>*/}
             </Col>
             {help && (
               <Col xs={8} className="text-right text-danger">
