@@ -144,7 +144,7 @@ AuthController.Register = (req, res) => {
     err = validEmail(email);
     if (err) throw new WE(err);
     // validate catpcha rules
-    err = validCaptcha(captcha, req.session.captcha ? req.session.captcha.reg : null,);
+    err = validCaptcha(captcha, req.session&&req.session.captcha ? req.session.captcha.reg : null,);
     if (err) throw new WE(err);
     // validate password rules
     err = validPassword(password, password2);
