@@ -1,7 +1,7 @@
 const dicts = {
   anchors: ['ECHO', 'FoundingTeam', 'Cooperation', 'Contact'],
   switcher: {
-    link: '?lang=zh-CN',
+    link: '?lang=zh-cn',
     label: '中文',
   },
   login: 'Login',

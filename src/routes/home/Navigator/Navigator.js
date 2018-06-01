@@ -13,7 +13,9 @@ function Navigator() {
     <div className={s.root}>
       <div className={s.container}>
         <div className={s.logo}>
-          <a href='http://echoex.io'><img src={logo} alt="ECHO" /></a>
+          <a href="http://www.echoex.io/">
+            <img src={logo} alt="ECHO" />
+          </a>
         </div>
 
         <div className={s.nav}>

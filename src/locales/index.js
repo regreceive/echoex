@@ -3,27 +3,27 @@
 import intl from 'react-intl-universal';
 import find from 'lodash/find';
 
-let currentLocale = 'en-US';
+let currentLocale = 'en-us';
 
 const SUPPORT_LOCALES = [
   {
     name: 'English',
-    value: 'en-US',
+    value: 'en-us',
   },
   {
     name: '中文',
-    value: 'zh-CN',
+    value: 'zh-cn',
   },
 ];
 
 const locales = {
-  'en-US': require('./en-US.js').default,
-  'zh-CN': require('./zh-CN.js').default,
+  'en-us': require('./en-US.js').default,
+  'zh-cn': require('./zh-CN.js').default,
 };
 
 const name = {
-  'en-US': 'English',
-  'zh-CN': '中文',
+  'en-us': 'English',
+  'zh-cn': '中文',
 };
 
 /**
@@ -49,8 +49,10 @@ const loadLocales = (lang: string, acceptLanguage?: string): Promise => {
     });
   }
 
+  currentLocale = currentLocale.toLowerCase();
+
   if (!find(SUPPORT_LOCALES, { value: currentLocale })) {
-    currentLocale = 'en-US';
+    currentLocale = 'en-us';
   }
 
   return intl.init({
@@ -61,6 +63,9 @@ const loadLocales = (lang: string, acceptLanguage?: string): Promise => {
 
 const mapLocalesName = () => name[currentLocale];
 
-const getLocale = () => currentLocale.replace('-', '');
+const getLocale = () => {
+  const data = currentLocale.split('-');
+  return data[0] + data[1].toUpperCase();
+};
 
 export { loadLocales, mapLocalesName, getLocale };

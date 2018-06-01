@@ -76,7 +76,7 @@ class Header extends React.Component {
   toIndex() {
     let query = queryString.stringify(this.context.query);
     query = query ? `?${query}` : query;
-    return `http://echoex.io/${query}`;
+    return `http://www.echoex.io/${query}`;
   }
 
   render() {
@@ -105,8 +105,8 @@ class Header extends React.Component {
               <NavItem href="/register">{intl.get('REGISTER')}</NavItem>
             )}
             <NavDropdown title={mapLocalesName()} id="language-you-choose">
-              <MenuItem href="?lang=en-US">English</MenuItem>
-              <MenuItem href="?lang=zh-CN">中文</MenuItem>
+              <MenuItem href="?lang=en-us">English</MenuItem>
+              <MenuItem href="?lang=zh-cn">中文</MenuItem>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>
