@@ -3,7 +3,13 @@
   justify-content: center;
   align-items: center;
   height: 1079px;
-  background: url('./assets/banner.jpg') center;
+  background: url('./assets/banner.jpg') rgb(24, 25, 79) center;
+  // 小米有个bug，设置高度动画防止抖动
+  transition: height .5s;
+
+  @media (max-width: 767px) {
+    height: 100vh;
+  }
 }
 
 .container {
@@ -11,6 +17,10 @@
   max-width: 960px;
   height: 200px;
   margin-bottom: 100px;
+
+  @media (max-width: 767px) {
+    margin-bottom: unset;
+  }
 }
 
 .slogan {
@@ -18,14 +28,30 @@
   font-size: 3rem;
   text-align: center;
   margin-bottom: 20px;
+
+  @media (max-width: 767px) {
+    font-size: 25px;
+  }
 }
 
 .btnWrap {
   text-align: center;
 
-  img {
+  a {
+    display: block;
     width: 190px;
     height: 40px;
-    margin: 10px;
+    margin: 10px auto;
+    color: #fff;
+    line-height: 40px;
+    text-align: center;
+    text-decoration: none;
+    background: linear-gradient(40deg, rgb(0, 158, 242), rgb(0, 105, 223));
+    border-radius: 20px;
+    font-weight: bold;
+  }
+
+  a:hover {
+    color: #f0c203;
   }
 }

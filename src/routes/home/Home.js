@@ -13,6 +13,9 @@ import Media from './Media';
 import s from './Home.scss';
 
 class Home extends React.Component {
+  componentDidMount() {
+    //alert(document.body.offsetWidth+', '+devicePixelRatio);
+  }
   render() {
     return (
       <div className={s.root}>

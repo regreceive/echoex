@@ -1,5 +1,5 @@
 const dicts = {
-  title: 'Eco partners',
+  title: 'Echo partners',
 };
 
 export default dicts;

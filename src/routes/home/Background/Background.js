@@ -12,14 +12,28 @@ class Background extends React.Component {
     super(props);
 
     this.canvas = null;
+    this.visibilitychangeHandle = this.visibilitychangeHandle.bind(this);
   }
 
   componentDidMount() {
     start(this.canvas);
+    document.addEventListener('visibilitychange', this.visibilitychangeHandle);
   }
 
   componentWillUnmount() {
     stop();
+    document.removeEventListener(
+      'visibilitychange',
+      this.visibilitychangeHandle,
+    );
+  }
+
+  visibilitychangeHandle() {
+    if (document.hidden) {
+      stop();
+    } else {
+      start(this.canvas);
+    }
   }
 
   render() {

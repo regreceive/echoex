@@ -15,16 +15,14 @@
 
     @media (max-width: 767px) {
       font-size: 3rem;
+      margin-left: unset;
+      text-align: center;
     }
   }
 }
 
 .canvas {
   flex: 1;
-
-  @media (max-width: 767px) {
-    display: none;
-  }
 
   img {
     max-width: 100%;
@@ -41,7 +39,7 @@
 
   ul {
     margin-top: 40px;
-    font-size: 1.5rem;
+    font-size: 14px;
     line-height: 2rem;
 
     li {

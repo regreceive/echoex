@@ -62,21 +62,9 @@ const routes = {
       load: () => import(/* webpackChunkName: 'register' */ './subscribe'),
     },
     {
-      path: '/profile/edit',
-      load: () => import(/* webpackChunkName: 'register' */ './profile-edit'),
-    },
-    {
       path: '/address',
       needLogin,
       load: () => import(/* webpackChunkName: 'register' */ './apply-address'),
-    },
-    {
-      path: '/about',
-      load: () => import(/* webpackChunkName: 'about' */ './about'),
-    },
-    {
-      path: '/privacy',
-      load: () => import(/* webpackChunkName: 'privacy' */ './privacy'),
     },
     // Wildcard routes, e.g. { path: '(.*)', ... } (must go last)
     {
@@ -90,7 +78,7 @@ const routes = {
     const route = await next();
 
     // Provide default values for title, description etc.
-    route.title = `${route.title || 'Untitled Page'} - ECHO`;
+    route.title = `${route.title || 'Untitled Page'}`;
     route.description = route.description || '';
 
     return route;

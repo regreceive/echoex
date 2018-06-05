@@ -1,13 +1,13 @@
 let cxt;
 
 // 画布长宽
-const width = 800,
-  height = 800;
+const width = 800;
+const height = 800;
 // 画布中心点坐标
-const center = { left: width / 2, top: height / 2 };
+const center = { left: width / 2, top: height / 2 + 20 };
 // 轨道半径
-const innerOrbit = 270,
-  outerOrbit = 350;
+const innerOrbit = 250;
+const outerOrbit = 330;
 // 速度
 const speed = 5;
 
@@ -17,10 +17,10 @@ function rotate(deg) {
   cxt.rotate(deg * Math.PI / 180);
 }
 
-function word(x, y, text, color) {
+function word(x, y, text, color = '#333') {
   color = color || '#333';
   cxt.fillStyle = color;
-  cxt.font = '14px Arial';
+  cxt.font = '16px Arial';
   const offsetX = cxt.measureText(text).width / 2;
   cxt.fillText(text, x - offsetX, y + 7);
 }
@@ -48,9 +48,6 @@ Planet.prototype = {
 
     const angle = this.angle + time * this.speed;
     this._circle(angle, center.left - orbit, center.top, radius);
-    if (this.dash) {
-      this._dash(center.left - orbit, center.top, radius + 10);
-    }
 
     cxt.translate(center.left - orbit, center.top);
     rotate(-angle);
@@ -58,14 +55,6 @@ Planet.prototype = {
     word(center.left - orbit, center.top, this.label, this.dash && '#fff');
 
     cxt.restore();
-  },
-
-  _dash(pointX, pointY, radius) {
-    cxt.setLineDash([3]);
-    cxt.beginPath();
-    cxt.arc(pointX, pointY, radius, 0, 2 * Math.PI);
-    cxt.closePath();
-    cxt.stroke();
   },
 
   _circle(angle, pointX, pointY, radius) {
@@ -81,7 +70,15 @@ Planet.prototype = {
     cxt.arc(pointX, pointY, radius, 0, 2 * Math.PI);
     cxt.closePath();
     cxt.fill();
-    !this.dash && cxt.stroke();
+
+    if (this.dash) {
+      cxt.setLineDash([5]);
+      cxt.beginPath();
+      cxt.arc(pointX, pointY, radius + 10, 0, 2 * Math.PI);
+      cxt.closePath();
+    }
+
+    cxt.stroke();
     // drawRect();
   },
 };
@@ -138,7 +135,7 @@ Breath.prototype = {
   },
 };
 
-const centerOrbit = function() {
+function centerOrbit() {
   cxt.fillStyle = gradient;
   cxt.beginPath();
   cxt.arc(center.left, center.top, 50, 0, 2 * Math.PI);
@@ -166,7 +163,7 @@ const centerOrbit = function() {
   cxt.lineTo(center.left + 10, center.top + 5);
 
   cxt.stroke();
-};
+}
 
 const innerBreath = new Breath(125, 40);
 const outerBreath = new Breath(180, 40);
@@ -176,7 +173,7 @@ const performance = new Planet(330, 'outer', 0.3, 'Performance');
 const security = new Planet(60, 'inner', 0.5, 'Security');
 const stability = new Planet(180, 'inner', 0.5, 'Stability');
 
-let pause = false;
+let pause = true;
 
 function draw() {
   cxt.clearRect(0, 0, width, height);
@@ -201,11 +198,15 @@ function draw() {
 }
 
 function start(ref) {
+  if (!pause) {
+    return;
+  }
   cxt = ref.getContext('2d');
   // 蓝色星球渐变
   gradient = cxt.createLinearGradient(0, center.top - 50, 0, center.top + 50);
   gradient.addColorStop(0, 'rgb(2, 148, 251)');
   gradient.addColorStop(1, 'rgb(10, 106, 255)');
+  pause = false;
 
   draw();
 }

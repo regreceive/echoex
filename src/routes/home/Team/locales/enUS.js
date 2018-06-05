@@ -5,7 +5,7 @@ const dicts = {
       name: 'Teresa Fu',
       duty: 'ECHO Foundation Leader',
       intro:
-        'Responsible for the Global Market Operation of ECHO Project.Teresa Fu admitted by University of California, Santa Cruz, Newport University, majored in MBA. She has worked as the assistant chairman of the Merchants Dichen Group, the secretary of the DFCT listed company in the United States, the general manager of the Hong Kong Qixiang Group (the Hong Kong listed company 0632) China, the director of the China Pharmaceutical (US listed company), and the director of the DC Capital and the chief financial officer. She has also participated in investment and decision-making related projects in real estate, energy, internet and consumer finance industries.',
+        'Responsible for the global market operation of the ECHO project, MBA in Newport University, several years experience of Wall Street financial investment, Director of Hong Kong Qi Xiang Group, China  Pharmaceutical and many other listed company.',
     },
     {
       name: 'Kevin Zhang',
