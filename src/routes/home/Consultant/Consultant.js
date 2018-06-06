@@ -14,10 +14,12 @@ import s from './Consultant.scss';
 const params = {
   slidesPerView: 4,
   spaceBetween: 30,
+
   pagination: {
     el: '.swiper-pagination',
     clickable: true,
   },
+
   breakpoints: {
     1400: {
       slidesPerView: 4,
@@ -34,45 +36,70 @@ const params = {
   },
 };
 
-function Consultant() {
-  const dict = lang();
-  const { title, persons } = dict;
-  return (
-    <div className={s.root}>
-      <div className={s.container}>
-        <h2>{title}</h2>
-        <Swiper {...params}>
-          <Person
-            portrait={vm}
-            name={persons[0].name}
-            duty={persons[0].duty}
-            intro={persons[0].intro}
-          />
+class Consultant extends React.Component {
+  componentDidMount() {
+    if (this.swiper) {
+      this.swiper.on('paginationUpdate', (swiper, paginationEl) => {
+        if (swiper.pagination.bullets.length <= 1) {
+          paginationEl.style.display = 'none';
+        } else {
+          paginationEl.style.display = 'block';
+        }
+      });
+    }
+  }
 
-          <Person
-            portrait={dqz}
-            name={persons[1].name}
-            duty={persons[1].duty}
-            intro={persons[1].intro}
-          />
+  componentWillUnmount() {
+    if (this.swiper) {
+      this.swiper.off('paginationUpdate');
+    }
+  }
 
-          <Person
-            portrait={dz}
-            name={persons[2].name}
-            duty={persons[2].duty}
-            intro={persons[2].intro}
-          />
+  render() {
+    const dict = lang();
+    const { title, persons } = dict;
+    return (
+      <div className={s.root}>
+        <div className={s.container}>
+          <h2>{title}</h2>
+          <Swiper
+            {...params}
+            ref={node => {
+              if (node) this.swiper = node.swiper;
+            }}
+          >
+            <Person
+              portrait={vm}
+              name={persons[0].name}
+              duty={persons[0].duty}
+              intro={persons[0].intro}
+            />
 
-          <Person
-            portrait={wyh}
-            name={persons[3].name}
-            duty={persons[3].duty}
-            intro={persons[3].intro}
-          />
-        </Swiper>
+            <Person
+              portrait={dqz}
+              name={persons[1].name}
+              duty={persons[1].duty}
+              intro={persons[1].intro}
+            />
+
+            <Person
+              portrait={dz}
+              name={persons[2].name}
+              duty={persons[2].duty}
+              intro={persons[2].intro}
+            />
+
+            <Person
+              portrait={wyh}
+              name={persons[3].name}
+              duty={persons[3].duty}
+              intro={persons[3].intro}
+            />
+          </Swiper>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 const Person = props => {
