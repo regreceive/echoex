@@ -5,12 +5,9 @@
 
   h2 {
     text-align: center;
-    color: #0080dd;
-    font-size: 4.17rem;
+    color: #1A96F8;
+    font-size: 42px;
 
-    @media (max-width: 767px) {
-      font-size: 3rem;
-    }
   }
 }
 
@@ -35,3 +32,42 @@
     }
   }
 }
+
+// 下面的都是手机版的
+.m {
+  margin: 20px 0;
+  padding: 0 90px;
+
+  h3 {
+    margin: 20px 0;
+    color: #1A96F8;
+    font-size: 28px;
+    text-align: center;
+  }
+
+  p {
+    font-size: 24px;
+    line-height: 36px;
+    color: #474847;
+    text-align: justify;
+  }
+}
+.icon {
+  width: 101px;
+  height: 116px;
+  margin: auto;
+  background-size: cover;
+
+  &.icon1 {
+    background-image: url('./assets/m_1.png');
+  }
+
+  &.icon2 {
+    background-image: url('./assets/m_2.png');
+  }
+
+  &.icon3 {
+    background-image: url('./assets/m_3.png');
+  }
+}
+

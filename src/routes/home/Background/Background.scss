@@ -2,49 +2,45 @@
   max-width: 1200px;
   margin: 60px auto;
   padding: 0 20px;
-  display: flex;
-
-  @media (max-width: 767px) {
-    display: block;
-  }
 
   h2 {
-    margin-left: 30px;
     color: #0080dd;
-    font-size: 4.17rem;
-
-    @media (max-width: 767px) {
-      font-size: 3rem;
-      margin-left: unset;
-      text-align: center;
-    }
+    font-size: 42px;
+    text-align: center;
   }
 }
 
 .canvas {
-  flex: 1;
-
-  img {
-    max-width: 100%;
-  }
+  display: inline-block;
+  width: 50%;
+  vertical-align: top;
 
   canvas {
     max-width: 100%;
   }
+
+  @media (max-width: 767px) {
+    width: unset;
+  }
 }
 
 .descr {
-  flex: 1;
+  display: inline-block;
+  width: 50%;
   color: #474847;
+  padding-top: 40px;
 
   ul {
-    margin-top: 40px;
-    font-size: 14px;
-    line-height: 2rem;
+    font-size: 26px;
+    line-height: 36px;
 
     li {
       list-style-image: url('./assets/polyhedron.png');
       margin: 20px 0;
     }
+  }
+
+  @media (max-width: 767px) {
+    width: unset;
   }
 }

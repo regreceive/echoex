@@ -11,20 +11,17 @@
     margin-bottom: 40px;
     text-align: center;
     color: #04a0ef;
-    font-size: 4.17rem;
-
-    @media (max-width: 767px) {
-      font-size: 3rem;
-    }
+    font-size: 42px;
   }
 }
 
 .logos {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
 
-  span {
-    box-shadow: 0 0 0 1px #E2E9ED;
+  div {
+    padding: 10px 15px;
+  }
+
+  img {
+    max-width: 100%;
   }
 }

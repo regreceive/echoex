@@ -1,26 +1,62 @@
 @import '../../assets/bootstrap/bootstrap/_variables.scss';
 
 .root {
-  background: var(--footer-bg-color);
+  background: #1A1F2B;
   color: #fff;
   padding: 5px;
   width: 100%;
 }
 
-.homeFooter {
-  min-width: 1200px;
-  width: 100%;
+.container {
+  max-width: 1200px;
+  padding: 0 20px;
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+
+  @media(max-width: 1199px) {
+    height: 500px;
+  }
+}
+
+.logo {
+
+  @media(min-width: 1200px) {
+    position: absolute;
+    top: 34px;
+
+    img {
+      width: 212px;
+      height: 66px;
+    }
+  }
+
+  @media(max-width: 1199px) {
+    padding: 60px 0 0 0;
+    text-align: center;
+
+    img {
+      width: 153px;
+      heihgt: 48px;
+    }
+  }
 }
 
 .sns {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  padding: 10px 0;
-  flex: 0 1 auto;
-  align-items: center;
   width: fit-content;
-  margin: auto;
+  margin: 45px auto 0;
+  padding: 0;
+
+  li {
+    display: inline-block;
+    margin: 0 8px;
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
 
   a {
     opacity: 0.5;
@@ -30,8 +66,14 @@
     }
   }
 
-  img {
-    padding: 3px;
+  @media(max-width: 1199px) {
+    width: 404px;
+
+    li {
+      width: 20%;
+      margin: 20px 0;
+      padding: 0 10px;
+    }
   }
 }
 
@@ -46,45 +88,14 @@
 }
 
 .copyright {
+  font-size: 20px;
+  color: #666771;
   text-align: center;
+  padding: 30px 0 10px 0;
 }
 
 // 自定义bootstrap的弹出层的大小和位置
 .customDialog {
   width: fit-content;
   margin: 30px auto;
-}
-
-@media (min-width: $screen-md) { // >= 992px
-  .logoContainer {
-    position: absolute;
-  }
-}
-
-@media (min-width: $screen-sm) { // >= 768px
-  .firstRow {
-    display: flex;
-  }
-}
-
-@media (max-width: $screen-sm - 1) { // <=767px
-  .logoContainer {
-    text-align: center;
-  }
-}
-
-@media (max-width: $screen-xs - 1) { // <= 479px
-  .logoContainer > img {
-    min-width: 100px;
-    width: 30vw;
-    height: auto;
-  }
-
-  .sns img {
-    min-width: 15px;
-    max-width: 45px;
-    width: 10vw;
-    height: auto;
-    padding: 3px;
-  }
 }

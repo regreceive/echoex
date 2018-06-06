@@ -4,7 +4,7 @@ let cxt;
 const width = 800;
 const height = 800;
 // 画布中心点坐标
-const center = { left: width / 2, top: height / 2 + 20 };
+const center = { left: width / 2, top: height / 2 };
 // 轨道半径
 const innerOrbit = 250;
 const outerOrbit = 330;
@@ -198,6 +198,7 @@ function draw() {
 }
 
 function start(ref) {
+  console.log('start');
   if (!pause) {
     return;
   }
@@ -212,6 +213,7 @@ function start(ref) {
 }
 
 function stop() {
+  console.log('stop');
   pause = true;
 }
 

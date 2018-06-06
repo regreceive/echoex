@@ -5,6 +5,7 @@ export * as csl from './csl.png';
 export * as wj from './wj.png';
 export * as gvc from './gvc.png';
 export * as pusu from './pusu.png';
+export * as bam from './bam.png';
 export * as dfj from './dfj.png';
 export * as zh from './zh.png';
 export * as zy from './zy.png';

@@ -1,5 +1,6 @@
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import Waypoint from 'react-waypoint';
 
 import lang from './locales';
 import { start, stop } from './Canvas';
@@ -16,7 +17,6 @@ class Background extends React.Component {
   }
 
   componentDidMount() {
-    start(this.canvas);
     document.addEventListener('visibilitychange', this.visibilitychangeHandle);
   }
 
@@ -41,11 +41,18 @@ class Background extends React.Component {
     const { title, content } = dict;
     return (
       <div className={s.container}>
+        <h2>{title}</h2>
         <div className={s.canvas}>
-          <canvas ref={ref => (this.canvas = ref)} width="800" height="800" />
+          <Waypoint
+            topOffset="10%"
+            bottomOffset="10%"
+            onEnter={() => start(this.canvas)}
+            onLeave={() => stop()}
+          >
+            <canvas ref={ref => (this.canvas = ref)} width="800" height="800" />
+          </Waypoint>
         </div>
         <div className={s.descr}>
-          <h2>{title}</h2>
           <ul dangerouslySetInnerHTML={{ __html: content }} />
         </div>
       </div>

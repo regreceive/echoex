@@ -3,17 +3,20 @@ import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
-import Swiper from 'react-id-swiper/lib/custom';
-import MediaQuery from 'react-responsive';
 import cs from 'classnames';
+import Swiper from 'react-id-swiper';
 
-import s from './Principle.scss';
 import lang from './locales';
-
-const Mobile = props => <MediaQuery {...props} maxWidth={767} />;
-const Default = props => <MediaQuery {...props} minWidth={768} />;
+import { Default, Mobile } from '../../../deviceSwith';
+import s from './Principle.scss';
 
 let dict;
+const params = {
+  pagination: {
+    el: '.swiper-pagination',
+    type: 'fraction',
+  },
+};
 
 class Principle extends React.Component {
   state = { index: 0 };
@@ -62,33 +65,30 @@ class Principle extends React.Component {
     this.setState({ index: i });
   }
 
-  normal() {
-    const { index } = this.state;
-    return (
-      <div>
-        <Chapter1 show={index === 0} />
-        <Chapter2 show={index === 1} />
-        <Chapter3 show={index === 2} />
-        <Chapter4 show={index === 3} />
-        <Chapter5 show={index === 4} />
-      </div>
-    );
-  }
-
   render() {
     dict = lang();
     const { title } = dict;
+    const { index } = this.state;
     return (
       <div className={s.root}>
         <h2>{title}</h2>
         <Mobile>
-          <Swipe />
+          <Swiper {...params}>
+            <Swipe1 />
+            <Swipe2 />
+          </Swiper>
         </Mobile>
 
         <Default>
           <Row className={s.container}>
             <Col sm={6}>{this.menu()}</Col>
-            <Col sm={6}>{this.normal()}</Col>
+            <Col sm={6}>
+              <Chapter1 show={index === 0} />
+              <Chapter2 show={index === 1} />
+              <Chapter3 show={index === 2} />
+              <Chapter4 show={index === 3} />
+              <Chapter5 show={index === 4} />
+            </Col>
           </Row>
         </Default>
       </div>
@@ -96,40 +96,74 @@ class Principle extends React.Component {
   }
 }
 
-function Swipe() {
-  return (
-    <Swiper>
-      <WrapForSwipe>
-        <Chapter1 />
-      </WrapForSwipe>
-      <WrapForSwipe>
-        <Chapter2 />
-      </WrapForSwipe>
-      <WrapForSwipe>
-        <Chapter3 />
-      </WrapForSwipe>
-      <WrapForSwipe>
-        <Chapter4 />
-      </WrapForSwipe>
-      <WrapForSwipe>
-        <Chapter5 />
-      </WrapForSwipe>
-    </Swiper>
-  );
-}
+const Swipe1 = props => {
+  const { menus, chapters } = dict;
+  const [c1, c2] = chapters;
 
-// 给内容加一个背景颜色
-function WrapForSwipe(props) {
-  const { children, ...moreProps } = props;
   return (
-    <div {...moreProps}>
-      <div className={s.swipeUnit}>{props.children}</div>
+    <div {...props}>
+      <div className={s.swipeUnit}>
+        <Row>
+          <Col xs={6}>
+            <span className={s.t1}>{menus[0]}</span>
+            <ol dangerouslySetInnerHTML={{ __html: c1.ol1 }} />
+          </Col>
+          <Col xs={6}>
+            <h4>{c1.title2}</h4>
+            <ol dangerouslySetInnerHTML={{ __html: c1.ol2 }} />
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={6}>
+            <span className={s.t2}>{menus[1]}</span>
+            <ol dangerouslySetInnerHTML={{ __html: c2.ol1 }} />
+          </Col>
+          <Col xs={6}>
+            <h4>{c2.title2}</h4>
+            <ol dangerouslySetInnerHTML={{ __html: c2.ol2 }} />
+          </Col>
+        </Row>
+      </div>
     </div>
   );
-}
+};
 
-WrapForSwipe.propTypes = {
-  children: PropTypes.node.isRequired,
+const Swipe2 = props => {
+  const { menus, chapters } = dict;
+  const [, , c3, c4, c5] = chapters;
+
+  return (
+    <div {...props}>
+      <div className={s.swipeUnit}>
+        <Row>
+          <Col xs={6}>
+            <span className={s.t3}>{menus[2]}</span>
+            <ol dangerouslySetInnerHTML={{ __html: c3.ol1 }} />
+          </Col>
+          <Col xs={6}>
+            <h4>{c3.title2}</h4>
+            <ol dangerouslySetInnerHTML={{ __html: c3.ol2 }} />
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={6}>
+            <span className={s.t4}>{menus[3]}</span>
+            <ol dangerouslySetInnerHTML={{ __html: c4.ol1 }} />
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={6}>
+            <span className={s.t5}>{menus[4]}</span>
+            <p dangerouslySetInnerHTML={{ __html: c5.p1 }} />
+          </Col>
+          <Col xs={6}>
+            <h4>{c3.title2}</h4>
+            <p dangerouslySetInnerHTML={{ __html: c5.p2 }} />
+          </Col>
+        </Row>
+      </div>
+    </div>
+  );
 };
 
 function Chapter1(props) {
@@ -215,10 +249,12 @@ function Chapter4(props) {
   const c = chapters[3];
 
   return (
-    <div className={cs(s.content, props.show && s.show)}>
-      <h4>{c.title1}</h4>
-      <ol dangerouslySetInnerHTML={{ __html: c.ol1 }} />
-    </div>
+    <Row className={cs(s.content, props.show && s.show)}>
+      <Col xs={12}>
+        <h4>{c.title1}</h4>
+        <ol dangerouslySetInnerHTML={{ __html: c.ol1 }} />
+      </Col>
+    </Row>
   );
 }
 

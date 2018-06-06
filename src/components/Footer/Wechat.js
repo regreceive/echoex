@@ -5,6 +5,7 @@ import MediaQuery from 'react-responsive';
 import Popover from 'react-bootstrap/lib/Popover';
 import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 import Modal from 'react-bootstrap/lib/Modal';
+import Col from 'react-bootstrap/lib/Col';
 import wechat from '../../assets/sns/wechat.png';
 import qrc from '../../assets/sns/wechat_qrc.png';
 
@@ -40,7 +41,7 @@ class Wechat extends React.Component {
           // 大屏
           if (matches) {
             return (
-              <span>
+              <li>
                 <OverlayTrigger
                   trigger="click"
                   rootClose
@@ -53,13 +54,13 @@ class Wechat extends React.Component {
                     <img src={wechat} width="45" height="45" />
                   </a>
                 </OverlayTrigger>
-              </span>
+              </li>
             );
           }
 
           // 小屏
           return (
-            <span>
+            <li>
               <a href="#" onClick={this.modalOpenHandle}>
                 <img src={wechat} width="45" height="45" />
               </a>
@@ -72,7 +73,7 @@ class Wechat extends React.Component {
                   <img src={qrc} className={s.qrc} />
                 </Modal.Body>
               </Modal>
-            </span>
+            </li>
           );
         }}
       </MediaQuery>

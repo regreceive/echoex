@@ -4,6 +4,7 @@
   align-items: center;
   height: 1079px;
   background: url('./assets/banner.jpg') rgb(24, 25, 79) center;
+  background-size: cover;
   // 小米有个bug，设置高度动画防止抖动
   transition: height .5s;
 
@@ -15,40 +16,29 @@
 .container {
   flex: auto;
   max-width: 960px;
-  height: 200px;
-  margin-bottom: 100px;
-
-  @media (max-width: 767px) {
-    margin-bottom: unset;
-  }
 }
 
 .slogan {
   color: #fff;
-  font-size: 3rem;
+  font-size: 52px;
   text-align: center;
-  margin-bottom: 20px;
-
-  @media (max-width: 767px) {
-    font-size: 25px;
-  }
 }
 
 .btnWrap {
-  text-align: center;
+  margin: 115px 0 0 0;
 
   a {
     display: block;
-    width: 190px;
-    height: 40px;
-    margin: 10px auto;
+    width: 300px;
+    height: 60px;
+    margin: auto;
+    font-size: 32px;
+    line-height: 60px;
     color: #fff;
-    line-height: 40px;
     text-align: center;
     text-decoration: none;
     background: linear-gradient(40deg, rgb(0, 158, 242), rgb(0, 105, 223));
-    border-radius: 20px;
-    font-weight: bold;
+    border-radius: 5px;
   }
 
   a:hover {

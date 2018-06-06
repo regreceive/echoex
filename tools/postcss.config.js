@@ -48,6 +48,25 @@ module.exports = () => ({
     // Generate pixel fallback for "rem" units, e.g. div { margin: 2.5rem 2px 3em 100%; }
     // https://github.com/robwierzbowski/node-pixrem
     // require('pixrem')(),
+
+    // px转rem
+    require('postcss-pxtorem')({
+      rootValue: 75,
+      propList: [
+        'font',
+        'font-size',
+        'line-height',
+        'letter-spacing',
+        'width',
+        'height',
+        'margin',
+        'padding',
+        'left',
+        'top',
+      ],
+      selectorBlackList: [/^html$/],
+    }),
+
     // W3C CSS Level4 :matches() pseudo class, e.g. p:matches(:first-child, .special) { }
     // https://github.com/postcss/postcss-selector-matches
     require('postcss-selector-matches')(),
