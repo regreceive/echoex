@@ -6,10 +6,18 @@
   background: url('./assets/banner.jpg') rgb(24, 25, 79) center;
   background-size: cover;
   // 小米有个bug，设置高度动画防止抖动
-  transition: height .5s;
+  transition: height 1s;
 
   @media (max-width: 767px) {
     height: 100vh;
+  }
+}
+
+.init {
+  height: 100vh;
+
+  @media (max-width: 767px) {
+    height: 120vh;
   }
 }
 

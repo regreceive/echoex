@@ -198,7 +198,6 @@ function draw() {
 }
 
 function start(ref) {
-  console.log('start');
   if (!pause) {
     return;
   }
@@ -213,7 +212,6 @@ function start(ref) {
 }
 
 function stop() {
-  console.log('stop');
   pause = true;
 }
 

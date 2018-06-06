@@ -14,7 +14,7 @@ let dict;
 const params = {
   pagination: {
     el: '.swiper-pagination',
-    type: 'fraction',
+    clickable: true,
   },
 };
 
@@ -157,7 +157,7 @@ const Swipe2 = props => {
             <p dangerouslySetInnerHTML={{ __html: c5.p1 }} />
           </Col>
           <Col xs={6}>
-            <h4>{c3.title2}</h4>
+            <h4>{c5.title2}</h4>
             <p dangerouslySetInnerHTML={{ __html: c5.p2 }} />
           </Col>
         </Row>
