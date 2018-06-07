@@ -35,6 +35,8 @@ export default {
   PASSWORD_LINK_SENT: 'Email of resetting password has been sent to your mailbox, please check it',
 
   PASSWORD_RECOVER: 'Password recover',
+  PASSWORD_RECOVER_SENT_TITLE: 'Success!',
+  PASSWORD_RECOVER_SENT: 'Reset password successfully. Please login again.',
 
   PROFILE_TITLE: 'personal information',
   PROFILE_SUBMIT: 'Submit information',

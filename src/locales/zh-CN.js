@@ -35,6 +35,8 @@ export default {
   PASSWORD_LINK_SENT: '已发送重置账号密码的邮件到您的邮箱，请接收。',
 
   PASSWORD_RECOVER: '重置密码',
+  PASSWORD_RECOVER_SENT_TITLE: '重置密码成功',
+  PASSWORD_RECOVER_SENT: '请您重新登录',
 
   PROFILE_TITLE: '个人信息',
   PROFILE_SUBMIT: '提交信息',

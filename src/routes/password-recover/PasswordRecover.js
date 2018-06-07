@@ -14,11 +14,8 @@ import Captcha from '../../components/Form/Captcha';
 import { recover } from '../api';
 
 import s from './PasswordRecover.css';
-import history from '../../history';
 
-const Reply = () => {
-  return <h5>{intl.get('JOIN_ECHO_REPLY')}</h5>;
-};
+const Reply = () => <h5>{intl.get('PASSWORD_RECOVER_SENT')}</h5>;
 
 class PasswordRecover extends React.Component {
   static contextTypes = {
@@ -92,7 +89,7 @@ class PasswordRecover extends React.Component {
           addonClassName={s.addon}
           captchaClassName={s.captcha}
           refreshCaptcha={() => {
-            this.captchaImg.src = `/api/captcha/send?scenario=reg&${Math.random()}`;
+            this.captchaImg.src = `/api/captcha/send?scenario=reset&${Math.random()}`;
           }}
           imgRef={ref => {
             this.captchaImg = ref;
@@ -125,7 +122,9 @@ class PasswordRecover extends React.Component {
 
   render() {
     const { sent } = this.state;
-    const title = sent ? '' : this.props.title;
+    const title = sent
+      ? intl.get('PASSWORD_RECOVER_SENT_TITLE')
+      : this.props.title;
 
     return (
       <Section
