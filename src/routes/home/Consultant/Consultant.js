@@ -18,7 +18,7 @@ const params = {
     el: '.swiper-pagination',
     clickable: true,
     renderBullet(index, className) {
-      if (this.currentBreakpoint === '1400') {
+      if (this.currentBreakpoint === '1400' || this.currentBreakpoint === 'max') {
         return '';
       }
       return `<span class="${className}"></span>`;
