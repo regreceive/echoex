@@ -25,16 +25,14 @@ class Subscribe extends React.Component {
   }
 
   componentDidMount() {
-    const self = this;
-    const {s, code} = querystring.parse(window.location.href.split('?')[1]);
+    const { s, code } = querystring.parse(window.location.href.split('?')[1]);
     regActivate(this.context.fetch, { s, code })
-      .then(()=>{
-        let msg = intl.get('REGACTIVATE_SUCCESS');
-        self.setState({help: msg});
+      .then(() => {
+        const msg = intl.get('REGACTIVATE_SUCCESS');
+        this.setState({ help: msg });
       })
-      .catch(status=>{
-        let msg = intl.get(status);
-        self.setState({help: msg});
+      .catch(status => {
+        this.setState({ help: intl.get(status) });
       });
   }
 
@@ -45,7 +43,9 @@ class Subscribe extends React.Component {
         containerClassName={s.container}
         title={this.props.title}
       >
-        <h5 className={s.h5} style={{textAlign: 'center'}}>{this.state.help}</h5>
+        <h5 className={s.h5} style={{ textAlign: 'center' }}>
+          {this.state.help}
+        </h5>
       </Section>
     );
   }

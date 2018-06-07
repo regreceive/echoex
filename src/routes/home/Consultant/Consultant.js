@@ -14,10 +14,15 @@ import s from './Consultant.scss';
 const params = {
   slidesPerView: 4,
   spaceBetween: 30,
-
   pagination: {
     el: '.swiper-pagination',
     clickable: true,
+    renderBullet(index, className) {
+      if (this.currentBreakpoint === '1400') {
+        return '';
+      }
+      return `<span class="${className}"></span>`;
+    },
   },
 
   breakpoints: {
@@ -37,22 +42,10 @@ const params = {
 };
 
 class Consultant extends React.Component {
-  componentDidMount() {
-    if (this.swiper) {
-      this.swiper.on('paginationUpdate', (swiper, paginationEl) => {
-        if (swiper.pagination.bullets.length <= 1) {
-          paginationEl.style.display = 'none';
-        } else {
-          paginationEl.style.display = 'block';
-        }
-      });
-    }
-  }
+  constructor(props) {
+    super(props);
 
-  componentWillUnmount() {
-    if (this.swiper) {
-      this.swiper.off('paginationUpdate');
-    }
+    this.swiper = null;
   }
 
   render() {
@@ -62,12 +55,7 @@ class Consultant extends React.Component {
       <div className={s.root}>
         <div className={s.container}>
           <h2>{title}</h2>
-          <Swiper
-            {...params}
-            ref={node => {
-              if (node) this.swiper = node.swiper;
-            }}
-          >
+          <Swiper {...params}>
             <Person
               portrait={vm}
               name={persons[0].name}

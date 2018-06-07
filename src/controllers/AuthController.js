@@ -277,7 +277,7 @@ Echochain团队
 
 AuthController.Recoverpwd = (req, res) => {
   tryErrors(req, res, async () => {
-    const { code } = req.query;
+    const { code } = req.body;
     if (!code || code.length !== 64) {
       throw new WE(Errors.PWD_RESET_LINK_INVALID);
     }
@@ -287,7 +287,7 @@ AuthController.Recoverpwd = (req, res) => {
       throw new WE(Errors.PWD_RESET_LINK_EXPIRED);
     }
 
-    const { email, captcha, password, password_confirm: password2 } = req.body;
+    const { email, captcha = '', password, password_confirm: password2 } = req.body;
     let err;
     // validate username rules
     err = validEmail(email);
