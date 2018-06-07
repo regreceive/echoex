@@ -14,6 +14,7 @@ function validEmail(email) {
   return null;
 }
 function validCaptcha(captcha, originInSession) {
+  if(!originInSession) return Errors.CAPTCHA_EMPTY;
   const {captcha:code, expired_at} = originInSession;
   if (!captcha || /^\s*&/.test(captcha)) return Errors.CAPTCHA_EMPTY;
   if (!originInSession || captcha.toLowerCase() !== code.toLowerCase() || new Date().getTime() > expired_at)
@@ -293,7 +294,7 @@ AuthController.Recoverpwd = (req, res) => {
     err = validEmail(email);
     if (err) throw new WE(err);
     // validate catpcha rules
-    err = validCaptcha(captcha, req.session&&req.session.captcha ? req.session.captcha.reset : null);
+    err = validCaptcha(captcha, req.session&&req.session.captcha&&req.session.captcha.reset ? req.session.captcha.reset : null);
     if (err) throw new WE(err);
     // validate password rules
     err = validPassword(password, password2);
