@@ -10,6 +10,7 @@ import lang from './locales';
 import s from './Partners.scss';
 
 const partners = [
+  { img: logos.block },
   { img: logos.yl },
   { img: logos.sm },
   { img: logos.inc },

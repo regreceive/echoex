@@ -1,3 +1,4 @@
+export * as block from './block.png';
 export * as yl from './yl.png';
 export * as sm from './sm.png';
 export * as inc from './inc.png';
