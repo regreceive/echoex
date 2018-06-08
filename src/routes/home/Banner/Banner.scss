@@ -2,19 +2,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 1079px;
-  background: url('./assets/banner.jpg') rgb(24, 25, 79) center;
+  height: 100vh;
+  background: url('./assets/banner.jpg') rgb(24, 25, 79) bottom no-repeat;
   background-size: cover;
   // 小米有个bug，设置高度动画防止抖动
-  transition: height 1s;
-
-  @media (max-width: 767px) {
-    height: 100vh;
-  }
+  transition: all 1s;
 }
 
 .init {
-  height: 100vh;
+  height: 1079px;
 
   @media (max-width: 767px) {
     height: 120vh;
