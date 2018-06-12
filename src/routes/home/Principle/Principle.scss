@@ -1,9 +1,13 @@
 .root {
-  min-height: 100vh;
+  min-height: 700px;
   padding: 93px 0 0 0;
   background: url('./assets/bg.png') no-repeat rgb(6, 10, 35) center;
   background-size: cover;
   color: #fff;
+
+  @media (max-width: 767px) {
+    min-height: 100vh;
+  }
 
   h2 {
     margin: 0 0 80px;
@@ -185,6 +189,7 @@
 
   &:before {
     background: url('./assets/icon1.png') no-repeat center center;
+    background-size: contain;
   }
 }
 
@@ -193,6 +198,8 @@
 
   &:before {
     background: url('./assets/icon2.png') no-repeat center center;
+    background-size: contain;
+
   }
 }
 
@@ -201,6 +208,7 @@
 
   &:before {
     background: url('./assets/icon3.png') no-repeat center center;
+    background-size: contain;
   }
 }
 
@@ -209,6 +217,7 @@
 
   &:before {
     background: url('./assets/icon4.png') no-repeat center center;
+    background-size: contain;
   }
 }
 
@@ -217,5 +226,6 @@
 
   &:before {
     background: url('./assets/icon5.png') no-repeat center center;
+    background-size: contain;
   }
 }
