@@ -11,7 +11,7 @@ const dicts = {
       name: 'Kevin Zhang',
       duty: 'Project Leader/Technical Leader',
       intro:
-        'Kevin studied at the Information Engineering University of the People\'s Liberation Army and Renmin University of China, specializing in MBA degree. He used to be the technical development manager of Ericsson (China) Communications Co., Ltd. and the senior manager of the Samsung Internet Application Center in China. He has many years of experience in the Internet industry and in product team management. He created products with millions of users, can comprehensively analyze the various product operational data, continue to enhance the user\'s experience for product, and has the ability to balance the user experience and product commercial interests.',
+        'Graduated from PLA Information Engineering University and MBA from Renmin University of China, Senior manager of Samsung Greater China Headquarters Internet Application Center. He has led quantity product projects over tens of millions of users with extensive ability and experience to balance the user’s experience and business benefits of commercial products.',
     },
     {
       name: 'Jianwei ZHOU',
