@@ -1,11 +1,11 @@
 const dicts = {
   title: 'Background of ECHO public chain',
   content:
-    '<li>ECHO Public Chain is a blockchain technology focused on enterprise application services</li>' +
-    '<li>Which is based on the existing mature and stable blockchain open source project</li>' +
-    '<li>We comprehensively consider and many aspects of performance, including the maturity of open source projects, the friendliness of development interfaces, the availability of technical components, the degree of pluggability, the degree of support for diversification and complex business support</li>' +
-    '<li>According to the specifications and requirements of blockchain system for enterprises, the open source project is transformed and upgraded from the ground floor to form a public chain that meets the requirements of enterprise-level application scenarios in terms of functions, performance, security, and stability</li>' +
-    '<li>helps users in various industries to build commercial blockchain service</li>',
+    '<li>The rapid development of new energy generates massive energy digital assets and asset circulation demand</li>' +
+    '<li>Blockchain enables energy digital precision management and efficient and secure transaction protection</li>' +
+    '<li>Chained assets between upstream and downstream companies can reduce trust costs and financing costs</li>' +
+    '<li>The blockchain ecology can achieve fast and free transactions and settlement capabilities, speed up the efficiency and save eco-cost</li>' +
+    '<li>In order to realize this vision, a public chain with high TPS, Turing-complete smart contract and decentralized transaction is needed</li>',
 };
 
 export default dicts;

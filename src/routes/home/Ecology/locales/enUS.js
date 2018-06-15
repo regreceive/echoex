@@ -1,19 +1,19 @@
 const dicts = {
-  title: 'Future ecology',
+  title: 'Echo Ecosystem',
   collection: {
-    label: 'Data collection',
+    label: 'Digitization of asset',
     descr:
-      'assists users to consolidate their data and stores encrypted on distributed file system. Users can choose to open their data access and profit from it. helping users to retrieve their data property.',
+      "The digitization of assets is the best solution for companies to reduce costs and increase efficiency. The use of ECHO's technical method to encrypt and save digital assets makes it easier for companies and individuals to proceed better management.",
   },
   p2p: {
-    label: 'P2P Data Marketplace',
+    label: 'super wallet',
     descr:
-      'The decentralized data marketplace provides a unique solution for businesses. Comparing to traditional solutions, such as centralized data center or underground data trading market, decentralized data marketplace allows P2P data transmission without precipitating data. This effectively protects data privacy and copyright, as well as prevents fraudulent activities.',
+      'Echo will launch a super wallet that supports energy digital assets with optimized interface and simplified use. The user has full control of the private key. It is developed based on efficient native code and is applicable for Android and IOS mobile devices.',
   },
   echain: {
-    label: 'Echain',
+    label: 'decentralized transaction',
     descr:
-      'EChain greatly supports all kinds of app development. Comparing to other public blockchain, EChain not only supports smart contract, blockchain as a service (BaaS), but also provides many unique services. Including ID verification, multi-dimensional data, KYC, and swift login. , which can accommodate general business application scenarios. Moreover, developers can issue new assets on EChain',
+      'ECHO decentralized transactions are charactered by trust-exmption, security, instant transactions, and on-chain transactions. The integrity of the operator ensured by smart contract, transaction performed on chain are applicable to all accounts including ordinary accounts and smart contracts.',
   },
 
   images: {

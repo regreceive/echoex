@@ -36,7 +36,12 @@ const loadLocales = (lang: string, acceptLanguage?: string): Promise => {
   if (lang) {
     // server side
     currentLocale = lang;
-  } else if (acceptLanguage) {
+  } else {
+    currentLocale = 'en-us';
+  }
+
+  /*
+  if (acceptLanguage) {
     // server side
     const langs = acceptLanguage.split(';');
     currentLocale = langs[0] ? langs[0].split(',')[0] : '';
@@ -48,6 +53,7 @@ const loadLocales = (lang: string, acceptLanguage?: string): Promise => {
       cookieLocaleKey: 'lang',
     });
   }
+  */
 
   currentLocale = currentLocale.toLowerCase();
 

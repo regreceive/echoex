@@ -88,7 +88,7 @@ async function onLocationChange(location, action) {
       (context.query.lang && context.query.lang !== lang) ||
       !intl.getInitOptions().currentLocale
     ) {
-      await loadLocales();
+      await loadLocales(context.query.lang);
     }
 
     // Traverses the list of routes in the order they are defined until

@@ -23,7 +23,7 @@ function Navigator() {
           <a href="#team">{anchors[1]}</a>
           <a href="#partners">{anchors[2]}</a>
           <a href="#contact">{anchors[3]}</a>
-          <a href="/login">{login}</a>
+          {/* <a href="/login">{login}</a> */}
           <a href={switcher.link}>{switcher.label}</a>
         </div>
       </div>
