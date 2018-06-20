@@ -64,6 +64,31 @@ const UserRaised = sequelize.define('UserRaised', {
   },
 });
 
+function getDate(date = new Date()) {
+  const yyyy = date.getUTCFullYear().toString();
+  const mm = (date.getUTCMonth() + 1).toString().padStart(2, '0'); // getMonth() is zero-based
+  const dd = date.getUTCDate().toString().padStart(2, '0');
+  const HH = date.getHours().toString().padStart(2, '0');
+  const MM = date.getMinutes().toString().padStart(2, '0');
+  let SS = date.getMilliseconds().toString().padStart(2, '0');
+  SS = SS.padEnd(3,"0");
+
+  let year = yyyy;
+  let month = mm.padStart(2, '0');
+  let day = dd.padStart(2, '0');
+  let hour = HH.padStart(2, '0');
+  let minute = MM.padStart(2, '0');
+  let second = SS.padStart(3, '0');
+  return `${year}-${month}-${day}|${hour}:${minute}:${second}Z`;
+}
+
+const log = function info(...args) {
+  args.unshift(getDate());
+  args.unshift(`[Info]`);
+  console.log(...args); // eslint-disable-line no-console
+  return true;
+};
+
 function Blockchain() {}
 
 Blockchain.prototype.Init = function() {
@@ -89,12 +114,12 @@ Blockchain.prototype.Run = async function() {
   }
 
   if (!this.lastBlk) {
-    this.lastBlk = await this.readStartBlkFromLockFile();
-    console.log(this.lastBlk);
+    this.lastBlk = await this.readLastBlkFromLockFile();
+    log(this.lastBlk);
   }
 
   while (true) {
-    await wait(10 * 10);
+    await wait(10 * 1000);
     await this.task();
   }
 };
@@ -102,7 +127,7 @@ Blockchain.prototype.Run = async function() {
 Blockchain.prototype.task = async function() {
   if (!this.exitOnEnd) {
     this.endBlk = await web3.eth.getBlockNumber();
-    console.log(`latest blk#${this.endBlk}`);
+    log(`latest blk#${this.endBlk}`);
   }
   if (this.lastBlk < this.endBlk) {
     await this.digBlock();
@@ -111,7 +136,7 @@ Blockchain.prototype.task = async function() {
 
 Blockchain.prototype.digBlock = async function() {
   this.bulk = [];
-  for (let i = this.lastBlk; i <= this.endBlk; i++) {
+  for (let i = this.lastBlk+1; i <= this.endBlk; i++) {
     this.lastBlk = i;
     const block = await web3.eth.getBlock(i, true);
     const block_number = block.number;
@@ -132,7 +157,8 @@ Blockchain.prototype.digBlock = async function() {
     }
     await this.bulkInsert();
     await this.updateUserId();
-    console.log(
+    await this.writeLastBlk();
+    log(
       `handle #blk${this.lastBlk}, txs:${
         block.transactions.length
       }, processed:${this.bulk.length}`,
@@ -141,19 +167,23 @@ Blockchain.prototype.digBlock = async function() {
   }
 
   if (this.exitOnEnd) {
-    console.log(`work done!`);
+    log(`work done!`);
     process.exit(1);
   }
 };
 
-Blockchain.prototype.readStartBlkFromLockFile = async function() {
+Blockchain.prototype.readLastBlkFromLockFile = async function() {
   const filename = Config.Blockchain.lastBlkLock;
-  console.log(`read from lock file:${filename}`);
+  log(`read from lock file:${filename}`);
   if (!fs.existsSync(filename)) return 0;
   let data = fs.readFileSync(filename);
   data = parseInt(data, 10) || 0;
   if (_.isNaN(data) || !data) return 0;
   return data;
+};
+Blockchain.prototype.writeLastBlk = async function(){
+  const filename = Config.Blockchain.lastBlkLock;
+  fs.writeFileSync(filename, this.lastBlk);
 };
 
 Blockchain.prototype.bulkInsert = async function() {
@@ -177,5 +207,5 @@ const web3 = new Web3(
 const blockchain = new Blockchain();
 blockchain.Init();
 blockchain.Run().catch(err => {
-  console.log(err);
+  log(err);
 });
