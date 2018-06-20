@@ -127,6 +127,7 @@ Blockchain.prototype.Run = async function() {
 Blockchain.prototype.task = async function() {
   if (!this.exitOnEnd) {
     this.endBlk = await web3.eth.getBlockNumber();
+    if(!this.lastBlk) this.lastBlk = this.endBlk - 12;
     log(`latest blk#${this.endBlk}`);
   }
   if (this.lastBlk < this.endBlk) {

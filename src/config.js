@@ -123,9 +123,9 @@ if (process.env.NODE_ENV === 'production') {
   };
 
   config.Blockchain = {
-    url: 'ws://172.29.1.168:8846',
-    targetAddress: '0x43266A575c16512e7Ef1bdC69603d5d319CA9f39',
-    lastBlkLock: '/app/EchoChain/kyc/master/.lastblk.lock',
+    url: 'ws://172.29.1.168:8846', // 不需修改!
+    targetAddress: '填写正式上线时的众筹收款地址',
+    lastBlkLock: '填写App根目录/.lastblk.lock',
     startBlk: null,
     endBlk: null,
   };
