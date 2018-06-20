@@ -32,7 +32,8 @@ export default {
   PASSWORD_LINK: 'please enter your registered email address',
   SEND_EMAIL: 'send email',
   PASSWORD_LINK_SENT_TITLE: 'Sent successfully',
-  PASSWORD_LINK_SENT: 'Email of resetting password has been sent to your mailbox, please check it',
+  PASSWORD_LINK_SENT:
+    'Email of resetting password has been sent to your mailbox, please check it',
 
   PASSWORD_RECOVER: 'Password recover',
   PASSWORD_RECOVER_SENT_TITLE: 'Success!',
@@ -69,9 +70,11 @@ export default {
     ' I hereby confirm that I am not the resident of any area where ICO is forbidden  ',
 
   SUBSCRIBE_TITLE: 'How to purchase ECHO token',
-  SUBSCRIBE_DESCRIPTION: 'To obtain Echo token, please transfer ETH to the wallet address below',
+  SUBSCRIBE_DESCRIPTION:
+    'To obtain Echo token, please transfer ETH to the wallet address below',
   COPY: 'Copy',
-  SUBSCRIBE_DOWNLOAD_EXCEL: 'please fill in a Excel form to Echo Official email after your successful token transferring ',
+  SUBSCRIBE_DOWNLOAD_EXCEL:
+    'please fill in a Excel form to Echo Official email after your successful token transferring ',
   COPIED: 'Copied',
   DOWNLOAD_TABLE: 'download forms',
 
@@ -82,11 +85,13 @@ export default {
   REG_VALIDATION_DESCRIPTION:
     'Information has been sent to your mailbox <em>{email}</em>, Please make verification on mailbox ',
 
-  JOIN_ECHO: 'Join Echo to co-build the new generation of distributed supply chain ecosystem ',
+  JOIN_ECHO:
+    'Join Echo to co-build the new generation of distributed supply chain ecosystem ',
   JOIN_ECHO_ORGANIZATION: 'Institution name',
   JOIN_ECHO_INDUSTRY: 'Industry',
   JOIN_ECHO_TEXTAREA: 'Please provide company profile and cooperation plan',
-  JOIN_ECHO_REPLY: 'Once successful submit, Echo Official will get in touch with you',
+  JOIN_ECHO_REPLY:
+    'Once successful submit, Echo Official will get in touch with you',
 
   MOBILE: 'MOBILE',
   PHONE: 'TEL',
@@ -118,6 +123,7 @@ export default {
   [Constant.PWD_RESET_LINK_EXPIRED]: 'password reset link expired',
   [Constant.PWD_RESET_LINK_INVALID]: 'password reset link invalid',
   [Constant.ACCOUNT_NOT_ACTIVATED]: 'account not activate',
+  [Constant.KYC_UNAUTHORIZED]: 'KYC_UNAUTHORIZED',
 
   [Constant.MUST_LOGIN]: 'must login',
   [Constant.MUST_BE_GUEST]: 'must be guest',

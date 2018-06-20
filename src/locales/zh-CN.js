@@ -118,6 +118,7 @@ export default {
   [Constant.PWD_RESET_LINK_EXPIRED]: '密码重置链接失效',
   [Constant.PWD_RESET_LINK_INVALID]: '违规的密码重置链接',
   [Constant.ACCOUNT_NOT_ACTIVATED]: '账号尚未激活',
+  [Constant.KYC_UNAUTHORIZED]: 'KYC_UNAUTHORIZED',
 
   [Constant.MUST_LOGIN]: '必须登录',
   [Constant.MUST_BE_GUEST]: 'must be guest',

@@ -89,15 +89,29 @@ const config = {
     },
   },
 
+  Blockchain: {
+    url: 'ws://172.29.1.169:8846',
+    targetAddress: '0x43266A575c16512e7Ef1bdC69603d5d319CA9f39',
+    lastBlkLock: '/app/EchoChain/kyc/master/.lastblk.lock',
+    startBlk: null,
+    endBlk: null,
+  },
+
   upload_path: null,
-  authList: ['/profile', '/address', '/subscribe', '/api/profile', '/api/profile/address',],
+  authList: [
+    '/profile',
+    '/address',
+    '/subscribe',
+    '/api/profile',
+    '/api/profile/address',
+  ],
   guestList: ['/login', '/register', '/api/login', '/api/register'],
-  authRedirectUrl: '/login', //需要登录但未登录, 跳转到登录页
-  guestRedirectUrl: '/profile', //需要游客但已经登录, 跳转到首页
-  logoutRedirectUrl: '/login', //登出后跳转
+  authRedirectUrl: '/login', // 需要登录但未登录, 跳转到登录页
+  guestRedirectUrl: '/profile', // 需要游客但已经登录, 跳转到首页
+  logoutRedirectUrl: '/login', // 登出后跳转
 };
 
-if(process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV === 'production') {
   config.api.serverUrl = 'http://www_echoex_dev.echo.center';
   config.upload_path = '/tmp/uploads';
   config.database = {

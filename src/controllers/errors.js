@@ -31,5 +31,6 @@ errors[Constant.MUST_LOGIN] = 'must login';
 errors[Constant.MUST_BE_GUEST] = 'must be guest';
 errors[Constant.PASSPORT_SAVE_FAILED] = 'passport saving failed';
 errors[Constant.ACCOUNT_NOT_ACTIVATED] = 'account not activate';
+errors[Constant.KYC_UNAUTHORIZED] = 'kyc unauthorized';
 
 export default errors;

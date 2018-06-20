@@ -30,3 +30,4 @@ export const MUST_LOGIN = 40001;
 export const MUST_BE_GUEST = 40002;
 export const PASSPORT_SAVE_FAILED = 40003;
 export const ACCOUNT_NOT_ACTIVATED = 40004;
+export const KYC_UNAUTHORIZED = 40005;
