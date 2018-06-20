@@ -98,3 +98,21 @@
 ```bash
 sudo apt-get install libcairo2-dev libjpeg-dev libpango1.0-dev libgif-dev build-essential g++
 ```
+
+
+### Blockchain Watcher
+开发模式:
+* `node blockchain.js` 启动脚本后,自动监听新交易,并将config.Blockchain.targetAddress的交易记录仅数据库
+
+生产模式
+* `pm2 start echosystem.config.js --only="blkwatcher"`
+
+查看已募集到的以太总额:
+GET `/api/totalRaised` (不需登录), 返回结果:  
+```
+{
+  info: "success",
+  status: 10000,
+  data: 0.0246
+}
+```

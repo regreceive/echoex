@@ -240,8 +240,7 @@ HomeController.TotalRaised = (req, res) => {
       '`userId` IS NOT NULL AND `status`=1',
     );
     console.log(total);
-    total = total ? total.total_amount : 0;
-    res.json({ info: 'success', status: 10000, data: total });
+    res.json({ info: 'success', status: 10000, data: total||0 });
   });
 };
 
