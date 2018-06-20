@@ -244,4 +244,20 @@ HomeController.TotalRaised = (req, res) => {
   });
 };
 
+HomeController.IsCrowdfunding = (req, res) => {
+  const start = new Date(config.crowFunding.start_date).getTime();
+  const end = new Date(config.crowFunding.end_date).getTime();
+  const now = new Date().getTime();
+  console.log(start)
+  console.log(now)
+  console.log(start)
+
+  let data = false;
+  if(now>=start && now<=end){
+    data = true;
+  }
+
+  res.json({ info: 'success', status: 10000, data});
+};
+
 export default HomeController;

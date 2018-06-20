@@ -96,6 +96,7 @@ app.post('/api/password/reset-link', AuthController.ResetLink);
 app.post('/api/password/recover', AuthController.Recoverpwd);
 app.post('/api/user/activate', AuthController.RegisterActivate);
 app.post('/api/join', HomeController.JoinEcho);
+app.post('/api/is-crowfunding', HomeController.IsCrowdfunding);
 app.get('/api/totalRaised', HomeController.TotalRaised);
 app.get('/api/test', HomeController.Test);
 app.post(

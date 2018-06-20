@@ -97,6 +97,11 @@ const config = {
     endBlk: null,
   },
 
+  crowFunding: {
+    start_date: '2018-6-19',
+    end_date: '2018-6-20',
+  },
+
   upload_path: null,
   authList: [
     '/profile',
@@ -104,6 +109,7 @@ const config = {
     '/subscribe',
     '/api/profile',
     '/api/profile/address',
+    '/api/is-crowfunding',
   ],
   guestList: ['/login', '/register', '/api/login', '/api/register'],
   authRedirectUrl: '/login', // 需要登录但未登录, 跳转到登录页

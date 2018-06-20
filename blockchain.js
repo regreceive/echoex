@@ -102,7 +102,7 @@ Blockchain.prototype.Init = function() {
   }
   if (!_.isNumber(this.endBlk) && this.endBlk !== 'latest') {
     throw new Error(
-      `endBlk must either be integer nor "latest",current ${this.endBlk}`,
+      `endBlk must either be integer or "latest",current ${this.endBlk}`,
     );
   }
 };
