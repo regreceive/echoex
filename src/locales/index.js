@@ -23,7 +23,7 @@ const locales = {
 
 const name = {
   'en-us': 'English',
-  'zh-cn': '中文',
+  'zh-cn': 'CN',
 };
 
 /**

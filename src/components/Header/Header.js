@@ -106,7 +106,7 @@ class Header extends React.Component {
             )} */}
             <NavDropdown title={mapLocalesName()} id="language-you-choose">
               <MenuItem href="?lang=en-us">English</MenuItem>
-              <MenuItem href="?lang=zh-cn">中文</MenuItem>
+              <MenuItem href="?lang=zh-cn">CN</MenuItem>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>
