@@ -6,6 +6,7 @@ import WE from './exception';
 import config from '../config';
 import PasswordReset from '../data/models/PasswordReset';
 import Canvas from './canvas';
+import UserProfile from "../data/models/UserProfile";
 
 function validEmail(email) {
   if (/^\s*$/.test(email)) return Errors.EMAIL_EMPTY;
@@ -125,6 +126,11 @@ AuthController.Login = (req, res, next) => {
     if(req.user.status != 1) {
       throw new WE(Errors.ACCOUNT_NOT_ACTIVATED);
     }
+
+    const user_id = req.user.id;
+    let kyc_status = 0;
+    const profile = await UserProfile.findOne({ where: { userId: user_id } });
+    if (profile && profile.status == 1) kyc_status = 1;
     req.logIn(req.user, err => {
       if (err) {
         return next(err);
@@ -132,7 +138,7 @@ AuthController.Login = (req, res, next) => {
       let host = req.hostname.split('.');
       host = host.slice(host.length-2).join('.')
       res.cookie('username', req.body.email, {domain: host});
-      return res.json({ info: 'success', status: 10000, data: req.user.id });
+      return res.json({ info: 'success', status: 10000, data: {user_id, kyc_status} });
     });
   });
 };
