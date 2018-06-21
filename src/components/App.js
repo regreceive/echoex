@@ -9,10 +9,20 @@ export const LoginType = {
   check: PropTypes.func.isRequired,
 };
 
+export const KycType = {
+  sync: PropTypes.func.isRequired,
+  check: PropTypes.func.isRequired,
+};
+
 export type LoginFlowType = {
   in: void,
   out: void,
   check: void => string,
+};
+
+export type KycFlowType = {
+  sync: () => void,
+  check: void => number,
 };
 
 const ContextType = {
@@ -25,6 +35,7 @@ const ContextType = {
   query: PropTypes.object,
   state: PropTypes.object,
   login: PropTypes.shape(LoginType),
+  kyc: PropTypes.shape(KycType),
 };
 
 /**

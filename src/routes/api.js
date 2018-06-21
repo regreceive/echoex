@@ -116,3 +116,16 @@ export function recover(fetch, payload: {}): Promise<object | number> {
 export function joinEcho(fetch, payload: {}): Promise<object | number> {
   return post(fetch, '/api/join', JSON.stringify(payload));
 }
+
+/**
+ * 获得kyc状态
+ * request: {email}
+ * response: {status, data: {kyc}}
+ * @param fetch
+ * @param payload
+ * @returns {Promise<*>}
+ */
+export function kyc(fetch, payload: {}): Promise<{ kyc: number }> {
+  // return post(fetch, '/api/kyc', JSON.stringify(payload));
+  return Promise.resolve({ kyc: 2 });
+}

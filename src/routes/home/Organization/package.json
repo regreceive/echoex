@@ -1,0 +1,6 @@
+{
+  "name": "Organization",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./Organization.js"
+}

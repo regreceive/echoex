@@ -7,12 +7,14 @@ import queryString from 'query-string';
 import { createPath } from 'history/PathUtils';
 import intl from 'react-intl-universal';
 import Cookies from 'universal-cookie';
+import throttle from 'lodash/throttle';
 import App from './components/App';
 import createFetch from './createFetch';
 import history from './history';
 import { updateMeta } from './DOMUtils';
 import router from './router';
 import { loadLocales } from './locales';
+import { kyc } from './routes/api';
 
 // Global (context) variables that can be easily accessed from any React component
 // https://facebook.github.io/react/docs/context.html
@@ -49,10 +51,24 @@ let context = {
       return this.email;
     },
   },
+
+  kyc: {
+    status: null,
+    sync() {
+      const email = context.login.check();
+      kyc(context.fetch, { email }).then(data => {
+        this.status = data.kyc;
+      });
+    },
+    check() {
+      return this.status;
+    },
+  },
 };
 
 // 如果浏览器刷新，通过cookie记录用户的登录状态
 context.login.in();
+const kycPolling = throttle(context.kyc.sync.bind(context.kyc), 30 * 1000);
 
 const container = document.getElementById('app');
 let currentLocation = history.location;
@@ -62,6 +78,11 @@ const scrollPositionsHistory = {};
 
 // Re-render the app when window.location changes
 async function onLocationChange(location, action) {
+  // 如果处于登录状态，就轮询获得kyc状态
+  if (context.login.check()) {
+    kycPolling();
+  }
+
   // Remember the latest scroll position for the previous location
   scrollPositionsHistory[currentLocation.key] = {
     scrollX: window.pageXOffset,

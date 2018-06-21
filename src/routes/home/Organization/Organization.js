@@ -2,14 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
-
 import * as logos from './assets';
 import lang from './locales';
-import s from './Media.scss';
+import s from './Organization.scss';
 
 const data = Object.keys(logos);
-
-function Media() {
+function Organization() {
   const dict = lang();
   const { title } = dict;
   return (
@@ -37,4 +35,4 @@ Logo.propTypes = {
   img: PropTypes.string.isRequired,
 };
 
-export default withStyles(s)(Media);
+export default withStyles(s)(Organization);

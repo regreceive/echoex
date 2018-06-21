@@ -16,12 +16,25 @@
 }
 
 .logos {
+  max-width: 980px;
+  margin: auto;
 
-  div {
-    padding: 10px 15px;
-  }
+  .unit {
+    display: inline-block;
+    width: 20%;
+    box-shadow: 0 0 1px 0 rgba(0, 0, 0, .3);
 
-  img {
-    max-width: 100%;
+    @media(max-width: 767px) {
+      width: 25%;
+    }
+
+    @media(max-width: 479px) {
+      width: 33.3%;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
   }
 }

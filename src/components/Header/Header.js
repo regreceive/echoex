@@ -13,6 +13,7 @@ import MenuItem from 'react-bootstrap/lib/MenuItem';
 import logoUrl from '../../assets/logo.png';
 import history from '../../history';
 import { mapLocalesName } from '../../locales';
+import User from './user';
 
 import s from './Header.css';
 
@@ -94,16 +95,16 @@ class Header extends React.Component {
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav pullRight onSelect={this.selectHandle}>
-            {/* {email && (
-              <NavDropdown title={email} id="personal-center">
-                <MenuItem href="/profile">{intl.get('PROFILE_TITLE')}</MenuItem>
-                <MenuItem href="/logout">{intl.get('LOGOUT')}</MenuItem>
-              </NavDropdown>
-            )}
-            {!email && <NavItem href="/login">{intl.get('LOGIN')}</NavItem>}
-            {!email && (
-              <NavItem href="/register">{intl.get('REGISTER')}</NavItem>
-            )} */}
+            {/* {email && ( */}
+            {/* <NavDropdown title={<User />} id="personal-center"> */}
+            {/* /!* <MenuItem href="/profile">{intl.get('PROFILE_TITLE')}</MenuItem> *!/ */}
+            {/* <MenuItem href="/logout">{intl.get('LOGOUT')}</MenuItem> */}
+            {/* </NavDropdown> */}
+            {/* )} */}
+            {/* {!email && <NavItem href="/login">{intl.get('LOGIN')}</NavItem>} */}
+            {/* {!email && ( */}
+            {/* <NavItem href="/register">{intl.get('REGISTER')}</NavItem> */}
+            {/* )} */}
             <NavDropdown title={mapLocalesName()} id="language-you-choose">
               <MenuItem href="?lang=en-us">English</MenuItem>
               <MenuItem href="?lang=zh-cn">CN</MenuItem>

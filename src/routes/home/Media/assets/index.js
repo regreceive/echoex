@@ -1,3 +1,4 @@
-export * as ed from './ed.png';
-export * as js from './js.png';
-export * as btt from './btt.png';
+export * as p1 from './1.png';
+export * as p2 from './2.png';
+export * as p3 from './3.png';
+export * as p4 from './3.png';

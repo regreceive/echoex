@@ -20,6 +20,12 @@ const params = {
   pagination: {
     el: '.swiper-pagination',
     clickable: true,
+    renderBullet(index, className) {
+      if (this.currentBreakpoint === '1400' || this.currentBreakpoint === 'max') {
+        return '';
+      }
+      return `<span class="${className}"></span>`;
+    },
   },
   breakpoints: {
     1400: {
@@ -52,12 +58,12 @@ function Team() {
             intro={persons[0].intro}
           />
 
-          <Person
-            portrait={zn}
-            name={persons[1].name}
-            duty={persons[1].duty}
-            intro={persons[1].intro}
-          />
+          {/* <Person */}
+          {/* portrait={zn} */}
+          {/* name={persons[1].name} */}
+          {/* duty={persons[1].duty} */}
+          {/* intro={persons[1].intro} */}
+          {/* /> */}
 
           <Person
             portrait={jw}
@@ -80,19 +86,19 @@ function Team() {
             intro={persons[4].intro}
           />
 
-          <Person
-            portrait={lk}
-            name={persons[5].name}
-            duty={persons[5].duty}
-            intro={persons[5].intro}
-          />
+          {/* <Person */}
+          {/* portrait={lk} */}
+          {/* name={persons[5].name} */}
+          {/* duty={persons[5].duty} */}
+          {/* intro={persons[5].intro} */}
+          {/* /> */}
 
-          <Person
-            portrait={dy}
-            name={persons[6].name}
-            duty={persons[6].duty}
-            intro={persons[6].intro}
-          />
+          {/* <Person */}
+          {/* portrait={dy} */}
+          {/* name={persons[6].name} */}
+          {/* duty={persons[6].duty} */}
+          {/* intro={persons[6].intro} */}
+          {/* /> */}
         </Swiper>
       </div>
     </div>
