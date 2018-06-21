@@ -17,7 +17,7 @@ const dicts = {
       name: '戴震',
       duty: '顾问',
       intro:
-        '车主邦创始人，历任正源股份（600321）和红星美凯龙（601828）两家上市公司高管，曾操盘国内投资规模最大的家居互联网项目。负责ECHO项目的全球化市场运作，纽波特大学MBA。多年华尔街金融投资经验，香港启祥集团、中国药业等多家上市公司董事。',
+        '东北财经大学MBA，引力资本创始人，历任正源股份（600321）和红星美凯龙（601828）两家上市公司高管，房地产与连锁行业15年管理经验，曾操盘国内投资规模最大的家居互联网项目。引力资本为顶尖的区块链母基金，曾投资Dfinity、RSK、Merculet、MT、QuarkChain、Pnt、VEN、ONT、ZIL、Cybex、IPC、skrumble、SentinelProtocol、gagapay、NEX、signals等项目。',
     },
     {
       name: '王岳华',

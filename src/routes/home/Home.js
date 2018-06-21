@@ -1,5 +1,6 @@
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import Modal from 'react-bootstrap/lib/Modal';
 
 import Navigator from './Navigator';
 import Banner from './Banner';
@@ -14,9 +15,16 @@ import Media from './Media';
 import s from './Home.scss';
 
 class Home extends React.Component {
-  componentDidMount() {
-    // alert(document.body.offsetWidth+', '+devicePixelRatio);
-  }
+  state = { showModal: false };
+
+  show = e => {
+    e.preventDefault();
+    this.setState({ showModal: true });
+  };
+
+  hide = () => {
+    this.setState({ showModal: false });
+  };
 
   render() {
     return (
@@ -33,6 +41,12 @@ class Home extends React.Component {
           <Partners />
           <Media />
         </div>
+
+        <Modal bsSize="small" show={this.state.showModal} onHide={this.hide}>
+          <Modal.Header closeButton />
+
+          <Modal.Body>主体内容...</Modal.Body>
+        </Modal>
       </div>
     );
   }

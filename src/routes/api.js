@@ -127,5 +127,5 @@ export function joinEcho(fetch, payload: {}): Promise<object | number> {
  */
 export function kyc(fetch, payload: {}): Promise<{ kyc: number }> {
   // return post(fetch, '/api/kyc', JSON.stringify(payload));
-  return Promise.resolve({ kyc: 2 });
+  return Promise.resolve({ kyc: 0 });
 }
