@@ -99,7 +99,7 @@ const config = {
 
   crowFunding: {
     start_date: '2018-6-19',
-    end_date: '2018-6-20',
+    end_date: '2018-6-30',
   },
 
   upload_path: null,
