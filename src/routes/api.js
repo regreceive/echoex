@@ -123,7 +123,7 @@ export function joinEcho(fetch, payload: {}): Promise<object | number> {
  * response: {status, data: {kyc}}
  */
 export function kyc(fetch, payload: {}): Promise<{ kyc: number }> {
-  return post(fetch, '/api/kyc', JSON.stringify(payload));
+  return get(fetch, '/api/kyc-status', JSON.stringify(payload));
   // return Promise.resolve({ kyc: 0 });
 }
 
@@ -133,7 +133,7 @@ export function kyc(fetch, payload: {}): Promise<{ kyc: number }> {
  * response: {status, data: {address: string | null}}
  */
 export function address(fetch, payload: {}): Promise<{ address: ?string }> {
-  return post(fetch, '/api/address', JSON.stringify(payload));
+  return get(fetch, '/api/address', JSON.stringify(payload));
   // return Promise.resolve({ address: null });
 }
 
@@ -145,6 +145,6 @@ export function raisedRange(
   fetch,
   payload: {},
 ): Promise<{ start: ?number, end: ?number }> {
-  return post(fetch, '/api/raised-range', JSON.stringify(payload));
+  return get(fetch, '/api/raised-range', JSON.stringify(payload));
   // return Promise.resolve({ start: 1529647494372, end: 1529648494321});
 }

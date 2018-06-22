@@ -248,16 +248,39 @@ HomeController.IsCrowdfunding = (req, res) => {
   const start = new Date(config.crowFunding.start_date).getTime();
   const end = new Date(config.crowFunding.end_date).getTime();
   const now = new Date().getTime();
-  console.log(start)
-  console.log(now)
-  console.log(start)
 
-  let data = false;
+  let status = false;
   if(now>=start && now<=end){
-    data = true;
+    status = true;
   }
 
-  res.json({ info: 'success', status: 10000, data});
+  res.json({ info: 'success', status: 10000, data: {
+    status,
+    start,
+    end,
+  }});
 };
+
+HomeController.KycStatus = (req, res) => {
+  tryErrors(req, res, async () => {
+    let data = 0;
+    const { user } = req;
+    if (!user) throw new WE(Errors.MUST_LOGIN);
+
+    const profile = await UserProfile.findOne({ where: { userId: user.id } });
+    if (profile && profile.status == 1) data = 1;
+
+    res.json({ info: 'success', status: 10000, data });
+  });
+}
+
+HomeController.UserAddress = (req, res) => {
+  tryErrors(req, res, async () => {
+    const { user } = req;
+    if (!user) throw new WE(Errors.MUST_LOGIN);
+
+    res.json({ info: 'success', status: 10000, data: user.address || "" });
+  });
+}
 
 export default HomeController;

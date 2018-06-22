@@ -116,3 +116,45 @@ GET `/api/totalRaised` (不需登录), 返回结果:
   data: 0.0246
 }
 ```
+
+
+### 新增api
+* POST /api/is-crowdfunding
+```
+{
+  info: "success",
+  status: 10000,
+  data: {
+    status: false, //是否公募
+    start: 1529337600000, //开始时间,microtime
+    end: 1529424000000 //结束时间,microtime
+  }
+}
+```
+
+* GET /api/totalRaised
+```
+{
+  info: "success",
+  status: 10000,
+  data: 0.0246
+}
+```
+
+* GET /api/kyc-status
+```
+{
+  info: "success",
+  status: 10000,
+  data: 1
+}
+```
+
+* GET /api/address
+```
+{
+  info: "success",
+  status: 10000,
+  data: "0x3A1CBB00730dDf72f3172C78fb5fbBefFFcc62A7"
+}
+```
