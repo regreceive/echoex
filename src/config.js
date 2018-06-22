@@ -109,7 +109,6 @@ const config = {
     '/subscribe',
     '/api/profile',
     '/api/profile/address',
-    '/api/is-crowfunding',
   ],
   guestList: ['/login', '/register', '/api/login', '/api/register'],
   authRedirectUrl: '/login', // 需要登录但未登录, 跳转到登录页
