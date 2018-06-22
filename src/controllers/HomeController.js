@@ -264,10 +264,10 @@ HomeController.IsCrowdfunding = (req, res) => {
 HomeController.KycStatus = (req, res) => {
   tryErrors(req, res, async () => {
     let data = 0;
-    const { user } = req;
+    const { email } = req.body;
     if (!user) throw new WE(Errors.MUST_LOGIN);
 
-    const profile = await UserProfile.findOne({ where: { userId: user.id } });
+    const profile = await UserProfile.findOne({ where: { email } });
     if (profile && profile.status == 1) data = 1;
 
     res.json({ info: 'success', status: 10000, data });
