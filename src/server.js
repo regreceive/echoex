@@ -99,7 +99,7 @@ app.post('/api/user/activate', AuthController.RegisterActivate);
 app.post('/api/join', HomeController.JoinEcho);
 app.post('/api/is-crowdfunding', HomeController.IsCrowdfunding);
 app.get('/api/totalRaised', HomeController.TotalRaised);
-app.get('/api/kyc-status', HomeController.KycStatus);
+app.post('/api/kyc-status', HomeController.KycStatus);
 app.get('/api/address', HomeController.UserAddress);
 app.get('/api/test', HomeController.Test);
 app.post(
