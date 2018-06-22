@@ -121,11 +121,30 @@ export function joinEcho(fetch, payload: {}): Promise<object | number> {
  * 获得kyc状态
  * request: {email}
  * response: {status, data: {kyc}}
- * @param fetch
- * @param payload
- * @returns {Promise<*>}
  */
 export function kyc(fetch, payload: {}): Promise<{ kyc: number }> {
-  // return post(fetch, '/api/kyc', JSON.stringify(payload));
-  return Promise.resolve({ kyc: 0 });
+  return post(fetch, '/api/kyc', JSON.stringify(payload));
+  // return Promise.resolve({ kyc: 0 });
+}
+
+/**
+ * 获得用户提交的以太地址
+ * request: {email}
+ * response: {status, data: {address: string | null}}
+ */
+export function address(fetch, payload: {}): Promise<{ address: ?string }> {
+  return post(fetch, '/api/address', JSON.stringify(payload));
+  // return Promise.resolve({ address: null });
+}
+
+/**
+ * 获得公募开始和结束时间戳，无需登录
+ * response: {status, data: {start: number | null, end: number | null}}
+ */
+export function raisedRange(
+  fetch,
+  payload: {},
+): Promise<{ start: ?number, end: ?number }> {
+  return post(fetch, '/api/raised-range', JSON.stringify(payload));
+  // return Promise.resolve({ start: 1529647494372, end: 1529648494321});
 }
