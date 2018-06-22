@@ -270,8 +270,8 @@ HomeController.KycStatus = (req, res) => {
 
     const profile = await UserProfile.findOne({ where: { userId: user.id } });
     if (profile){
-      if(profile.status == 1) data = 1;
-      else if(profile.status ==0) data = 3;
+      data = profile.status;
+      if(profile.status==0) data=3;
     }
 
     res.json({ info: 'success', status: 10000, data });
