@@ -56,8 +56,9 @@ let context = {
     status: null,
     sync() {
       const email = context.login.check();
-      kyc(context.fetch, { email }).then(data => {
-        this.status = data.kyc;
+      return kyc(context.fetch, { email }).then(data => {
+        this.status = data;
+        return data;
       });
     },
     check() {
@@ -68,7 +69,6 @@ let context = {
 
 // 如果浏览器刷新，通过cookie记录用户的登录状态
 context.login.in();
-const kycPolling = throttle(context.kyc.sync.bind(context.kyc), 30 * 1000);
 
 const container = document.getElementById('app');
 let currentLocation = history.location;
@@ -78,11 +78,6 @@ const scrollPositionsHistory = {};
 
 // Re-render the app when window.location changes
 async function onLocationChange(location, action) {
-  // 如果处于登录状态，就轮询获得kyc状态
-  if (context.login.check()) {
-    kycPolling();
-  }
-
   // Remember the latest scroll position for the previous location
   scrollPositionsHistory[currentLocation.key] = {
     scrollX: window.pageXOffset,

@@ -1,9 +1,9 @@
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import Modal from 'react-bootstrap/lib/Modal';
 
 import Navigator from './Navigator';
 import Banner from './Banner';
+import Raise from './Raise';
 import Background from './Background';
 import Principle from './Principle';
 import Ecology from './Ecology';
@@ -15,23 +15,13 @@ import Media from './Media';
 import s from './Home.scss';
 
 class Home extends React.Component {
-  state = { showModal: false };
-
-  show = e => {
-    e.preventDefault();
-    this.setState({ showModal: true });
-  };
-
-  hide = () => {
-    this.setState({ showModal: false });
-  };
-
   render() {
     return (
       <div className={s.root}>
         <div className={s.container}>
           <Navigator />
-          <Banner />
+          {/* <Banner /> */}
+          <Raise />
           <Background />
           <Principle />
           <Ecology />
@@ -41,12 +31,6 @@ class Home extends React.Component {
           <Partners />
           <Media />
         </div>
-
-        <Modal bsSize="small" show={this.state.showModal} onHide={this.hide}>
-          <Modal.Header closeButton />
-
-          <Modal.Body>主体内容...</Modal.Body>
-        </Modal>
       </div>
     );
   }

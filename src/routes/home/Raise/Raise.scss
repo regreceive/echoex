@@ -1,0 +1,72 @@
+.root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: url('./assets/bg.jpg') rgb(24, 25, 79) center no-repeat;
+  background-size: cover;
+  // 小米有个bug，设置高度动画防止抖动
+  transition: all 1s;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 0;
+  max-width: 1920px;
+}
+
+@media (min-width: 768px) {
+  :global(.modal-dialog) {
+    margin: 25vh auto 0;
+  }
+}
+
+.modal {
+  @media (min-width: 768px) {
+    width: 500px;
+  }
+
+  > div {
+    background-color: rgb(198, 199, 205);
+    border-radius: 0;
+    padding: 9px;
+  }
+
+  .modalBody {
+    min-height: 100px;
+    padding: 10px 15px;
+    border-radius: 6px;
+    background-color: #fff;
+  }
+
+  .closeWrap {
+    overflow: hidden;
+
+    .close {
+      float: right;
+      font-size: 35px;
+      font-weight: bold;
+      line-height: 1;
+      color: #000;
+      text-shadow: 0 1px 0 #fff;
+      opacity: 0.2;
+      cursor: pointer;
+    }
+  }
+
+  .content {
+    padding: 30px 20px;
+    text-align: center;
+    font-size: 24px;
+
+    button {
+      display: block;
+      margin: 50px auto 30px;
+      width: 282px;
+      height: 50px;
+      color: #fff;
+      background: rgb(18,24,56);
+      border-width: 0;
+    }
+  }
+}

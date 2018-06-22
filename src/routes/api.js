@@ -72,6 +72,16 @@ async function get(fetch, serviceName) {
   return Promise.reject(result.status);
 }
 
+function objToUrl(obj) {
+  let str = '';
+  Object.keys(obj).forEach(value => {
+    if (Object.prototype.hasOwnProperty.call(obj, value)) {
+      str += `&${value}=${obj[value]}`;
+    }
+  });
+  return str ? str.replace('&', '?') : '';
+}
+
 // 登录
 export function login(fetch, payload: object): Promise<object | number> {
   return post(fetch, '/api/login', JSON.stringify(payload));
@@ -118,33 +128,48 @@ export function joinEcho(fetch, payload: {}): Promise<object | number> {
 }
 
 /**
+ * 获得募集情况
+ * response: {status, data: number}
+ */
+export function raisedCount(fetch, payload: {}): Promise<number> {
+  // return get(fetch, '/api/totalRaised', objToUrl(payload));
+  return Promise.resolve(20);
+}
+
+/**
  * 获得kyc状态
  * request: {email}
- * response: {status, data: {kyc}}
+ * response: {status, data: number}
  */
-export function kyc(fetch, payload: {}): Promise<{ kyc: number }> {
-  return post(fetch, '/api/kyc-status', JSON.stringify(payload));
-  // return Promise.resolve({ kyc: 0 });
+export function kyc(fetch, payload: {}): Promise<number> {
+  return get(fetch, '/api/kyc-status', objToUrl(payload));
+  // return new Promise(resolve => {
+  //   setTimeout(() => resolve(1), 1000);
+  // });
 }
 
 /**
  * 获得用户提交的以太地址
  * request: {email}
- * response: {status, data: {address: string | null}}
+ * response: {status, data: string}
  */
-export function address(fetch, payload: {}): Promise<{ address: ?string }> {
-  return get(fetch, '/api/address', JSON.stringify(payload));
-  // return Promise.resolve({ address: null });
+export function address(fetch, payload: {}): Promise<?string> {
+  // return get(fetch, '/api/address', objToUrl(payload));
+  return Promise.resolve('0x0ae06b74346dF0793b531f01594515335DAb9c4d');
 }
 
 /**
  * 获得公募开始和结束时间戳，无需登录
- * response: {status, data: {start: number | null, end: number | null}}
+ * response: {status, data: {status: boolean, start: number | null, end: number | null}}
  */
 export function raisedRange(
   fetch,
   payload: {},
-): Promise<{ start: ?number, end: ?number }> {
-  return get(fetch, '/api/raised-range', JSON.stringify(payload));
-  // return Promise.resolve({ start: 1529647494372, end: 1529648494321});
+): Promise<{ status: boolean, start: ?number, end: ?number }> {
+  // return post(fetch, '/api/is-crowdfunding', JSON.stringify(payload));
+  return Promise.resolve({
+    status: true,
+    start: 1529647494372,
+    end: 1529648494321,
+  });
 }

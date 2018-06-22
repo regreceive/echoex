@@ -36,6 +36,7 @@ import chunks from './chunk-manifest.json'; // eslint-disable-line import/no-unr
 import config from './config';
 import { AuthController, HomeController, GuestFilter } from './controllers';
 import { loadLocales } from './locales';
+import { kyc } from './routes/api';
 
 const upload = multer({
   storage: multer.memoryStorage(),
@@ -162,6 +163,19 @@ app.get('*', async (req, res, next) => {
         out() {},
         check() {
           return req.cookies && req.cookies.username;
+        },
+      },
+
+      kyc: {
+        status: null,
+        sync() {
+          const email = context.login.check();
+          kyc(context.fetch, { email }).then(data => {
+            this.status = data.kyc;
+          });
+        },
+        check() {
+          return this.status;
         },
       },
     };
