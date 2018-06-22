@@ -235,12 +235,12 @@ HomeController.SubmitEthAddress = (req, res) => {
 
 HomeController.TotalRaised = (req, res) => {
   tryErrors(req, res, async () => {
-    let total = await UserRaised.sum(
+    const total = await UserRaised.sum(
       'amount',
       '`userId` IS NOT NULL AND `status`=1',
     );
     console.log(total);
-    res.json({ info: 'success', status: 10000, data: total||0 });
+    res.json({ info: 'success', status: 10000, data: total || 0 });
   });
 };
 
@@ -250,37 +250,41 @@ HomeController.IsCrowdfunding = (req, res) => {
   const now = new Date().getTime();
 
   let status = false;
-  if(now>=start && now<=end){
+  if (now >= start && now <= end) {
     status = true;
   }
 
-  res.json({ info: 'success', status: 10000, data: {
-    status,
-    start,
-    end,
-  }});
+  res.json({
+    info: 'success',
+    status: 10000,
+    data: {
+      status,
+      start,
+      end,
+    },
+  });
 };
 
 HomeController.KycStatus = (req, res) => {
   tryErrors(req, res, async () => {
     let data = 0;
-    const { email } = req.body;
+    const { user } = req;
     if (!user) throw new WE(Errors.MUST_LOGIN);
 
-    const profile = await UserProfile.findOne({ where: { email } });
+    const profile = await UserProfile.findOne({ where: { userId: user.id } });
     if (profile && profile.status == 1) data = 1;
 
     res.json({ info: 'success', status: 10000, data });
   });
-}
+};
 
 HomeController.UserAddress = (req, res) => {
   tryErrors(req, res, async () => {
     const { user } = req;
     if (!user) throw new WE(Errors.MUST_LOGIN);
 
-    res.json({ info: 'success', status: 10000, data: user.address || "" });
+    res.json({ info: 'success', status: 10000, data: user.address || '' });
   });
-}
+};
 
 export default HomeController;
