@@ -43,8 +43,10 @@ class ApplyAddress extends React.Component {
       } catch (e) {}
     }
 
+    const email = this.context.login.check();
+
     // 已经登记以太地址，自动跳转到认筹页面
-    address(this.context.fetch, this.context.login.check()).then(ethAddress => {
+    address(this.context.fetch, { email }).then(ethAddress => {
       if (ethAddress !== '') {
         try {
           history.replace('/subscribe');

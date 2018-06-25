@@ -18,7 +18,7 @@ const dicts = {
   offering: 'Public Offering',
   ongoing: 'Public offering is ongoing',
   scope: 'Public offering',
-  aggrement:
+  agreement:
     '<p>The ECHO public offering may end in advance, if the amount of ETH collected reaches the upper limit.</p><p>According to the local policies and laws, Chinese and U.S. citizens are not allowed to participate in public offerings. Please be noted.</p>',
 };
 

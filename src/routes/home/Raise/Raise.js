@@ -1,39 +1,47 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import intl from 'react-intl-universal';
 import Modal from 'react-bootstrap/lib/Modal';
 import ProgressBar from 'react-bootstrap/lib/ProgressBar';
 
 import history from '../../../history';
 import { KycType } from '../../../components/App';
-import { raisedRange } from '../../api';
 import lang from './locales';
 import CountDown from './CountDown';
+import { raisedCount } from '../../api';
 import s from './Raise.scss';
 
 let dict;
+// 总公募量
+const totalNum = 10000;
 
 class Raise extends React.Component {
   static contextTypes = {
+    fetch: PropTypes.func,
     login: PropTypes.object,
     kyc: PropTypes.shape(KycType),
   };
 
-  state = { showModal: false, start: 0, end: 0 };
-
-  async componentWillMount() {
-    if (this.context.login.check()) {
-      const status = await this.context.kyc.sync();
-      // 如果是认证中，就不用提示用户了
-      if (status !== 3) {
-        this.setState({ showModal: true });
-      }
-    }
-  }
+  state = {
+    showModal: false,
+    start: Date.now(),
+    end: new Date(new Date().setDate(30)).getTime(),
+    currentNum: 0,
+  };
 
   componentDidMount() {
-    raisedRange().then(({ start = 0, end = 0 }) => {
-      this.setState({ start, end });
+    if (this.context.login.check()) {
+      this.context.kyc.sync().then(status => {
+        // 如果是认证中，就不用提示用户了
+        if (status !== 3) {
+          this.setState({ showModal: true });
+        }
+      });
+    }
+
+    raisedCount(this.context.fetch).then(currentNum => {
+      this.setState({ currentNum });
     });
   }
 
@@ -42,6 +50,7 @@ class Raise extends React.Component {
       this.setState({ showModal: true });
     }
   }
+
   offeringHandle = () => {
     if (!this.context.login.check()) {
       history.push('/login');
@@ -62,22 +71,23 @@ class Raise extends React.Component {
   render() {
     dict = lang();
     const kyc = this.context.kyc.check();
-    const { start, end } = this.state;
+    const { start, end, currentNum } = this.state;
+    const achievedPercent = currentNum / totalNum * 100;
     return (
       <div className={s.root}>
         <div>
           <div className={s.title}>{dict.title}</div>
-          <CountDown start={start} end={end} />
+          <CountDown deadline={end} />
           <div className={s.progress}>
             <div>{dict.ongoing}</div>
             <div className={s.progressWrap}>
-              <ProgressBar now={60} />
+              <ProgressBar now={achievedPercent} />
             </div>
-            <div className={s.percent}>70%</div>
+            <div className={s.percent}>{achievedPercent}%</div>
           </div>
 
           <div className={s.scope}>
-            {dict.scope}: <span>2018.6.20~2018.6.30</span>
+            {dict.scope}: <span>{intl.get('DEADLINE', { start, end })}</span>
           </div>
         </div>
 
@@ -88,7 +98,7 @@ class Raise extends React.Component {
           </div>
           <div
             className={s.agreement}
-            dangerouslySetInnerHTML={{ __html: dict.aggrement }}
+            dangerouslySetInnerHTML={{ __html: dict.agreement }}
           />
         </div>
 

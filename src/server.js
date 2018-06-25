@@ -100,7 +100,7 @@ app.post('/api/join', HomeController.JoinEcho);
 app.post('/api/is-crowdfunding', HomeController.IsCrowdfunding);
 app.get('/api/totalRaised', HomeController.TotalRaised);
 app.post('/api/kyc-status', HomeController.KycStatus);
-app.get('/api/address', HomeController.UserAddress);
+app.post('/api/address', HomeController.UserAddress);
 app.get('/api/test', HomeController.Test);
 app.post(
   '/api/profile',

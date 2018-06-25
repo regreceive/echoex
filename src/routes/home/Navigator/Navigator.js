@@ -48,7 +48,7 @@ class Navigator extends Component {
               this.context.login.out();
             }}
           >
-            { logout }
+            {logout}
           </a>
         </div>
       </div>

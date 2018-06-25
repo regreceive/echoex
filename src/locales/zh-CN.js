@@ -97,6 +97,8 @@ export default {
   MOBILE: '移动电话',
   PHONE: '座机',
 
+  DEADLINE: '{start, date} ~ {end, date}',
+
   // error messages
   [Constant.FAILS]: '出了点小意外',
   [Constant.EMAIL_EMPTY]: '邮箱地址为空',

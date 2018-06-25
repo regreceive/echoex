@@ -102,6 +102,8 @@ export default {
   MOBILE: 'MOBILE',
   PHONE: 'TEL',
 
+  DEADLINE: '{start, date} ~ {end, date}',
+
   // error messages
   [Constant.FAILS]: 'whoops ...',
   [Constant.EMAIL_EMPTY]: 'empty email',
