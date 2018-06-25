@@ -1,7 +1,9 @@
 .root {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-height: 700px;
   height: 100vh;
   background: url('./assets/bg.jpg') rgb(24, 25, 79) center no-repeat;
   background-size: cover;
@@ -9,10 +11,38 @@
   transition: all 1s;
 }
 
-.container {
-  margin: 0 auto;
-  padding: 0;
-  max-width: 1920px;
+.title {
+  color: #FEFDFD;
+  font-size: 55px;
+  text-align: center;
+}
+
+.elapse {
+  display: table;
+  margin: 50px auto;
+
+  span {
+    height: 101px;
+    color: #fff;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+
+
+    &:nth-child(odd) {
+      width: 102px;
+      font-size: 36px;
+      padding: 10px 0 0;
+      background: url(./assets/board.gif) no-repeat;
+      background-size: contain;
+    }
+
+    &:nth-child(even) {
+      width: 70px;
+      padding: 10px 0 0;
+      font-size: 28px;
+    }
+  }
 }
 
 @media (min-width: 768px) {
@@ -22,9 +52,6 @@
 }
 
 .modal {
-  @media (min-width: 768px) {
-    width: 500px;
-  }
 
   > div {
     background-color: rgb(198, 199, 205);
@@ -68,5 +95,105 @@
       background: rgb(18,24,56);
       border-width: 0;
     }
+
+    &.left {
+      text-align: left;
+    }
+
+    .form {
+      display: flex;
+      align-items: center;
+
+      @media (max-width: 479px){
+        display: block;
+      }
+    }
+
+    .label {
+      display: inline-block;
+      padding-right: 10px;
+    }
+
+    .input {
+      flex: 1 auto;
+    }
+
+    p {
+      padding: 30px 0 0;
+      font-size: 16px;
+      line-height: 26px;
+    }
+  }
+}
+
+.progress {
+  display: flex;
+  margin: 30px 0;
+  align-items: center;
+  width: 650px;
+  font-size: 28px;
+  color: #fff;
+
+  .progressWrap {
+    flex: 1;
+    padding: 0 20px;
+
+    // 复写bootstrap的progress
+    > div {
+      margin-bottom: auto;
+      background-color: #2E313A;
+    }
+  }
+
+  .percent {
+    font-size: 30px;
+    color: #00BBF4;
+  }
+}
+
+.scope {
+  width: 650px;
+  text-align: left;
+  color: #fff;
+  font-size: 28px;
+
+  span {
+    color: #00BBF4;
+    font-size: 30px;
+  }
+}
+
+.bottom {
+  position: relative;
+  bottom: -90px;
+
+  .btnWrap {
+    text-align: center;
+
+    a, button {
+      display: inline-block;
+      margin: 0 20px;
+      width: 200px;
+      height: 60px;
+      border-radius: 10px;
+      outline: 0;
+      color: #00BBF4;
+      border: 1px solid #00BBF4;
+      font-size: 24px;
+      text-align: center;
+      line-height: 60px;
+      background-color: transparent;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
+  .agreement {
+    margin: 50px 0 0;
+    font-size: 18px;
+    color: #fff;
+    text-align: center;
   }
 }

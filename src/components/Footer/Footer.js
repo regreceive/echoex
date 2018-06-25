@@ -44,7 +44,8 @@ class Footer extends React.Component {
             <Wechat />
           </ul>
           <div className={s.copyright}>
-            Copyright © ECHO Team 2014-2018 ECHO Contributors www.echo.com
+            Copyright © ECHO Team 2014-2018 ECHO Contributors www.echo.com <br />
+            <a href="https://github.com/echochain/">github.com/echochain/</a>
           </div>
         </div>
       </footer>

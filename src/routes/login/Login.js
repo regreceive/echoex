@@ -21,7 +21,9 @@ export const expireHandle = (
 ) => status => {
   if (status === 40001) {
     loginProvider.out();
-    history.replace('/login');
+    try {
+      history.replace('/login');
+    } catch(e) {}
   }
 
   try {
@@ -39,7 +41,7 @@ export const expireHandle = (
 
 const loginHandle = (loginProvider: LoginFlowType, email: string) => () => {
   loginProvider.in(email);
-  history.replace('/profile');
+  history.replace('/');
 };
 
 class Login extends React.Component {

@@ -67,13 +67,19 @@ export default {
   SUBMIT: '提交',
   ADDRESS_STATEMENT:
     '我在此確認，我不是禁止參與令牌銷售（ICO）的任何司法管轄區的居民。',
+  ADDRESS_SA:
+    '请输入您正确的以太坊地址,公募结束后项目方会在两周内将ECHO发送到您的以太坊地址, 支持ERC20代币的钱包均可接收。由于个人原因导致地址错误, 平台概不负责, 公募期间仅允许填写一次哦!',
 
   SUBSCRIBE_TITLE: '如何购买ECHO的令牌？',
-  SUBSCRIBE_DESCRIPTION: '要获得ECHO的令牌，清将ETH转移到下方钱包地址',
+  SUBSCRIBE_DESCRIPTION: '要获得ECHO的令牌，请将ETH转移到下方钱包地址',
+  SUBSCRIBE_ITEM:
+    '请将ETH汇入上方地址内，交易确认后，这里将会显示您所拥有的ECHO数量。公募结束后，请不要再向公募收币地址中打币，如有损失，平台概不负责。',
   COPY: 'Copy',
   SUBSCRIBE_DOWNLOAD_EXCEL: '打币后需要填写Excel表格信息到ECHO官方邮箱',
   COPIED: '已复制',
   DOWNLOAD_TABLE: '下载表格',
+  ETHEREUM_ADDRESS: '以太坊地址',
+  PUBLIC_ADDRESS: '公募收币地址',
 
   REGACTIVATE_TITLE: '激活账号',
   REGACTIVATE_SUCCESS: '邮箱验证成功, 立即登录',

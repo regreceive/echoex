@@ -160,7 +160,9 @@ app.get('*', async (req, res, next) => {
       // 返回用户cookie的邮箱，用于server侧的react导航条右上角渲染
       login: {
         in() {},
-        out() {},
+        out() {
+          res.clearCookie('username');
+        },
         check() {
           return req.cookies && req.cookies.username;
         },
@@ -169,10 +171,7 @@ app.get('*', async (req, res, next) => {
       kyc: {
         status: null,
         sync() {
-          const email = context.login.check();
-          kyc(context.fetch, { email }).then(data => {
-            this.status = data.kyc;
-          });
+          return Promise.resolve();
         },
         check() {
           return this.status;

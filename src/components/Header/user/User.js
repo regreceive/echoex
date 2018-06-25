@@ -22,7 +22,7 @@ class User extends Component {
 
   state = { kyc: 0 };
 
-  componentDidMount() {
+  componentWillMount() {
     this.context.kyc.sync().then(kyc => {
       this.setState({ kyc });
     });
@@ -31,7 +31,7 @@ class User extends Component {
   handleClick = e => {
     e.preventDefault();
     e.stopPropagation();
-    history.replace(history.location);
+    history.replace('/');
   };
 
   render() {
@@ -41,17 +41,17 @@ class User extends Component {
     let kycMsg = '';
 
     switch (kyc) {
-      case 0:
+      case 3:
         bs = 'info';
         kycMsg = intl.get('KYC_AUTH_WAITING');
         break;
       case 1:
-        bs = 'danger';
-        kycMsg = intl.get('KYC_AUTH_FAILURE');
-        break;
-      case 2:
         bs = 'success';
         kycMsg = intl.get('KYC_AUTH_SUCCESS');
+        break;
+      case 2:
+        bs = 'danger';
+        kycMsg = intl.get('KYC_AUTH_FAILURE');
         break;
       default:
         bs = 'info';

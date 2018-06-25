@@ -56,13 +56,16 @@ let context = {
     status: null,
     sync() {
       const email = context.login.check();
-      return kyc(context.fetch, { email }).then(data => {
-        this.status = data;
-        return data;
-      });
+      if (email) {
+        return kyc(context.fetch, { email }).then(data => {
+          this.status = data;
+          return data;
+        });
+      }
+      return Promise.reject();
     },
     check() {
-      return this.status;
+      return this.status || 0;
     },
   },
 };

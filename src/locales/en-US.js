@@ -68,15 +68,21 @@ export default {
   SUBMIT: 'Submit',
   ADDRESS_STATEMENT:
     ' I hereby confirm that I am not the resident of any area where ICO is forbidden  ',
+  ADDRESS_SA:
+    'Please enter correct Ethereum address, the project will send ECHO to your Ethereum address within two weeks after the public offer, and all wallets supporting the ERC20 token can receive it. The platform is not responsible for address errors due to personal reasons, and you are allowed to fill in the address once during the period of public offering.',
 
   SUBSCRIBE_TITLE: 'How to purchase ECHO token',
   SUBSCRIBE_DESCRIPTION:
     'To obtain Echo token, please transfer ETH to the wallet address below',
+  SUBSCRIBE_ITEM:
+    'Please send ETH to the address above. After confirming the transaction, the number of ECHOs you have will be displayed here. After the public offering, please do not send coin to public offerings collecting address. If there is any loss caused, the platform is not responsible for it.',
   COPY: 'Copy',
   SUBSCRIBE_DOWNLOAD_EXCEL:
     'please fill in a Excel form to Echo Official email after your successful token transferring ',
   COPIED: 'Copied',
   DOWNLOAD_TABLE: 'download forms',
+  ETHEREUM_ADDRESS: 'Ethereum Address',
+  PUBLIC_ADDRESS: 'Public offerings collecting address',
 
   REGACTIVATE_TITLE: 'Activate Account',
   REGACTIVATE_SUCCESS: "Your email has' been activated, LOGIN now!",

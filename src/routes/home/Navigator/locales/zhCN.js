@@ -5,6 +5,7 @@ const dicts = {
     label: 'English',
   },
   login: '登录',
+  logout: '退出',
 };
 
 export default dicts;

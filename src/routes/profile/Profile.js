@@ -75,16 +75,16 @@ class Profile extends React.Component {
             <Col xs={3}>{intl.get('KYC_AUTH')}</Col>
             <Col xs={9}>
               {status === 0 && intl.get('KYC_AUTH_WAITING')}
-              {status === 1 && intl.get('KYC_AUTH_FAILURE')}
-              {status === 2 && intl.get('KYC_AUTH_SUCCESS')}
+              {status === 1 && intl.get('KYC_AUTH_SUCCESS')}
+              {status === 2 && intl.get('KYC_AUTH_FAILURE')}
             </Col>
           </Row>
         </PanelGroup>
 
-        {(status === undefined || status === 2) && (
+        {(status === 0 || status === 2) && (
           <Edit onSubmitted={data => this.onSubmittedHandle(data)} />
         )}
-        {(status === 0 || status === 1) && (
+        {(status === 3 || status === 1) && (
           <View profile={this.state.profile} />
         )}
       </Section>

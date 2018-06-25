@@ -53,4 +53,63 @@
     border-bottom: 2px solid #04A0EF;
     text-decoration: none;
   }
+
+  a:last-child {
+    margin-left: 20px;
+  }
+}
+
+.login {
+  margin-right: 20px;
+}
+
+.user {
+  position: relative;
+  display: inline-block;
+  min-height: 70.45px;
+  padding: 40px 10px 0;
+  margin-left: 55px;
+  color: #fff;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(100, 100, 100, .2);
+
+    .btn {
+      visibility: visible;
+    }
+
+    .drop {
+      display: block;
+    }
+  }
+
+  .btn {
+    visibility: hidden;
+    border-width: 0;
+    background-color: transparent;
+    outline: 0;
+  }
+
+  .drop {
+    display: none;
+    padding: 10px;
+    margin: 0 0 0 -10px;
+    top: 0;
+    margin-top: 70.45px;
+    position: absolute;
+    width: 100%;
+    background-color: rgba(100, 100, 100, .2);
+
+    a {
+      display: block;
+      padding: 5px;
+      margin-left: 0;
+
+      &:hover {
+        background-color: rgba(100, 100, 100, .2);
+        border-width: 0;
+      }
+    }
+  }
 }

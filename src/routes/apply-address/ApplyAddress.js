@@ -12,13 +12,15 @@ import SubmitGroup from '../../components/Form/SubmitGroup';
 import FieldInlineGroup from '../../components/Form/FieldInlineGroup';
 import Section from '../../components/Section';
 import { expireHandle } from '../login/Login';
-import { postAddress } from '../api';
+import { postAddress, address } from '../api';
 import s from './ApplyAddress.css';
+import { KycType } from '../../components/App';
 
 class ApplyAddress extends React.Component {
   static contextTypes = {
     fetch: PropTypes.func.isRequired,
     login: PropTypes.object.isRequired,
+    kyc: PropTypes.shape(KycType),
   };
 
   static propTypes = {
@@ -30,6 +32,25 @@ class ApplyAddress extends React.Component {
 
     this.state = { help: '', agree: false };
     this.checkHandle = this.checkHandle.bind(this);
+  }
+
+  componentDidMount() {
+    // 没有kyc认证成功，不能进入。如果浏览器跳转进入该页，会由于kyc没有及时拿到而回退一个页面
+    if (this.context.kyc.check() !== 1) {
+      try {
+        history.goBack();
+        return;
+      } catch (e) {}
+    }
+
+    // 已经登记以太地址，自动跳转到认筹页面
+    address(this.context.fetch, this.context.login.check()).then(ethAddress => {
+      if (ethAddress !== '') {
+        try {
+          history.replace('/subscribe');
+        } catch (e) {}
+      }
+    });
   }
 
   submitHandle() {
@@ -66,7 +87,6 @@ class ApplyAddress extends React.Component {
               this.address = ref;
             }}
             autoFocus
-            className={s.formGroup}
           />
           <FormGroup>
             <Col smOffset={3} sm={9}>
@@ -75,6 +95,12 @@ class ApplyAddress extends React.Component {
               </Checkbox>
             </Col>
           </FormGroup>
+
+          <Row className={s.sa}>
+            <Col smOffset={3} sm={9}>
+              {intl.get('ADDRESS_SA')}
+            </Col>
+          </Row>
 
           <SubmitGroup
             title={intl.get('SUBMIT')}

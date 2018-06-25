@@ -5,6 +5,7 @@ const dicts = {
     label: 'CN',
   },
   login: 'Login',
+  logout: 'logout',
 };
 
 export default dicts;

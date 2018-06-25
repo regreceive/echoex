@@ -142,7 +142,7 @@ export function raisedCount(fetch, payload: {}): Promise<number> {
  * response: {status, data: number}
  */
 export function kyc(fetch, payload: {}): Promise<number> {
-  return get(fetch, '/api/kyc-status', objToUrl(payload));
+  return post(fetch, '/api/kyc-status', JSON.stringify(payload));
   // return new Promise(resolve => {
   //   setTimeout(() => resolve(1), 1000);
   // });
@@ -154,8 +154,8 @@ export function kyc(fetch, payload: {}): Promise<number> {
  * response: {status, data: string}
  */
 export function address(fetch, payload: {}): Promise<?string> {
-  // return get(fetch, '/api/address', objToUrl(payload));
-  return Promise.resolve('0x0ae06b74346dF0793b531f01594515335DAb9c4d');
+  return post(fetch, '/api/address', JSON.stringify(payload));
+  // return Promise.resolve('0x0ae06b74346dF0793b531f01594515335DAb9c4d');
 }
 
 /**

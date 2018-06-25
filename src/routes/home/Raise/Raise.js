@@ -2,28 +2,53 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Modal from 'react-bootstrap/lib/Modal';
+import ProgressBar from 'react-bootstrap/lib/ProgressBar';
 
+import history from '../../../history';
 import { KycType } from '../../../components/App';
+import { raisedRange } from '../../api';
+import lang from './locales';
+import CountDown from './CountDown';
 import s from './Raise.scss';
+
+let dict;
 
 class Raise extends React.Component {
   static contextTypes = {
+    login: PropTypes.object,
     kyc: PropTypes.shape(KycType),
   };
 
-  state = { showModal: false };
+  state = { showModal: false, start: 0, end: 0 };
 
-  componentDidMount() {
-    console.log('didmount');
+  async componentWillMount() {
+    if (this.context.login.check()) {
+      const status = await this.context.kyc.sync();
+      // 如果是认证中，就不用提示用户了
+      if (status !== 3) {
+        this.setState({ showModal: true });
+      }
+    }
   }
 
-  componentWillUnmount() {
-    console.log('unmount');
+  componentDidMount() {
+    raisedRange().then(({ start = 0, end = 0 }) => {
+      this.setState({ start, end });
+    });
   }
 
   componentWillReceiveProps() {
-    console.log('receive next props');
+    if (this.context.login.check()) {
+      this.setState({ showModal: true });
+    }
   }
+  offeringHandle = () => {
+    if (!this.context.login.check()) {
+      history.push('/login');
+    } else {
+      this.setState({ showModal: true });
+    }
+  };
 
   show = e => {
     e.preventDefault();
@@ -35,9 +60,38 @@ class Raise extends React.Component {
   };
 
   render() {
+    dict = lang();
     const kyc = this.context.kyc.check();
+    const { start, end } = this.state;
     return (
       <div className={s.root}>
+        <div>
+          <div className={s.title}>{dict.title}</div>
+          <CountDown start={start} end={end} />
+          <div className={s.progress}>
+            <div>{dict.ongoing}</div>
+            <div className={s.progressWrap}>
+              <ProgressBar now={60} />
+            </div>
+            <div className={s.percent}>70%</div>
+          </div>
+
+          <div className={s.scope}>
+            {dict.scope}: <span>2018.6.20~2018.6.30</span>
+          </div>
+        </div>
+
+        <div className={s.bottom}>
+          <div className={s.btnWrap}>
+            <a href={dict.link}>{dict.whitePaper}</a>
+            <button onClick={this.offeringHandle}>{dict.offering}</button>
+          </div>
+          <div
+            className={s.agreement}
+            dangerouslySetInnerHTML={{ __html: dict.aggrement }}
+          />
+        </div>
+
         <Modal
           dialogClassName={s.modal}
           show={this.state.showModal}
@@ -58,43 +112,48 @@ function Contents({ kyc }) {
     case 0:
       return <Unauthorized />;
     case 1:
-      return <Failure />;
-    case 2:
       return <Success />;
+    case 2:
+      return <Failure />;
+    default:
+      return <div />;
   }
 }
 
 function Unauthorized() {
+  const { unauthorized: d } = dict;
   return (
     <div className={s.content}>
-      你还未进行KYC认证,快去认证吧!
-      <button>去认证</button>
+      {d.title}
+      <button onClick={() => history.push('/profile')}>{d.btn}</button>
     </div>
   );
 }
 
 function Failure() {
+  const { failure: d } = dict;
   return (
     <div className={s.content}>
-      KYC认证失败,请重新认证!
-      <button>重新认证</button>
+      {d.title}
+      <button onClick={() => history.push('/profile')}>{d.btn}</button>
     </div>
   );
 }
 
 function Success() {
+  const { success: d } = dict;
   return (
     <div className={s.content}>
-      KYC已认证成功,快去参与公募吧!
-      <button>去公募</button>
+      {d.title}
+      <button onClick={() => history.push('/address')}>{d.btn}</button>
     </div>
   );
 }
 
-function Close(props) {
+function Close({ onClose }) {
   return (
     <div className={s.closeWrap}>
-      <span className={s.close} onClick={props.onClose}>
+      <span className={s.close} onClick={onClose}>
         ×
       </span>
     </div>

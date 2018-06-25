@@ -9,3 +9,14 @@
   padding: 0 0 40px;
   max-width: var(--max-content-width);
 }
+
+.sa {
+  margin: 20px 0 30px;
+}
+
+.sa > div {
+  border: 1px dashed #f0ad4e;
+  border-radius: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
