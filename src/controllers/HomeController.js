@@ -278,10 +278,12 @@ HomeController.KycStatus = (req, res) => {
   });
 }
 
+// @Warn !!!!此处需要修改回去!!!!!
 HomeController.UserAddress = (req, res) => {
   tryErrors(req, res, async () => {
-    const { user } = req;
-    if (!user) throw new WE(Errors.MUST_LOGIN);
+    const { email } = req.body;
+    const user = await User.findOne({where: {email}});
+    if (!user) throw new WE(Errors.USER_NOT_EXISTS);
 
     res.json({ info: 'success', status: 10000, data: user.address || "" });
   });
