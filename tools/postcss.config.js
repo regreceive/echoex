@@ -63,6 +63,8 @@ module.exports = () => ({
         'padding',
         'left',
         'top',
+        'background-size',
+        'border-width',
       ],
       selectorBlackList: [/^html$/],
     }),

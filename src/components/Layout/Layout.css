@@ -15,7 +15,7 @@ html {
   font-weight: 100;
   font-family: var(--font-family-base);
   line-height: 1.375; /* ~22px */
-  font-size: 55px; /* ~16px; */
+  font-size: 75px; /* ~16px; */
 }
 
 @media screen and (max-width: 767px) {

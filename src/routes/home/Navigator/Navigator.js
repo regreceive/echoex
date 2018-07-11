@@ -4,7 +4,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 import history from '../../../history';
 import User from '../../../components/Header/user';
-import logo from '../../../assets/logo.png';
+import logo from '../../../assets/echo.png';
 import lang from './locales';
 import s from './Navigator.scss';
 

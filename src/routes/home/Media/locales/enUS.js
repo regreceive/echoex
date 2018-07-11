@@ -1,5 +1,5 @@
 const dicts = {
-  title: 'media support',
+  title: 'Media Support',
 };
 
 export default dicts;

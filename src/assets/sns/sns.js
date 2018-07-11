@@ -1,21 +1,31 @@
+import gg from './gg.png';
+import medium from './medium.png';
+import twitter from './twitter.png';
+import facebook from './facebook.png';
+import tme from './tme.png';
+import beechat from './beechat.png';
+import weibo from './weibo.png';
+import zssq from './zssq.png';
+import email from './email.png';
+
 export default [
-  { icon: require('./gg.png'), url: 'https://discord.gg/FKvngzE' },
+  { icon: gg, url: 'https://discord.gg/FKvngzE' },
   // { icon: require('./qq.png'), url: 'https://jq.qq.com/?_wv=1027&k=5wbofre' },
-  { icon: require('./medium.png'), url: 'https://medium.com/@echorealm_64486' },
-  { icon: require('./twitter.png'), url: 'https://twitter.com/ECHO_Realm' },
+  { icon: medium, url: 'https://medium.com/@echorealm_64486' },
+  { icon: twitter, url: 'https://twitter.com/ECHO_Realm' },
   {
-    icon: require('./facebook.png'),
+    icon: facebook,
     url: 'https://www.facebook.com/EchoRealm',
   },
-  { icon: require('./tme.png'), url: 'https://t.me/ECHOCN' },
+  { icon: tme, url: 'https://t.me/ECHOCN' },
   {
-    icon: require('./beechat.png'),
+    icon: beechat,
     url: 'https://beechat.io/join?g=3b88c9d4ff6b469fb78cce0a775b95a0&lang=zh',
   },
   {
-    icon: require('./weibo.png'),
+    icon: weibo,
     url: 'https://m.weibo.cn/p/1005056481472691',
   },
-  { icon: require('./zssq.png'), url: 'https://t.zsxq.com/6272Jqz' },
-  { icon: require('./email.png'), url: 'mailto:echo@echo.center' },
+  { icon: zssq, url: 'https://t.zsxq.com/6272Jqz' },
+  { icon: email, url: 'mailto:echo@echo.center' },
 ];

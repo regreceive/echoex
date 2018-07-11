@@ -1,72 +1,58 @@
+.root {
+  background-color: #040223;
+
+  @media (max-width: 767px) {
+    min-height: 100vh;
+  }
+
+}
+
 .container {
-  margin: auto;
-  padding: 60px 20px;
   max-width: 1200px;
-
-  h2 {
-    text-align: center;
-    color: #1A96F8;
-    font-size: 42px;
-
-  }
-}
-
-.wrap {
-  max-width: 343px;
-  margin: 30px auto;
-  position: relative;
-
-  img:last-child {
-    position: absolute;
-    top: 10%;
-    opacity: 0;
-    transition: .3s all;
-  }
-
-  &:hover {
-
-    img:last-child {
-      top: 0;
-      opacity: 1;
-    }
-  }
-}
-
-// 下面的都是手机版的
-.m {
-  margin: 20px 0;
-  padding: 0 90px;
-
-  h3 {
-    margin: 20px 0;
-    color: #1A96F8;
-    font-size: 28px;
-    text-align: center;
-  }
-
-  p {
-    font-size: 24px;
-    line-height: 36px;
-    color: #474847;
-    text-align: justify;
-  }
-}
-.icon {
-  width: 101px;
-  height: 116px;
+  padding: 60px 20px;
   margin: auto;
-  background-size: cover;
 
-  &.icon1 {
-    background-image: url('./assets/m_1.png');
+  > h2 {
+    margin: 0 0 80px;
+    font-size: 26px;
+    color: #D1E5EF;
+    text-align: center;
   }
 
-  &.icon2 {
-    background-image: url('./assets/m_2.png');
-  }
+  dl {
+    padding: 0 20px;
 
-  &.icon3 {
-    background-image: url('./assets/m_3.png');
+    dt {
+      color: #D1E5EF;
+      font-size: 20px;
+      text-align: center;
+
+      &:before {
+        content: '';
+        display: block;
+        margin: 0 auto 20px;
+        width: 53px;
+        height: 67px;
+        background: url(./assets/icon_1.png) no-repeat center center;
+        background-size: contain;
+      }
+    }
+
+    dd {
+      font-size: 14px;
+      line-height: 20px;
+      margin: 30px 0 0;
+      color: #8288A3;
+      text-align: justify;
+    }
+
+    &:nth-child(2) > dt:before {
+      background-image: url(./assets/icon_2.png);
+    }
+
+    &:nth-child(3) > dt:before {
+      background-image: url(./assets/icon_3.png);
+    }
   }
 }
 

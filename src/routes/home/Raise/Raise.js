@@ -10,6 +10,9 @@ import { KycType } from '../../../components/App';
 import lang from './locales';
 import CountDown from './CountDown';
 import { raisedCount } from '../../api';
+import Effect from '../Effect';
+import * as Star from '../Effect/Star';
+import * as Smog from '../Effect/Smog';
 import s from './Raise.scss';
 
 let dict;
@@ -75,32 +78,39 @@ class Raise extends React.Component {
     const achievedPercent = currentNum / totalNum * 100;
     return (
       <div className={s.root}>
-        <div>
-          <div className={s.title}>{dict.title}</div>
-          <CountDown deadline={end} />
-          <div className={s.progress}>
-            <div>{dict.ongoing}</div>
-            <div className={s.progressWrap}>
-              <ProgressBar now={achievedPercent} />
+        <Effect control={Star}>
+          <Effect control={Smog}>
+            <div className={s.container}>
+              <div>
+                <div className={s.title}>{dict.title}</div>
+                <CountDown deadline={end} />
+                <div className={s.progress}>
+                  <div>{dict.ongoing}</div>
+                  <div className={s.progressWrap}>
+                    <ProgressBar now={achievedPercent} />
+                  </div>
+                  <div className={s.percent}>{achievedPercent}%</div>
+                </div>
+
+                <div className={s.scope}>
+                  {dict.scope}:{' '}
+                  <span>{intl.get('DEADLINE', { start, end })}</span>
+                </div>
+              </div>
+
+              <div className={s.bottom}>
+                <div className={s.btnWrap}>
+                  <a href={dict.link}>{dict.whitePaper}</a>
+                  <button onClick={this.offeringHandle}>{dict.offering}</button>
+                </div>
+                <div
+                  className={s.agreement}
+                  dangerouslySetInnerHTML={{ __html: dict.agreement }}
+                />
+              </div>
             </div>
-            <div className={s.percent}>{achievedPercent}%</div>
-          </div>
-
-          <div className={s.scope}>
-            {dict.scope}: <span>{intl.get('DEADLINE', { start, end })}</span>
-          </div>
-        </div>
-
-        <div className={s.bottom}>
-          <div className={s.btnWrap}>
-            <a href={dict.link}>{dict.whitePaper}</a>
-            <button onClick={this.offeringHandle}>{dict.offering}</button>
-          </div>
-          <div
-            className={s.agreement}
-            dangerouslySetInnerHTML={{ __html: dict.agreement }}
-          />
-        </div>
+          </Effect>
+        </Effect>
 
         <Modal
           dialogClassName={s.modal}

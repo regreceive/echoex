@@ -19,6 +19,7 @@ import pkg from '../package.json';
 const ROOT_DIR = path.resolve(__dirname, '..');
 const resolvePath = (...args) => path.resolve(ROOT_DIR, ...args);
 const SRC_DIR = resolvePath('src');
+const MODULES_DIR = resolvePath('node_modules');
 const BUILD_DIR = resolvePath('build');
 
 const isDebug = !process.argv.includes('--release');
@@ -75,7 +76,8 @@ const config = {
       // Rules for JS / JSX
       {
         test: reScript,
-        include: [SRC_DIR, resolvePath('tools')],
+        include: [SRC_DIR, MODULES_DIR, resolvePath('tools')],
+        exclude: /node_modules\/(?!(dom7|swiper)\/).*/,
         loader: 'babel-loader',
         options: {
           // https://github.com/babel/babel-loader#options
@@ -157,6 +159,7 @@ const config = {
                 : '[hash:base64:5]',
               // CSS Nano http://cssnano.co/
               minimize: isDebug ? false : minimizeCssOptions,
+              camelCase: true,
             },
           },
 

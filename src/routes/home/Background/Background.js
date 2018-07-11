@@ -1,59 +1,32 @@
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import Waypoint from 'react-waypoint';
 
+import preview from './assets/preview.png';
 import lang from './locales';
-import { start, stop } from './Canvas';
 
 import s from './Background.scss';
-import canvas from './assets/canvas.png';
 
 class Background extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.canvas = null;
-    this.visibilitychangeHandle = this.visibilitychangeHandle.bind(this);
-  }
-
-  componentDidMount() {
-    document.addEventListener('visibilitychange', this.visibilitychangeHandle);
-  }
-
-  componentWillUnmount() {
-    stop();
-    document.removeEventListener(
-      'visibilitychange',
-      this.visibilitychangeHandle,
-    );
-  }
-
-  visibilitychangeHandle() {
-    if (document.hidden) {
-      stop();
-    } else {
-      start(this.canvas);
-    }
-  }
-
   render() {
     const dict = lang();
-    const { title, content } = dict;
+    const { title, contents } = dict;
     return (
-      <div className={s.container}>
-        <h2>{title}</h2>
-        <div className={s.canvas}>
-          <Waypoint
-            topOffset="10%"
-            bottomOffset="10%"
-            onEnter={() => start(this.canvas)}
-            onLeave={() => stop()}
-          >
-            <canvas ref={ref => (this.canvas = ref)} width="800" height="800" />
-          </Waypoint>
-        </div>
-        <div className={s.descr}>
-          <ul dangerouslySetInnerHTML={{ __html: content }} />
+      <div className={s.root}>
+        <div className={s.container}>
+          <h2>{title}</h2>
+          <div className={s.table}>
+            <div className={s.descr}>
+              {contents.map(content => (
+                <dl key={content.dt}>
+                  <dt>{content.dt}</dt>
+                  <dd>{content.dd}</dd>
+                </dl>
+              ))}
+            </div>
+            <div className={s.demo}>
+              <img src={preview} />
+            </div>
+          </div>
         </div>
       </div>
     );

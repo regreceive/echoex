@@ -1,15 +1,20 @@
 .root {
-  display: flex;
-  padding: 0 10px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 750px;
-  height: 100vh;
-  background: url('./assets/bg.jpg') rgb(24, 25, 79) center no-repeat;
+  min-height: 100vh;
+  background: url('./assets/bg.png') rgb(24, 25, 79) center no-repeat;
   background-size: cover;
   // 小米有个bug，设置高度动画防止抖动
   transition: all 1s;
+}
+
+.container {
+  padding: 0 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: inherit;
+  position: relative;
+  z-index: 1;
 }
 
 .title {

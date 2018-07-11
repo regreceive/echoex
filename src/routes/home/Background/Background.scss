@@ -1,46 +1,83 @@
+.root {
+  background-color: #040223;
+  overflow: hidden;
+}
+
 .container {
   max-width: 1200px;
   margin: 60px auto;
   padding: 0 20px;
 
   h2 {
-    color: #0080dd;
-    font-size: 42px;
+    color: #D1E5EF;
+    font-size: 26px;
     text-align: center;
   }
 }
 
-.canvas {
-  display: inline-block;
-  width: 40%;
-  vertical-align: top;
-
-  canvas {
-    max-width: 100%;
-  }
-
-  @media (max-width: 767px) {
-    width: unset;
-  }
+.table {
+  display: table;
+  width: 100%;
 }
 
 .descr {
-  display: inline-block;
-  width: 60%;
-  color: #474847;
+  display: table-cell;
+  width: 50%;
   padding-top: 40px;
 
-  ul {
-    font-size: 26px;
-    line-height: 36px;
+  dl {
+    max-width: 505px;
+    position: relative;
+    padding: 0 0 0 70px;
+    margin-bottom: 50px;
 
-    li {
-      list-style-image: url('./assets/polyhedron.png');
-      margin: 20px 0;
+
+    @media screen and (max-width: 992px){
+      margin: 0 0 30px 0;
+    }
+
+    &:before {
+      content: '';
+      position: absolute;
+      width: 53px;
+      height: 67px;
+      background: url(./assets/dl1.png) no-repeat center;
+      background-size: contain;
+      transform: translateX(-70px);
+    }
+    &:nth-child(2):before {
+      background-image: url(./assets/dl2.png);
+    }
+    &:nth-child(3):before {
+      background-image: url(./assets/dl3.png);
+    }
+    &:nth-child(4):before {
+      background-image: url(./assets/dl4.png);
+    }
+    &:nth-child(5):before {
+      background-image: url(./assets/dl5.png);
+    }
+    dt {
+      font-size: 18px;
+      line-height: 25px;
+      color: #D1E5EF;
+
+    }
+    dd {
+      font-size: 12px;
+      line-height: 25px;
+      color: #8288A3;
     }
   }
+}
 
-  @media (max-width: 767px) {
-    width: unset;
+.demo {
+  display: table-cell;
+  width: 50%;
+  vertical-align: middle;
+
+  img {
+    max-width: 100%;
+    height: auto;
   }
 }

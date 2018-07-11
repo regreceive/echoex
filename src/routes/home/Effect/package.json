@@ -1,0 +1,6 @@
+{
+  "name": "Effect",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./Effect.js"
+}

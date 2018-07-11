@@ -1,9 +1,5 @@
 .root {
-  min-height: 700px;
-  padding: 93px 0 0 0;
-  background: url('./assets/bg.png') no-repeat rgb(6, 10, 35) center;
-  background-size: cover;
-  color: #fff;
+  background-color: #040223;
 
   @media (max-width: 767px) {
     min-height: 100vh;
@@ -11,85 +7,179 @@
 
   h2 {
     margin: 0 0 80px;
-    font-size: 42px;
-    color: #1A96F8;
+    font-size: 26px;
+    color: #D1E5EF;
     text-align: center;
   }
 }
 
 .container {
-  margin: auto;
-  // 屏幕太大，左右两栏就跑开了
   max-width: 1200px;
+  margin: auto;
 }
 
-// 交错菜单
-.menu {
-  margin: 0 20px;
+.table {
+  display: table;
+  position: relative;
+  overflow: hidden;
 
-  span{
-    display: block;
-    width: 282px;
-    height: 110px;
-    padding-left: 35px;
-    font-size: 28px;
-    color: #fff;
-    text-align: center;
-    line-height: 110px;
-    background: url('./assets/btn.png') no-repeat;
-    position: relative;
+  &:before {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 270px;
+    border-radius: 50%;
+    transform: translateY(35px) translateX(97px);
+    animation: halo 3s alternate infinite;
+  }
+}
+
+.menu {
+  display: table-cell;
+  position: relative;
+  background-color: rgb(4, 2, 35);
+  min-width: 226px;
+
+  ul {
+    padding: 0;
+    margin: 0;
+    font-size: 20px;
     cursor: pointer;
-    transition: .3s all;
+
+    li {
+      height: 70px;
+      line-height: 70px;
+      padding: 0 0 0 85px;
+      list-style: none;
+      position: relative;
+      color: #8288A3;
+      transition: color .3s;
+
+      &:before {
+        content: '';
+        position: absolute;
+        width: 24px;
+        height: 2px;
+        background-color: #8288A3;
+        transform: translateX(-45px) translateY(32px);
+        transition: background-color .3s;
+      }
+
+      &:after {
+        content: '';
+        position: absolute;
+        top: 5px;
+        right: -1px;
+        width: 10px;
+        height: 60px;
+        border-radius: 50%;
+        transition: box-shadow .3s, background-color .3s;
+      }
+
+
+      &:hover, &.active {
+        color: #FFF;
+        &:before {
+          background-color: #fff;
+        }
+
+        &:after {
+          box-shadow: 0 0 7px 2px #1281b6;
+          background-color: #1293cb
+        }
+      }
+
+      span {
+        display: block;
+        padding: 0 20px 0 0;
+        background-color: rgb(4, 2, 35);
+        position: relative;
+        z-index: 1;
+      }
+    }
+  }
+}
+
+@keyframes halo {
+  from {
+    box-shadow: 0 0 90px 21px #1281b6;
+    transform: translateY(35px) translateX(90px);
+  }
+  to {
+    box-shadow: 0 0 125px 21px #128fc6;
+    transform: translateY(35px) translateX(105px);
+  }
+}
+
+.section {
+  display: table-cell;
+  padding: 0 0 0 70px;
+
+  dl {
+    position: relative;
+    padding: 0 0 0 70px;
+    margin-bottom: 60px;
+
+    @media screen and (max-width: 992px) {
+      margin: 0 0 30px 0;
+    }
 
     &:before {
       content: '';
-      width: 40px;
-      height: 38px;
       position: absolute;
-      left: 40px;
-      top: 30px;
+      width: 40px;
+      height: 40px;
+      background: url(./assets/icon_1.png) no-repeat center;
+      transform: translateX(-70px);
     }
 
-    &:hover, &.active {
-      z-index: 10;
-      background: url('./assets/btn_active.png') no-repeat;
-      box-shadow: -4px 6px 28px 0px rgba(0, 0, 0, .5);
+    &.icon_1_impl:before {
+      background-image: url(./assets/icon_1_impl.png);
     }
-  }
-}
 
-.content {
-  display: none;
-  margin: 0 20px;
-  color: #fff;
-  font-size: 24px;
-  line-height: 36px;
-  overflow: hidden;
-
-  h4 {
-    font-size: 23px;
-  }
-
-  ol {
-    padding-left: 20px;
-  }
-
-  &.show {
-    display: block;
-  }
-
-  @media (max-width: 767px) { // <=767px
-    display: block;
-    margin: 0 auto 40px;
-    padding-left: 20px;
-
-    h4 {
-      font-size: 23px;
+    &.icon_2:before {
+      background-image: url(./assets/icon_2.png);
     }
-  }
 
-  @media (max-width: 479px) {
-    padding-left: unset;
+    &.icon_2_impl:before {
+      background-image: url(./assets/icon_2_impl.png);
+    }
+
+    &.icon_3:before {
+      background-image: url(./assets/icon_3.png);
+    }
+
+    &.icon_3_impl:before {
+      background-image: url(./assets/icon_3_impl.png);
+    }
+
+    &.icon_4:before {
+      background-image: url(./assets/icon_4.png);
+    }
+
+    &.icon_4_impl:before {
+      background-image: url(./assets/icon_4_impl.png);
+    }
+
+    &.icon_5:before {
+      background-image: url(./assets/icon_5.png);
+    }
+
+    &.icon_5_impl:before {
+      background-image: url(./assets/icon_5_impl.png);
+    }
+
+    dt {
+      font-size: 20px;
+      color: #fff
+    }
+
+    dd {
+      margin: 20px 0 0;
+      font-size: 14px;
+      color: #8288A3;
+      line-height: 20px;
+    }
   }
 }
 

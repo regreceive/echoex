@@ -20,8 +20,8 @@ class Home extends React.Component {
       <div className={s.root}>
         <div className={s.container}>
           <Navigator />
-          {/* <Banner /> */}
-          <Raise />
+          <Banner />
+          {/* <Raise /> */}
           <Background />
           <Principle />
           <Ecology />

@@ -1,5 +1,5 @@
 .root {
-  background-color: #fff;
+  background-color: #040223;
 }
 
 .container {
@@ -10,19 +10,20 @@
   h2 {
     margin-bottom: 40px;
     text-align: center;
-    color: #04a0ef;
-    font-size: 42px;
+    color: #D1E5EF;
+    font-size: 26px;
   }
 }
 
 .logos {
   max-width: 980px;
   margin: auto;
+  text-align: center;
 
   .unit {
     display: inline-block;
-    width: 20%;
-    box-shadow: 0 0 1px 0 rgba(0, 0, 0, .3);
+    width: 12.5%;
+    text-align: center;
 
     @media(max-width: 767px) {
       width: 25%;

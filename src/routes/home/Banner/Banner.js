@@ -1,7 +1,10 @@
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import Waypoint from 'react-waypoint';
-import cs from 'classnames';
+
+import Effect from '../Effect';
+import Bezier from '../Effect/Bezier';
+import Star from '../Effect/Star';
+import Smog from '../Effect/Smog';
 
 import s from './Banner.scss';
 import lang from './locales';
@@ -12,22 +15,20 @@ class Banner extends React.Component {
     const { title, whitePaper, link } = dict;
 
     return (
-      <div className={cs(s.banner, s.init)} ref="banner">
-        <div className={s.container}>
-          <div
-            className={s.slogan}
-            dangerouslySetInnerHTML={{ __html: title }}
-          />
-          <div className={s.btnWrap}>
-            <Waypoint
-              onEnter={props => {
-                this.refs.banner.className = s.banner;
-              }}
-            >
-              <a href={link}>{whitePaper}</a>
-            </Waypoint>
+      <div className={s.root}>
+        <Effect control={[Bezier, Star, Smog]}>
+          <div className={s.planet}>
+            <div className={s.container}>
+              <div
+                className={s.slogan}
+                dangerouslySetInnerHTML={{ __html: title }}
+              />
+              {/* <div className={s.btnWrap}> */}
+              {/* <a href={link}>{whitePaper}</a> */}
+              {/* </div> */}
+            </div>
           </div>
-        </div>
+        </Effect>
       </div>
     );
   }
