@@ -2,12 +2,12 @@ const dicts = {
   title: 'Background of ECHO Public Chain',
   contents: [
     {
-      dt: 'Rapid Development Of New Energy',
+      dt: 'Rapid Development of New Energy',
       dd:
         'The rapid development of new energy generates massive energy digital assets and asset circulation demand',
     },
     {
-      dt: 'New energy trading guarantee',
+      dt: 'New Energy Trading Guarantee',
       dd:
         'Blockchain enables energy digital precision management and efficient and secure transaction protection',
     },
