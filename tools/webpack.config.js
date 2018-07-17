@@ -77,7 +77,7 @@ const config = {
       {
         test: reScript,
         include: [SRC_DIR, MODULES_DIR, resolvePath('tools')],
-        exclude: /node_modules\/(?!(dom7|swiper)\/).*/,
+        exclude: /node_modules\/(?!(dom7|swiper|gsap)\/).*/,
         loader: 'babel-loader',
         options: {
           // https://github.com/babel/babel-loader#options

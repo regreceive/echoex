@@ -1,10 +1,6 @@
 .root {
   background-color: #040223;
 
-  @media (max-width: 767px) {
-    min-height: 100vh;
-  }
-
   h2 {
     margin: 0 0 80px;
     font-size: 26px;
@@ -130,43 +126,53 @@
       width: 40px;
       height: 40px;
       background: url(./assets/icon_1.png) no-repeat center;
+      background-size: 29px 34px;
       transform: translateX(-70px);
     }
 
     &.icon_1_impl:before {
       background-image: url(./assets/icon_1_impl.png);
+      background-size: 39px 34px;
     }
 
     &.icon_2:before {
       background-image: url(./assets/icon_2.png);
+      background-size: 33px 32px;
     }
 
     &.icon_2_impl:before {
       background-image: url(./assets/icon_2_impl.png);
+      background-size: 32px 32px;
     }
 
     &.icon_3:before {
       background-image: url(./assets/icon_3.png);
+      background-size: 34px 34px;
     }
 
     &.icon_3_impl:before {
       background-image: url(./assets/icon_3_impl.png);
+      background-size: 35px 34px;
     }
 
     &.icon_4:before {
       background-image: url(./assets/icon_4.png);
+      background-size: 34px 34px;
     }
 
     &.icon_4_impl:before {
       background-image: url(./assets/icon_4_impl.png);
+      background-size: 34px 34px;
     }
 
     &.icon_5:before {
       background-image: url(./assets/icon_5.png);
+      background-size: 34px 34px;
     }
 
     &.icon_5_impl:before {
       background-image: url(./assets/icon_5_impl.png);
+      background-size: 34px 34px;
     }
 
     dt {

@@ -1,25 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import Row from 'react-bootstrap/lib/Row';
-import Col from 'react-bootstrap/lib/Col';
-import cs from 'classnames';
-import Swiper from 'react-id-swiper';
+import TweenMax from 'gsap';
+import Waypoint from 'react-waypoint';
+import $ from 'jquery';
 
+import Effect from '../Effect';
+import Meteor from '../Effect/Meteor';
 import lang from './locales';
 import { Default, Mobile } from '../../../deviceSwith';
 import s from './Principle.scss';
 
 let dict;
-const params = {
-  pagination: {
-    el: '.swiper-pagination',
-    clickable: true,
-  },
-};
-
+const meteor = Meteor();
 class Principle extends React.Component {
   state = { index: 0 };
+
+  constructor(...args) {
+    super(...args);
+    this.el = React.createRef();
+    this.animated = false;
+  }
+
+  componentDidMount() {
+   // TweenMax.set($('dl', this.el.current), { opacity: 0 });
+  }
+
+  enterHandle = () => {
+
+  };
+
+  leaveHandle = () => {};
 
   menuClickHandle = i => () => {
     this.setState({ index: i });
@@ -30,30 +41,38 @@ class Principle extends React.Component {
     const { title, menus } = dict;
     const { index } = this.state;
     return (
-      <div className={s.root}>
-        <div className={s.container}>
-          <h2>{title}</h2>
+      <Waypoint
+        onEnter={this.enterHandle}
+        onLeave={this.leaveHandle}
+        bottomOffset="80%"
+      >
+        <div className={s.root}>
+          <Effect control={[meteor]}>
+            <div className={s.container} ref={this.el}>
+              <h2>{title}</h2>
 
-          <div className={s.table}>
-            <div className={s.menu}>
-              <ul>
-                {menus.map((menu, i) => (
-                  <li
-                    key={menu}
-                    className={i === index ? s.active : ''}
-                    onClick={this.menuClickHandle(i)}
-                  >
-                    <span>{menu}</span>
-                  </li>
-                ))}
-              </ul>
+              <div className={s.table}>
+                <div className={s.menu}>
+                  <ul>
+                    {menus.map((menu, i) => (
+                      <li
+                        key={menu}
+                        className={i === index ? s.active : ''}
+                        onClick={this.menuClickHandle(i)}
+                      >
+                        <span>{menu}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className={s.section}>
+                  <Section index={index} />
+                </div>
+              </div>
             </div>
-            <div className={s.section}>
-              <Section index={index} />
-            </div>
-          </div>
+          </Effect>
         </div>
-      </div>
+      </Waypoint>
     );
   }
 }

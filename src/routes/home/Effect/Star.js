@@ -135,6 +135,10 @@ class Star {
     context.beginPath();
     context.fillStyle = `rgba(255, 255, 255, ${this.alpha.toString()})`;
     context.arc(this.x, this.y, this.particleSize, 0, Math.PI * 2, true);
+    // context.moveTo(this.x, this.y);
+    // context.lineTo(this.x - this.particleSize * 1.6, this.y);
+    // context.lineTo(this.x - this.particleSize * 1.6, this.y + this.particleSize);
+    // context.lineTo(this.x, this.y + this.particleSize);
     context.closePath();
     context.fill();
   }

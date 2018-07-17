@@ -23,5 +23,5 @@ module.exports = {
     '@babel/preset-flow',
     '@babel/preset-react',
   ],
-  ignore: ['node_modules', 'build'],
+  ignore: ['build'],
 };

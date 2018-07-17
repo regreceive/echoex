@@ -32,6 +32,7 @@ class Effect extends Component {
     document.addEventListener('visibilitychange', this.visibilityChangeHandle);
     this.resizeHandle();
     this.props.control.forEach((c, index) => {
+      this.canvas[index].className = `_${Math.random().toString().slice(2)}`;
       c.updateCanvas(this.canvas[index]);
       c.init();
     });
@@ -68,7 +69,6 @@ class Effect extends Component {
   };
 
   enterHandle = () => {
-    console.log('start');
     this.isWayStop = false;
     this.props.control.forEach(c => {
       c.start();
@@ -76,7 +76,6 @@ class Effect extends Component {
   };
 
   leaveHandle = () => {
-    console.log('stop');
     this.isWayStop = true;
     this.props.control.forEach(c => {
       c.stop();

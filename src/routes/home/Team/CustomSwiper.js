@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Swiper from 'swiper';
 import cs from 'classnames';
+import $ from 'jquery';
 
 import autotype from './autotype';
 import lang from './locales';
@@ -47,6 +48,8 @@ class CustomSwiper extends Component {
   }
   componentDidMount() {
     // this.swiper = new Swiper(this.el, params);
+    const el = $(this.el).find('.swiper-slide')[0];
+    this.arrow.style.left = `${el.offsetLeft + el.offsetWidth / 2}px`;
   }
 
   componentWillUnmount() {
@@ -69,13 +72,13 @@ class CustomSwiper extends Component {
           this.el = el;
         }}
       >
-        <div className="swiper-wrapper" style={{justifyContent: 'center'}}>
+        <div className="swiper-wrapper" style={{ justifyContent: 'center' }}>
           {persons.map(person => (
             <div
               className="swiper-slide"
               key={person.name}
               onClick={this.clickHandle(person.intro)}
-              style={{width: '200px', marginRight: '40px'}}
+              style={{ width: '200px', marginRight: '40px' }}
             >
               <div className={s.person}>
                 <img src={person.avatar} alt={person.name} />
