@@ -1,5 +1,5 @@
 const dicts = {
-  title: 'Echo背景',
+  title: 'ECHO背景',
   contents: [
     {
       dt: '新能源的迅猛发展',

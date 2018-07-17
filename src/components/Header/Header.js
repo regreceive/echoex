@@ -101,10 +101,10 @@ class Header extends React.Component {
                 <MenuItem href="/logout">{intl.get('LOGOUT')}</MenuItem>
               </NavDropdown>
             )}
-            {!email && <NavItem href="/login">{intl.get('LOGIN')}</NavItem>}
-            {!email && (
-              <NavItem href="/register">{intl.get('REGISTER')}</NavItem>
-            )}
+            {/* {!email && <NavItem href="/login">{intl.get('LOGIN')}</NavItem>} */}
+            {/* {!email && ( */}
+            {/* <NavItem href="/register">{intl.get('REGISTER')}</NavItem> */}
+            {/* )} */}
             <NavDropdown title={mapLocalesName()} id="language-you-choose">
               <MenuItem href="?lang=en-us">English</MenuItem>
               <MenuItem href="?lang=zh-cn">CN</MenuItem>

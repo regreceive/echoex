@@ -74,7 +74,7 @@ class Navigator extends Component {
             <a href="#team">{anchors[1]}</a>
             <a href="#partners">{anchors[2]}</a>
             <a href="#contact">{anchors[3]}</a>
-            {this.UserCenter(email)}
+            {/* {this.UserCenter(email)} */}
             <a href={switcher.link}>{switcher.label}</a>
           </div>
         </div>

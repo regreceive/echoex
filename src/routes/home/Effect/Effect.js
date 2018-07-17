@@ -45,6 +45,9 @@ class Effect extends Component {
       'visibilitychange',
       this.visibilitychangeHandle,
     );
+    this.props.control.forEach(c => {
+      c.stop();
+    });
   }
 
   resizeHandle = throttle(() => {
