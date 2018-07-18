@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import TweenMax from 'gsap';
+import TweenMax, { Power2 } from 'gsap';
 import Waypoint from 'react-waypoint';
+import { CSSTransition } from 'react-transition-group';
 import $ from 'jquery';
 
 import Effect from '../Effect';
@@ -13,38 +14,64 @@ import s from './Principle.scss';
 
 let dict;
 const meteor = Meteor();
-class Principle extends React.Component {
-  state = { index: 0 };
 
+class Principle extends React.Component {
   constructor(...args) {
     super(...args);
     this.el = React.createRef();
     this.animated = false;
   }
 
+  state = { selectedIndex: 0 };
+
   componentDidMount() {
-   // TweenMax.set($('dl', this.el.current), { opacity: 0 });
+    TweenMax.set($(this.el.current).find('li'), { opacity: 0, x: '-200' });
+    TweenMax.set($(this.el.current).find('.content'), {
+      scale: 2.5,
+      opacity: 0,
+    });
   }
 
   enterHandle = () => {
+    if (this.animated) {
+      return;
+    }
+    this.animated = true;
+    TweenMax.staggerTo(
+      $(this.el.current).find('li'),
+      1,
+      { opacity: 1, x: 0, ease: Power2.easeOut },
+      0.2,
+    );
 
+    TweenMax.to($(this.el.current).find('.content'), 0.5, {
+      scale: 1,
+      opacity: 1,
+      delay: 2,
+      onComplete() {
+        $(this.el.current)
+          .find('.content')
+          .removeAttr('style');
+      },
+      onCompleteScope: this,
+    });
   };
 
   leaveHandle = () => {};
 
   menuClickHandle = i => () => {
-    this.setState({ index: i });
+    this.setState({ selectedIndex: i });
   };
 
   render() {
     dict = lang();
     const { title, menus } = dict;
-    const { index } = this.state;
+    const { selectedIndex } = this.state;
     return (
       <Waypoint
         onEnter={this.enterHandle}
         onLeave={this.leaveHandle}
-        bottomOffset="80%"
+        bottomOffset="50%"
       >
         <div className={s.root}>
           <Effect control={[meteor]}>
@@ -57,7 +84,7 @@ class Principle extends React.Component {
                     {menus.map((menu, i) => (
                       <li
                         key={menu}
-                        className={i === index ? s.active : ''}
+                        className={i === selectedIndex ? s.active : ''}
                         onClick={this.menuClickHandle(i)}
                       >
                         <span>{menu}</span>
@@ -66,7 +93,7 @@ class Principle extends React.Component {
                   </ul>
                 </div>
                 <div className={s.section}>
-                  <Section index={index} />
+                  <Section selectedIndex={selectedIndex} />
                 </div>
               </div>
             </div>
@@ -79,25 +106,36 @@ class Principle extends React.Component {
 
 function Section(props) {
   const { sections } = dict;
-  const section = sections[props.index];
   return (
     <React.Fragment>
-      <dl className={s[`icon_${props.index + 1}`]}>
-        <dt>{section.t1}</dt>
-        <dd>{section.d1}</dd>
-      </dl>
-      {section.t2 && (
-        <dl className={s[`icon_${props.index + 1}_impl`]}>
-          <dt>{section.t2}</dt>
-          <dd>{section.d2}</dd>
-        </dl>
-      )}
+      {sections.map((section, index) => (
+        <CSSTransition
+          in={props.selectedIndex === index}
+          timeout={500}
+          classNames="fade"
+          key={section.id}
+          unmountOnExit
+        >
+          <div className="content">
+            <dl className={s[`icon_${index + 1}`]}>
+              <dt>{section.t1}</dt>
+              <dd>{section.d1}</dd>
+            </dl>
+            {section.t2 && (
+              <dl className={s[`icon_${index + 1}_impl`]}>
+                <dt>{section.t2}</dt>
+                <dd>{section.d2}</dd>
+              </dl>
+            )}
+          </div>
+        </CSSTransition>
+      ))}
     </React.Fragment>
   );
 }
 
 Section.propTypes = {
-  index: PropTypes.number.isRequired,
+  selectedIndex: PropTypes.number.isRequired,
 };
 
 export default withStyles(s)(Principle);

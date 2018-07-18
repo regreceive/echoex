@@ -94,7 +94,9 @@ class Effect extends Component {
             <canvas
               key={c.name}
               ref={ref => {
-                this.canvas.push(ref);
+                if (ref) {
+                  this.canvas.push(ref);
+                }
               }}
             />
           ))}

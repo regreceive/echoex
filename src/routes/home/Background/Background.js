@@ -46,7 +46,7 @@ class Background extends React.Component {
       <Waypoint
         onEnter={this.enterHandle}
         onLeave={this.leaveHandle}
-        bottomOffset="80%"
+        bottomOffset="50%"
       >
         <div className={s.root}>
           <Effect control={[meteor]}>

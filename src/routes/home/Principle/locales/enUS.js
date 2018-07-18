@@ -1,3 +1,5 @@
+import uuid from 'uuid';
+
 const dicts = {
   title: 'The Technical Principle of ECHO',
   menus: [
@@ -9,6 +11,7 @@ const dicts = {
   ],
   sections: [
     {
+      id: uuid(),
       t1: 'Security',
       d1:
         'Cryptographic Security / Data Security / Asset Security',
@@ -16,6 +19,7 @@ const dicts = {
       d2: 'Encrypted Quantum / Quantum communication',
     },
     {
+      id: uuid(),
       t1: 'Extensibility',
       d1:
         'solutions to main chain and side chain / Inetercation btween main chain and side chain / Chain organization form,chain network',
@@ -24,6 +28,7 @@ const dicts = {
         'Tokens / Witness as a node / Committee / Mechanism of proof of interest / Voting / Budget / Atomic transactions / Encrypted asset hosting gateway / Decentralized public offering platform / Price Stable communication',
     },
     {
+      id: uuid(),
       t1: 'Stability',
       d1:
         'Stability of the main chain / Stability of data / Consensus and conflict / Storage optimaization',
@@ -32,11 +37,13 @@ const dicts = {
         'Distributed availability / Self-healing of failure / Data persistence / Storage capacity',
     },
     {
+      id: uuid(),
       t1: 'Applicability',
       d1:
         'Big data supevises the ecloogy of chain / Compatible with pubic chains / Authority SDK',
     },
     {
+      id: uuid(),
       t1: 'Controllability',
       d1:
         'ECHO uses a sidechain archtecture that differs from Ethereum and Bitcion,where Dapp runs on the sidechain,and each sidechain corresponds to a Dapp',

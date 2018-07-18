@@ -110,6 +110,8 @@
 .section {
   display: table-cell;
   padding: 0 0 0 70px;
+  width: 100%;
+  vertical-align: top;
 
   dl {
     position: relative;
@@ -324,4 +326,29 @@
     background: url('./assets/icon5.png') no-repeat center center;
     background-size: contain;
   }
+}
+
+:global(.fade-enter) {
+  position: absolute;
+  top: 0;
+  z-index: 10000;
+  opacity: 0;
+  transform: translateY(100%);
+}
+:global(.fade-enter-active) {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.8s ease-out;
+}
+:global(.fade-exit-done) {
+  opacity: 0;
+}
+:global(.fade-exit) {
+  opacity: 0.5;
+  transform: translateY(0);
+}
+:global(.fade-exit-active) {
+  opacity: 0;
+  transform: translateY(-100%);
+  transition: all 0.3s;
 }
