@@ -341,7 +341,7 @@
   transition: all 0.8s ease-out;
 }
 :global(.fade-exit-done) {
-  opacity: 0;
+  opacity: 0 !important;
 }
 :global(.fade-exit) {
   opacity: 0.5;

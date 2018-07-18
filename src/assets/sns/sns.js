@@ -27,5 +27,5 @@ export default [
     url: 'https://m.weibo.cn/p/1005056481472691',
   },
   { icon: zssq, url: 'https://t.zsxq.com/6272Jqz' },
-  { icon: email, url: 'mailto:echo@echo.center' },
+  { icon: email, url: 'mailto:echo@echoex.io' },
 ];

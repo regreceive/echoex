@@ -143,10 +143,10 @@ class CustomSwiper extends Component {
           </div>
           <CSSTransition
             in={this.state.showResume}
-            timeout={10000}
+            timeout={500}
             classNames="fade"
           >
-            <div className={s.resume}>
+            <div className={cs(s.resume, 'fade-exit-done')}>
               <span
                 ref={ref => {
                   this.resume = ref;
