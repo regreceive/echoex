@@ -12,6 +12,7 @@ class Partners extends Brand {
     this.logos = logos;
     this.lang = lang;
     this.s = s;
+    this.id = 'partners';
   }
 }
 

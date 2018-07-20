@@ -12,6 +12,7 @@ class Brand extends React.Component {
     this.logos = {};
     this.lang = $.noop;
     this.s = {};
+    this.anchor = '';
   }
 
   componentDidMount() {
@@ -47,7 +48,7 @@ class Brand extends React.Component {
         bottomOffset="20%"
       >
         <div>
-          <div className={this.s.container} ref={this.easeEl}>
+          <div className={this.s.container} ref={this.easeEl} id={this.id}>
             <h2>{title}</h2>
             <div className={this.s.logos} data-logo>
               {keys.map(key => (
