@@ -9,6 +9,13 @@
     top: 0;
     left: 0;
     pointer-events: none;
+
+    @media (-webkit-min-device-pixel-ratio:2), (min-device-pixel-ratio:2) {
+      width: 200%;
+      height: 200%;
+      transform-origin: 0 0;
+      transform: scale3d(0.5, 0.5, 1);
+    }
   }
 }
 

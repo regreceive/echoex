@@ -3,7 +3,7 @@
 
   h2 {
     margin: 0 0 80px;
-    font-size: 26px;
+    font-size: 26PX;
     color: #D1E5EF;
     text-align: center;
   }
@@ -27,6 +27,10 @@
     border-radius: 50%;
     transform: translateY(35px) translateX(97px);
     animation: halo 3s alternate infinite;
+
+    @media screen and (max-width: 767px) {
+      content: unset;
+    }
   }
 }
 
@@ -113,218 +117,81 @@
   width: 100%;
   vertical-align: top;
 
+  @media screen and (max-width: 768px) {
+    padding: 0 50px;
+  }
+
   dl {
     position: relative;
-    padding: 0 0 0 70px;
-    margin-bottom: 60px;
-
-    @media screen and (max-width: 992px) {
-      margin: 0 0 30px 0;
-    }
+    padding: 0 0 0 70PX;
+    margin-bottom: 60PX;
 
     &:before {
       content: '';
       position: absolute;
-      width: 40px;
-      height: 40px;
+      width: 40PX;
+      height: 40PX;
       background: url(./assets/icon_1.png) no-repeat center;
-      background-size: 29px 34px;
-      transform: translateX(-70px);
+      background-size: 29PX 34PX;
+      transform: translateX(-70PX);
     }
 
     &.icon_1_impl:before {
       background-image: url(./assets/icon_1_impl.png);
-      background-size: 39px 34px;
+      background-size: 39PX 34PX;
     }
 
     &.icon_2:before {
       background-image: url(./assets/icon_2.png);
-      background-size: 33px 32px;
+      background-size: 33PX 32PX;
     }
 
     &.icon_2_impl:before {
       background-image: url(./assets/icon_2_impl.png);
-      background-size: 32px 32px;
+      background-size: 32PX 32PX;
     }
 
     &.icon_3:before {
       background-image: url(./assets/icon_3.png);
-      background-size: 34px 34px;
+      background-size: 34PX 34PX;
     }
 
     &.icon_3_impl:before {
       background-image: url(./assets/icon_3_impl.png);
-      background-size: 35px 34px;
+      background-size: 35PX 34PX;
     }
 
     &.icon_4:before {
       background-image: url(./assets/icon_4.png);
-      background-size: 34px 34px;
+      background-size: 34PX 34PX;
     }
 
     &.icon_4_impl:before {
       background-image: url(./assets/icon_4_impl.png);
-      background-size: 34px 34px;
+      background-size: 34PX 34PX;
     }
 
     &.icon_5:before {
       background-image: url(./assets/icon_5.png);
-      background-size: 34px 34px;
+      background-size: 34PX 34PX;
     }
 
     &.icon_5_impl:before {
       background-image: url(./assets/icon_5_impl.png);
-      background-size: 34px 34px;
+      background-size: 34PX 34PX;
     }
 
     dt {
-      font-size: 20px;
+      font-size: 20PX;
       color: #fff
     }
 
     dd {
-      margin: 20px 0 0;
-      font-size: 14px;
+      margin: 20PX 0 0;
+      font-size: 14PX;
       color: #8288A3;
-      line-height: 20px;
+      line-height: 20PX;
     }
-  }
-}
-
-@mixin label-variant($url) {
-  &:before {
-    background: url($url) no-repeat center;
-    background-size: contain;
-  }
-}
-
-.swipeUnit {
-  margin: 0 60px;
-  color: #fff;
-  font-size: 22px;
-  line-height: 36px;
-  overflow: hidden;
-  position: relative;
-
-  &:before {
-    z-index: 10;
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    border: 1px solid transparent;
-    border-image: linear-gradient(#0a6cff,rgba(0,0,0, .0)) 0  100%;
-    transform-origin: 0 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  span {
-    display: block;
-    width: 233px;
-    height: 68px;
-    padding: 0 0 0 32px;
-    font-size: 28px;
-    color: #fff;
-    text-align: center;
-    line-height: 68px;
-    background-image: linear-gradient(90deg, #0a6cff,rgba(0,0,0, .0));
-    position: relative;
-
-    &:before {
-      content: '';
-      width: 40px;
-      height: 40px;
-      position: absolute;
-      left: 10px;
-      top: 11px;
-    }
-
-    &.t1 {
-      @include label-variant('./assets/icon1.png')
-    }
-
-    &.t2 {
-      @include label-variant('./assets/icon2.png')
-    }
-
-    &.t3 {
-      @include label-variant('./assets/icon3.png')
-    }
-
-    &.t4 {
-      @include label-variant('./assets/icon4.png')
-    }
-
-    &.t5 {
-      @include label-variant('./assets/icon5.png')
-    }
-
-  }
-
-  h4 {
-    font-size: 22px;
-    margin: 22px 0 0;
-    padding: 0;
-  }
-
-  ol {
-    padding: 20px 0 0 35px;
-  }
-
-  p {
-    padding: 10px 0 0 10px;
-    text-align: justify;
-  }
-
-  h4 ~ p {
-    padding: 10px 10px 40px 0;
-  }
-}
-
-.link1 {
-  margin: 0 0 0 130px;
-
-  &:before {
-    background: url('./assets/icon1.png') no-repeat center center;
-    background-size: contain;
-  }
-}
-
-.link2 {
-  margin: -10px 0 0 0;
-
-  &:before {
-    background: url('./assets/icon2.png') no-repeat center center;
-    background-size: contain;
-
-  }
-}
-
-.link3 {
-  margin: -10px 0 0 52px;
-
-  &:before {
-    background: url('./assets/icon3.png') no-repeat center center;
-    background-size: contain;
-  }
-}
-
-.link4 {
-  margin: -10px 0 0 195px;
-
-  &:before {
-    background: url('./assets/icon4.png') no-repeat center center;
-    background-size: contain;
-  }
-}
-
-.link5 {
-  margin: -10px 0 0 120px;
-
-  &:before {
-    background: url('./assets/icon5.png') no-repeat center center;
-    background-size: contain;
   }
 }
 
@@ -333,13 +200,14 @@
   top: 0;
   z-index: 10000;
   opacity: 0;
-  transform: translateY(100%);
+  transform: translateY(200px);
 }
 :global(.fade-enter-active) {
   opacity: 1;
   transform: translateY(0);
-  transition: all 0.8s ease-out;
+  transition: all 0.7s ease-out 0.5s;
 }
+
 :global(.fade-exit-done) {
   opacity: 0 !important;
 }
@@ -349,6 +217,6 @@
 }
 :global(.fade-exit-active) {
   opacity: 0;
-  transform: translateY(-100%);
-  transition: all 0.3s;
+  transform: translateY(-50%);
+  transition: all 0.5s;
 }

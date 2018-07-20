@@ -8,7 +8,7 @@
   max-width: 1200px;
 
   h2 {
-    margin-bottom: 40px;
+    margin-bottom: 40PX;
     text-align: center;
     color: #D1E5EF;
     font-size: 26px;
@@ -17,20 +17,17 @@
 
 .logos {
   max-width: 980px;
-  margin: auto;
+  margin: 10px auto;
 
   .unit {
     display: inline-block;
     width: 12.5%;
-    margin: 5px 0;
+    margin: 5PX 0;
+    padding: 0 5PX;
     text-align: center;
 
     @media(max-width: 767px) {
       width: 25%;
-    }
-
-    @media(max-width: 479px) {
-      width: 33.3%;
     }
 
     img {

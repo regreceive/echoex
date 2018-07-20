@@ -6,9 +6,12 @@ import TweenMax, { Power2 } from 'gsap';
 import Waypoint from 'react-waypoint';
 import $ from 'jquery';
 
+import Effect from '../Effect';
+import Meteor from '../Effect/Meteor';
 import lang from './locales';
 import s from './Ecology.scss';
 
+const meteor = Meteor();
 class Ecology extends Component {
   constructor(...args) {
     super(...args);
@@ -53,19 +56,21 @@ class Ecology extends Component {
         bottomOffset="50%"
       >
         <div className={s.root}>
-          <div className={s.container} ref={this.el}>
-            <h2>{title}</h2>
-            <Grid>
-              <Row>
-                {contents.map(content => (
-                  <dl className="col-sm-4 col-xs-12" key={content.label}>
-                    <dt>{content.label}</dt>
-                    <dd>{content.descr}</dd>
-                  </dl>
-                ))}
-              </Row>
-            </Grid>
-          </div>
+          <Effect control={[meteor]}>
+            <div className={s.container} ref={this.el}>
+              <h2>{title}</h2>
+              <Grid>
+                <Row>
+                  {contents.map(content => (
+                    <dl className="col-sm-4 col-xs-12" key={content.label}>
+                      <dt>{content.label}</dt>
+                      <dd>{content.descr}</dd>
+                    </dl>
+                  ))}
+                </Row>
+              </Grid>
+            </div>
+          </Effect>
         </div>
       </Waypoint>
     );

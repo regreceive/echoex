@@ -14,10 +14,10 @@ import s from './Team.scss';
 const params = {
   slidesPerView: 5,
   spaceBetween: 30,
-  pagination: {
-    el: '.swiper-pagination',
-    clickable: true,
-  },
+  // pagination: {
+  //   el: '.swiper-pagination',
+  //   clickable: true,
+  // },
   breakpoints: {
     1400: {
       slidesPerView: 5,
@@ -32,7 +32,7 @@ const params = {
       spaceBetween: 20,
     },
     480: {
-      slidesPerView: 2,
+      slidesPerView: 1,
       spaceBetween: 20,
     },
   },
@@ -43,7 +43,7 @@ class CustomSwiper extends Component {
     super(...args);
 
     // swiper容器
-    this.el = null;
+    this.el = React.createRef();
     // 简历容器
     this.resume = null;
 
@@ -56,8 +56,14 @@ class CustomSwiper extends Component {
   state = { showResume: false };
 
   componentDidMount() {
-    // this.swiper = new Swiper(this.el, params);
-    const el = $(this.el).find('.swiper-slide')[0];
+    this.swiper = new Swiper(this.el.current, params);
+    this.swiper.on('slideChange', () => {
+      this.setState({
+        showResume: false,
+      });
+    });
+
+    const el = $(this.el.current).find('.swiper-slide')[0];
     this.arrow.style.left = `${el.offsetLeft + el.offsetWidth / 2}px`;
     TweenMax.set($(this.easeEl.current).find('[data-person]'), {
       y: 200,
@@ -68,7 +74,7 @@ class CustomSwiper extends Component {
   }
 
   componentWillUnmount() {
-    // this.swiper.destroy();
+    this.swiper.destroy();
     $('body').off('click', this.bodyClickHandle);
   }
 
@@ -83,7 +89,19 @@ class CustomSwiper extends Component {
 
   clickHandle = intro => e => {
     const el = e.currentTarget;
-    this.arrow.style.left = `${el.offsetLeft + el.offsetWidth / 2}px`;
+    let x;
+    try {
+      const matrix = $(el)
+        .parent()
+        .css('transform');
+      const stript = matrix.replace(/matrix\((.+?)\)/, '$1');
+      x = stript.split(',')[4].match(/[^px]+/)[0];
+      x = parseFloat(x);
+    } catch (err) {
+      x = 0;
+    }
+
+    this.arrow.style.left = `${x + el.offsetLeft + el.offsetWidth / 2}px`;
     autotype(this.resume, intro);
     this.setState({ showResume: true });
   };
@@ -112,56 +130,49 @@ class CustomSwiper extends Component {
         onLeave={this.leaveHandle}
         bottomOffset="20%"
       >
-        <div
-          className="swiper-container"
-          ref={el => {
-            this.el = el;
-          }}
-        >
-          <div
-            className="swiper-wrapper"
-            style={{ justifyContent: 'center' }}
-            ref={this.easeEl}
-          >
-            {persons.map(person => (
-              <div
-                className="swiper-slide"
-                key={person.name}
-                onClick={this.clickHandle(person.intro)}
-                style={{ width: '200px', marginRight: '40px' }}
-              >
-                <div className={s.person} data-person>
-                  <img src={person.avatar} alt={person.name} />
-                  <dl>
-                    <dt>{person.name}</dt>
-                    <dd>{person.duty}</dd>
-                  </dl>
+        <div>
+          <div className="swiper-container" ref={this.el}>
+            <div className="swiper-wrapper" ref={this.easeEl}>
+              {persons.map(person => (
+                <div
+                  className="swiper-slide"
+                  key={person.name}
+                  onClick={this.clickHandle(person.intro)}
+                  style={{ width: '200px', marginRight: '40px' }}
+                >
+                  <div className={s.person} data-person>
+                    <img src={person.avatar} alt={person.name} />
+                    <dl>
+                      <dt>{person.name}</dt>
+                      <dd>{person.duty}</dd>
+                    </dl>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-          <CSSTransition
-            in={this.state.showResume}
-            timeout={500}
-            classNames="fade"
-          >
-            <div className={cs(s.resume, 'fade-exit-done')}>
-              <span
-                ref={ref => {
-                  this.resume = ref;
-                }}
-              >
-                {persons[0].intro}
-              </span>
-              <div
-                className={s.arrow}
-                ref={ref => {
-                  this.arrow = ref;
-                }}
-              />
+              ))}
             </div>
-          </CSSTransition>
-          <div className={cs('swiper-pagination', s.customPagination)} />
+            <CSSTransition
+              in={this.state.showResume}
+              timeout={500}
+              classNames="fade"
+            >
+              <div className={cs(s.resume, 'fade-exit-done')}>
+                <span
+                  ref={ref => {
+                    this.resume = ref;
+                  }}
+                >
+                  {persons[0].intro}
+                </span>
+                <div
+                  className={s.arrow}
+                  ref={ref => {
+                    this.arrow = ref;
+                  }}
+                />
+              </div>
+            </CSSTransition>
+            <div className={cs('swiper-pagination', s.customPagination)} />
+          </div>
         </div>
       </Waypoint>
     );

@@ -1,40 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
-
+import Brand from '../Brand';
 import * as logos from './assets';
 import lang from './locales';
 import s from './Media.scss';
 
-const data = Object.keys(logos);
+class Media extends Brand {
+  constructor(...args) {
+    super(...args);
 
-function Media() {
-  const dict = lang();
-  const { title } = dict;
-  return (
-    <div className={s.root}>
-      <div className={s.container}>
-        <h2>{title}</h2>
-        <div className={s.logos}>
-          {data.map(name => <Logo img={logos[name]} key={name} />)}
-        </div>
-      </div>
-    </div>
-  );
+    this.logos = logos;
+    this.lang = lang;
+    this.s = s;
+  }
 }
-
-const Logo = props => {
-  const { img } = props;
-  return (
-    <div className={s.unit}>
-      <img src={img} alt="" />
-    </div>
-  );
-};
-
-Logo.propTypes = {
-  img: PropTypes.string.isRequired,
-};
 
 export default withStyles(s)(Media);

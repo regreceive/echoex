@@ -65,6 +65,7 @@ module.exports = () => ({
         'top',
         'background-size',
         'border-width',
+        'transform',
       ],
       selectorBlackList: [/^html$/],
     }),

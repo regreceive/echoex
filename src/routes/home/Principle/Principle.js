@@ -25,11 +25,16 @@ class Principle extends React.Component {
   state = { selectedIndex: 0 };
 
   componentDidMount() {
-    TweenMax.set($(this.el.current).find('li'), { opacity: 0, x: '-200' });
-    TweenMax.set($(this.el.current).find('.content'), {
-      scale: 2.5,
-      opacity: 0,
-    });
+    if (window.matchMedia('(min-width: 768px)').matches) {
+      TweenMax.set($(this.el.current).find('li'), { opacity: 0, x: '-200' });
+      TweenMax.set($(this.el.current).find('.content'), {
+        scale: 2.5,
+        opacity: 0,
+      });
+    } else {
+      TweenMax.set($(this.el.current).find('dl'), { opacity: 0, y: '200' });
+      TweenMax.set($(this.el.current).find('dd'), { opacity: 0 });
+    }
   }
 
   enterHandle = () => {
@@ -37,24 +42,41 @@ class Principle extends React.Component {
       return;
     }
     this.animated = true;
-    TweenMax.staggerTo(
-      $(this.el.current).find('li'),
-      1,
-      { opacity: 1, x: 0, ease: Power2.easeOut },
-      0.2,
-    );
 
-    TweenMax.to($(this.el.current).find('.content'), 0.5, {
-      scale: 1,
-      opacity: 1,
-      delay: 2,
-      onComplete() {
-        $(this.el.current)
-          .find('.content')
-          .removeAttr('style');
-      },
-      onCompleteScope: this,
-    });
+    if (window.matchMedia('(min-width: 768px)').matches) {
+      TweenMax.staggerTo(
+        $(this.el.current).find('li'),
+        1,
+        { opacity: 1, x: 0, ease: Power2.easeOut },
+        0.2,
+      );
+
+      TweenMax.to($(this.el.current).find('.content'), 0.5, {
+        scale: 1,
+        opacity: 1,
+        delay: 2,
+        onComplete() {
+          $(this.el.current)
+            .find('.content')
+            .removeAttr('style');
+        },
+        onCompleteScope: this,
+      });
+    } else {
+      TweenMax.staggerTo(
+        $(this.el.current).find('dl'),
+        1,
+        { opacity: 1, y: 0, ease: Power2.easeOut },
+        1,
+      );
+
+      TweenMax.staggerTo(
+        $(this.el.current).find('dd'),
+        3,
+        { opacity: 1, delay: 1 },
+        1,
+      );
+    }
   };
 
   leaveHandle = () => {};
@@ -79,22 +101,30 @@ class Principle extends React.Component {
               <h2>{title}</h2>
 
               <div className={s.table}>
-                <div className={s.menu}>
-                  <ul>
-                    {menus.map((menu, i) => (
-                      <li
-                        key={menu}
-                        className={i === selectedIndex ? s.active : ''}
-                        onClick={this.menuClickHandle(i)}
-                      >
-                        <span>{menu}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className={s.section}>
-                  <Section selectedIndex={selectedIndex} />
-                </div>
+                <Default>
+                  <div className={s.menu}>
+                    <ul>
+                      {menus.map((menu, i) => (
+                        <li
+                          key={menu}
+                          className={i === selectedIndex ? s.active : ''}
+                          onClick={this.menuClickHandle(i)}
+                        >
+                          <span>{menu}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className={s.section}>
+                    <Section selectedIndex={selectedIndex} />
+                  </div>
+                </Default>
+
+                <Mobile>
+                  <div className={s.section}>
+                    <SectionForM />
+                  </div>
+                </Mobile>
               </div>
             </div>
           </Effect>
@@ -111,7 +141,7 @@ function Section(props) {
       {sections.map((section, index) => (
         <CSSTransition
           in={props.selectedIndex === index}
-          timeout={500}
+          timeout={1200}
           classNames="fade"
           key={section.id}
           unmountOnExit
@@ -137,5 +167,27 @@ function Section(props) {
 Section.propTypes = {
   selectedIndex: PropTypes.number.isRequired,
 };
+
+function SectionForM() {
+  const { sections } = dict;
+  return (
+    <React.Fragment>
+      {sections.map((section, index) => (
+        <div key={section.id}>
+          <dl className={s[`icon_${index + 1}`]}>
+            <dt>{section.t1}</dt>
+            <dd>{section.d1}</dd>
+          </dl>
+          {section.t2 && (
+            <dl className={s[`icon_${index + 1}_impl`]}>
+              <dt>{section.t2}</dt>
+              <dd>{section.d2}</dd>
+            </dl>
+          )}
+        </div>
+      ))}
+    </React.Fragment>
+  );
+}
 
 export default withStyles(s)(Principle);

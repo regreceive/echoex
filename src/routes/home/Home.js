@@ -9,9 +9,7 @@ import Principle from './Principle';
 import Ecology from './Ecology';
 import Team from './Team';
 import Consultant from './Consultant';
-import Organization from './Organization';
-import Partners from './Partners';
-import Media from './Media';
+import Brands from './Brands';
 import s from './Home.scss';
 
 class Home extends React.Component {
@@ -27,9 +25,7 @@ class Home extends React.Component {
           <Ecology />
           <Team />
           <Consultant />
-          <Organization />
-          <Partners />
-          <Media />
+          <Brands />
         </div>
       </div>
     );

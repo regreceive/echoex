@@ -11,7 +11,7 @@
     margin-bottom: 40px;
     text-align: center;
     color: #D1E5EF;
-    font-size: 26px;
+    font-size: 26PX;
   }
 }
 
@@ -23,14 +23,12 @@
   .unit {
     display: inline-block;
     width: 12.5%;
+    margin: 5px 0;
+    padding: 0 5PX;
     text-align: center;
 
     @media(max-width: 767px) {
       width: 25%;
-    }
-
-    @media(max-width: 479px) {
-      width: 33.3%;
     }
 
     img {

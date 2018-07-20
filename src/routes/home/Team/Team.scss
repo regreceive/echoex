@@ -1,9 +1,5 @@
 .root {
   background-color: #040223;
-
-  @media (max-width: 767px) {
-    min-height: 100vh;
-  }
 }
 
 .container {
@@ -13,7 +9,7 @@
 
   h2 {
     margin: 0 0 80px;
-    font-size: 26px;
+    font-size: 26PX;
     color: #D1E5EF;
     text-align: center;
   }
@@ -34,13 +30,13 @@
 
     dt {
       margin: 40px 0 10px;
-      font-size: 22px;
+      font-size: 22PX;
       color: #D1E5EF;
       text-align: center;
     }
 
     dd {
-      font-size: 16px;
+      font-size: 16PX;
       color: #D1E5EF;
       text-align: center;
     }
@@ -52,10 +48,10 @@
   padding: 20px;
   background:rgba(8,8,41,1);
   border-radius:4px;
-  border:1px solid rgba(33,35,87,1);
+  border:1PX solid rgba(33,35,87,1);
   color: #8086A1;
-  line-height: 20px;
-  font-size: 14px;
+  line-height: 20PX;
+  font-size: 14PX;
 
   .arrow {
     position: absolute;

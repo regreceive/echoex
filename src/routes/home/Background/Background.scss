@@ -5,12 +5,12 @@
 
 .container {
   max-width: 1200px;
-  margin: 60px auto;
+  margin: 60PX auto;
   padding: 0 20px;
 
   h2 {
     color: #D1E5EF;
-    font-size: 26px;
+    font-size: 26PX;
     text-align: center;
   }
 }
@@ -23,27 +23,26 @@
 .descr {
   display: table-cell;
   width: 50%;
-  padding-top: 40px;
+  padding-top: 50px;
+
+  @media screen and (max-width: 767px){
+    padding: 50px 40px 0;
+  }
 
   dl {
     max-width: 505px;
     position: relative;
-    padding: 0 0 0 70px;
-    margin-bottom: 50px;
-
-
-    @media screen and (max-width: 992px){
-      margin: 0 0 30px 0;
-    }
+    padding: 0 0 0 70PX;
+    margin-bottom: 50PX;
 
     &:before {
       content: '';
       position: absolute;
-      width: 53px;
-      height: 67px;
+      width: 53PX;
+      height: 67PX;
       background: url(./assets/dl1.png) no-repeat center;
       background-size: contain;
-      transform: translateX(-70px);
+      transform: translateX(-70PX);
     }
     &:nth-child(2):before {
       background-image: url(./assets/dl2.png);
@@ -58,14 +57,14 @@
       background-image: url(./assets/dl5.png);
     }
     dt {
-      font-size: 18px;
-      line-height: 25px;
+      font-size: 18PX;
+      line-height: 25PX;
       color: #D1E5EF;
 
     }
     dd {
-      font-size: 12px;
-      line-height: 25px;
+      font-size: 12PX;
+      line-height: 25PX;
       color: #8288A3;
     }
   }
@@ -75,6 +74,10 @@
   display: table-cell;
   width: 50%;
   vertical-align: middle;
+
+  @media screen and (max-width: 767px){
+    display: none;
+  }
 
   img {
     max-width: 100%;

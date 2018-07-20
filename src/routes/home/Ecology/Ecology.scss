@@ -1,10 +1,5 @@
 .root {
   background-color: #040223;
-
-  @media (max-width: 767px) {
-    min-height: 100vh;
-  }
-
 }
 
 .container {
@@ -14,34 +9,34 @@
 
   > h2 {
     margin: 0 0 80px;
-    font-size: 26px;
+    font-size: 26PX;
     color: #D1E5EF;
     text-align: center;
   }
 
   dl {
-    padding: 0 20px;
+    padding: 0 20PX;
 
     dt {
       color: #D1E5EF;
-      font-size: 20px;
+      font-size: 20PX;
       text-align: center;
 
       &:before {
         content: '';
         display: block;
-        margin: 0 auto 20px;
-        width: 53px;
-        height: 67px;
+        margin: 0 auto 20PX;
+        width: 53PX;
+        height: 67PX;
         background: url(./assets/icon_1.png) no-repeat center center;
         background-size: contain;
       }
     }
 
     dd {
-      font-size: 14px;
-      line-height: 20px;
-      margin: 30px 0 0;
+      font-size: 14PX;
+      line-height: 20PX;
+      margin: 30PX 0 0;
       color: #8288A3;
       text-align: justify;
     }
