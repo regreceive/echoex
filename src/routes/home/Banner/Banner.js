@@ -24,7 +24,7 @@ class Banner extends React.Component {
                 dangerouslySetInnerHTML={{ __html: title }}
               />
               <div className={s.btnWrap}>
-                <a href={link}>{whitePaper}</a>
+                {/*<a href={link}>{whitePaper}</a>*/}
               </div>
             </div>
           </div>
