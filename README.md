@@ -1,3 +1,5 @@
+区块连公链项目官网，所用脚手架react-start-kit，服务器端渲染。
+
 ## API Response:
     ```json
     {
